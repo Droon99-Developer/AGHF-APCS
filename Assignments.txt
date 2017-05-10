@@ -1,0 +1,13 @@
+Connor- Economy Programming, Wiki/Site Page
+Sam- UI, UI Programming
+Andrew- Unit and Terrain Programming/Entity Management
+Julie- Unit Programming
+Tim- Everything
+James- Assets
+Ray- Assets 
+Andy- Unit Classes and Subclasses
+Abriola- Terrain Classes and Subclasses
+
+Obviously nobody is working alone obviously, and if you want to focus on a different area just change it. 
+We need to try to have *someone* covering everything so try to find someone to take on your stuff if you do leave. 
+Ask people before you work on their stuff please!
