@@ -8,5 +8,8 @@ public class Main {
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setVisible(true);
+		
+		Player a = new Player();
+		Player b = new Player();
 	}
 }
