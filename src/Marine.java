@@ -1,10 +1,10 @@
 
-public class Tank extends Unit {
-	private int speed = 10/10;
-	private int health = 10;
-	private int strength = 7;
-	private int cost = 18;
-	private int GPK = 5;
+public class Marine extends Unit {
+	private int speed = 10/3;
+	private int health = 2;
+	private int strength = 1;
+	private int cost = 2;
+	private int GPK = 1;
 	
 	public int getSpeed() {
 		return speed;
