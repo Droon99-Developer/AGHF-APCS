@@ -1,15 +1,15 @@
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
+import java.awt.EventQueue;
 
 public class Main {
 	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		frame.setSize(1000, 500);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.setVisible(true);
-		
-		Player a = new Player();
-		Player b = new Player();
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					StartGameView game = new StartGameView();					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
