@@ -5,7 +5,7 @@ public class Tank extends Unit {
 	private int strength = 7;
 	private int cost = 18;
 	private int GPK = 5;
-	
+		
 	public int getSpeed() {
 		return super.getSpeed();
 	}
