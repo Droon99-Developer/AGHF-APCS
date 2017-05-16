@@ -7,22 +7,22 @@ public class Tank extends Unit {
 	private int GPK = 5;
 	
 	public int getSpeed() {
-		return speed;
+		return super.getSpeed();
 	}
 
 	public int getHealth() {
-		return health;
+		return super.getHealth();
 	}
 
 	public int getStrength() {
-		return strength;
+		return super.getStrength();
 	}
 	
 	public int getCost(){
-		return cost;
+		return super.getCost();
 	}
 	
 	public int getPerKill(){
-		return GPK;
+		return super.getPerKill();
 	}
 }
