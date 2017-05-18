@@ -1,0 +1,34 @@
+Proposed Directions:
+
+OBJECTIVE:
+
+The goal of the game is to destroy the base on the opposite side of the map as yours. 
+This is accomplished by sending military units to war with the other player.
+
+TURN:
+
+On a single turn, there are 4 phases. 
+1. Income
+	This is the phase where you get the gold from killing opposing units.
+2. Buying
+	This is the phase where you buy your units for a specific price. The 5 units are:
+		a. Air Strike - 50 Gold
+		b. Infantry - 8 Gold
+		c. Tank - 18 Gold
+		d. Marine - 2 Gold
+		e. Medic - 12 Gold
+3. Waiting
+	The other player will now do steps 1 and 2. This may have happened before you did your steps 1 and 2.
+4. Skirmishes/Moving
+	All units will be deployed and attack opposing units or the enemy base, depending on where they are. If the unit is unable to move before attacking, it will not move that turn.
+
+UNIT TABLE:
+
+_____________________________________________________________________________________________________________________________
+|             Unit Name            |            Air Strike            | Tank | Marine | Infantry |          Medic           |
+|Speed (# of Slices Moved Per Turn)|                 5                |   1  |    4   |     2    | Attaches to seperate unit|
+|             Strength             |          40(1 Time Hit)          |   7  |    1   |     3    |Adds 2 Health/Turn to unit|
+|              Health              |Only Destroyed by Other Air Strike|  10  |    2   |     7    |  Shared health with unit |
+|               Cost               |                50                |  18  |    2   |     8    |            12            |
+|       Gold Gained Per Kill       |                10                |   5  |    1   |     3    |             4            |
+_____________________________________________________________________________________________________________________________
