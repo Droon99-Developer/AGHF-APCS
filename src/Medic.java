@@ -6,6 +6,7 @@ public class Medic extends Unit{
 	private int GPK = 4;
 	private int speed = linker.getSpeed();
 	private int health = linker.getHealth();
+	private int maxHealth = linker.getHealth();
 	public Medic(Unit attachment){
 		linker = attachment;
 	}
@@ -27,5 +28,10 @@ public class Medic extends Unit{
 	
 	public int getPerKill(){
 		return super.getPerKill();
+	}
+	public void heal(){
+		if(linker.getHealth() != linker.getMaxHealth()){
+			linker.addHealth();
+		}
 	}
 }

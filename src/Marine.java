@@ -5,7 +5,7 @@ public class Marine extends Unit {
 	private int strength = 1;
 	private int cost = 2;
 	private int GPK = 1;
-	
+	private int maxHealth = 2;
 	public int getSpeed() {
 		return super.getSpeed();
 	}

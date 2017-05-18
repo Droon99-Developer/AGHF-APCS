@@ -5,7 +5,7 @@ public class Unit {
 	public int strength;
 	public int cost;
 	public int GPK;
-	
+	public int maxHealth;
 	public int getSpeed() {
 		return speed;
 	}
@@ -24,5 +24,11 @@ public class Unit {
 	
 	public int getPerKill(){
 		return GPK;
+	}
+	public int getMaxHealth(){
+		return maxHealth;
+	}
+	public void addHealth(){
+		health += 2;
 	}
 }
