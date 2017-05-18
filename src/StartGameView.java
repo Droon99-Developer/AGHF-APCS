@@ -31,7 +31,7 @@ public class StartGameView implements ActionListener {
 		frame.setLayout(null);
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
-		
+		frame.setName("AGHF");
 		newGameBtn = new JButton("Create New Game");
 		newGameBtn.setBounds(frame.getWidth() / 2 - 80, frame.getHeight() * 3 / 4, 160, 70);
 		newGameBtn.addActionListener(this);
