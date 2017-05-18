@@ -26,7 +26,7 @@ public class StartGameView implements ActionListener {
 	
 	public StartGameView() {
 		frame = new JFrame();
-		frame.setSize(1024, 1024);
+		frame.setSize(720, 720);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLayout(null);
@@ -35,10 +35,10 @@ public class StartGameView implements ActionListener {
 		frame.setName("AGHF");
 		newGameBtn = new JButton("Create New Game");
 		quitBtn = new JButton("Quit");
-		quitBtn.setBounds(frame.getWidth() / 2 - 80, frame.getHeight() * 3 / 4 + 100, 160, 70);
+		quitBtn.setBounds(frame.getWidth() / 2 - 80, frame.getHeight() * 3 / 4 +50, 160, 70);
 		quitBtn.addActionListener(this);
 		quitBtn.setActionCommand("quit");
-		newGameBtn.setBounds(frame.getWidth() / 2 - 80, frame.getHeight() * 3 / 4, 160, 70);
+		newGameBtn.setBounds(frame.getWidth() / 2 - 80, frame.getHeight() * 3 / 4 - 50, 160, 70);
 		newGameBtn.addActionListener(this);
 		newGameBtn.setActionCommand("setup");
 		frame.add(newGameBtn);
