@@ -30,6 +30,7 @@ public class StartGameView implements ActionListener {
 		frame.setResizable(false);
 		frame.setLayout(null);
 		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
 		
 		newGameBtn = new JButton("Create New Game");
 		newGameBtn.setBounds(frame.getWidth() / 2 - 80, frame.getHeight() * 3 / 4, 160, 70);
@@ -43,7 +44,6 @@ public class StartGameView implements ActionListener {
 		if (e.getActionCommand().equals("setup")) {
 			p1Lbl = new JLabel("Player 1 Name:");
 			p2Lbl = new JLabel("Player 2 Name:");
-			
 			p1Name = new JTextField("Player 1");
 			p1Name.setForeground(Color.GRAY);
 			
