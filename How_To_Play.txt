@@ -9,7 +9,7 @@ TURN:
 
 On a single turn, there are 4 phases. 
 1. Income
-	This is the phase where you get the gold from killing opposing units.
+	This is the phase where you get the gold from killing opposing units and from your fixed income.
 2. Buying
 	This is the phase where you buy your units for a specific price. The 5 units are:
 		a. Air Strike - 50 Gold
