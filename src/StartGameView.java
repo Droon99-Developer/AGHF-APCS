@@ -55,7 +55,7 @@ public class StartGameView implements ActionListener {
 			
 			p2Name = new JTextField("Player 2");
 			p2Name.setForeground(Color.GRAY);
-			frame.remove(quitBtn);
+			
 			p1Name.addFocusListener(new FocusListener() {
 				@Override
 				public void focusGained(FocusEvent e) {
@@ -96,7 +96,8 @@ public class StartGameView implements ActionListener {
 			ref.x = frame.getWidth() * 3 / 4;
 			p2Name.setBounds(ref.x - 100, ref.y, 200, 40);
 			p2Lbl.setBounds(ref.x - 50, ref.y - 40, 100, 40);
-			
+			quitBtn.setText("Back");
+			quitBtn.setActionCommand("back");
 			frame.add(p1Lbl);
 			frame.add(p2Lbl);
 			frame.repaint();
@@ -115,6 +116,17 @@ public class StartGameView implements ActionListener {
 			frame.repaint();
 			GameController gc = new GameController(frame,p1,p2);
 		}else if(e.getActionCommand().equals("quit")){
-			System.exit(0);		}
+			System.exit(0);		
+		}else if(e.getActionCommand().equals("back")){
+			frame.remove(p1Lbl);
+			frame.remove(p2Lbl);
+			frame.remove(p1Name);
+			frame.remove(p2Name);
+			newGameBtn.setActionCommand("setup");
+			newGameBtn.setText("Create New Game");
+			quitBtn.setText("Quit");
+			quitBtn.setActionCommand("quit");
+			frame.repaint();
+		}
 	}
 }
