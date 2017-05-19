@@ -9,8 +9,10 @@ public class UnitsPanel extends JPanel {
 	private SingleUnitPanel scoutPnl = new SingleUnitPanel("Scout", 100);
 	private SingleUnitPanel medicPnl = new SingleUnitPanel("Medic", 100);
 	
-	public UnitsPanel() {
-		
+	public UnitsPanel(int x, int y, int width, int height) {
+		setLayout(null);
+		setBounds(x,y,width,height);
+
 	}
 	
 }

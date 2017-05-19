@@ -38,6 +38,11 @@ public class GameController implements KeyListener, ActionListener {
 		gv.setBounds(0,0,frame.getWidth(),frame.getHeight());
 		frame.add(gv);
 		
+		p1.setBounds(0, 0, frame.getWidth() / 2, frame.getHeight() / 4);
+		p2.setBounds(frame.getWidth() / 2, 0, frame.getWidth() / 2, frame.getHeight() / 4);
+		gv.add(p1.playerPnl);
+		gv.add(p2.playerPnl);
+		
 		sliceContainer = new JPanel();
 		sliceContainer.setLayout(null);
 		int x = 0;
