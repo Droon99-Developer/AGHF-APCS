@@ -2,7 +2,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 public class SliceController {
-	public SlicePanel myPanel = new SlicePanel();
+	public SlicePanel myPanel;
 	// rightUnits will have all the units coming from player 2 from the right side
 	private ArrayList<Unit> leftUnits;
 	private ArrayList<Unit> rightUnits;
@@ -11,6 +11,7 @@ public class SliceController {
 	private SliceController leftSlice;
 	
 	public SliceController(Rectangle bounds) {
+		myPanel = new SlicePanel();
 		myPanel.setBounds(bounds);
 	}
 	
