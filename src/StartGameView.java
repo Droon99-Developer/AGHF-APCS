@@ -113,6 +113,7 @@ public class StartGameView implements ActionListener {
 			frame.remove(p1Name);
 			frame.remove(p2Name);
 			frame.remove(newGameBtn);
+			frame.remove(quitBtn);
 			frame.repaint();
 			GameController gc = new GameController(frame,p1,p2);
 		}else if(e.getActionCommand().equals("quit")){
