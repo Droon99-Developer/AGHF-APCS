@@ -18,7 +18,7 @@ public class GameController implements KeyListener, ActionListener {
 	private GameView gv;
 	private JPanel sliceContainer;
 	private SliceController firstSlice;
-	private final int SLICES_ON_SCREEN = 4;
+	private final int SLICES_ON_SCREEN = 2;
 	
 	// scroll with left and right arrow keys and hold shift for speed
 	private boolean leftScroll = false;
@@ -42,7 +42,7 @@ public class GameController implements KeyListener, ActionListener {
 		sliceContainer.setLayout(null);
 		int x = 0;
 		int sliceWidth = frame.getWidth() / SLICES_ON_SCREEN;
-		SliceController[] slices = new SliceController[12];
+		SliceController[] slices = new SliceController[10];
 		for (int i = 0; i < slices.length; i++) {
 			Rectangle bounds = new Rectangle(x, 0, sliceWidth, frame.getHeight());
 			slices[i] = new SliceController(bounds);
