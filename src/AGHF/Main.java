@@ -1,3 +1,4 @@
+package AGHF;
 import java.awt.EventQueue;
 
 public class Main {

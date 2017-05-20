@@ -1,5 +1,8 @@
+package AGHF;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+
+import Units.Unit;
 
 public class SliceController {
 	public SlicePanel myPanel;
@@ -36,9 +39,9 @@ public class SliceController {
 	
 	
 	public void unitsAdvance() {
-		// if a unit is ready to advance, rightSlice.addUnit(...) or leftSlice.addUnit(...) and reset unit.turns until next advance
+		// TODO if a unit can advance, rightSlice.addUnit(...) or leftSlice.addUnit(...)
+		// and subtract one from units advancesLeft variable
 		// we could give scouts the ability to advance even when there are enemy units still alive??
-		// (placeholder:)
 		if (rightSlice != null) {
 			rightSlice.unitsAdvance();
 		}
