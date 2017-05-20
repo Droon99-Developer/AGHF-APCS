@@ -17,11 +17,7 @@ public class GameController implements KeyListener, ActionListener {
 	private Player p2;
 	private JFrame frame;
 	private GameView gv;
-	private JPanel sliceContainer;
 	private SliceController firstSlice;
-	private final int SLICES_ON_SCREEN = 2;
-	private UnitsPanel leftUnitsPnl;
-	private UnitsPanel rightUnitsPnl;
 
 	// scroll with left and right arrow keys and hold shift for speed
 	private boolean leftScroll = false;
@@ -45,45 +41,11 @@ public class GameController implements KeyListener, ActionListener {
 		gv.setBounds(0, 0, frame.getWidth(), frame.getHeight());
 		frame.add(gv);
 
-		p1.setBounds(0, 0, frame.getWidth() / 2, 100);
-		p2.setBounds(frame.getWidth() / 2, 0, frame.getWidth() / 2, 100);
-		gv.add(p1.playerPnl);
-		gv.add(p2.playerPnl);
-
-		leftUnitsPnl = new UnitsPanel(0, p1.playerPnl.getHeight(), frame.getWidth() / 4, 500);
-		leftUnitsPnl.setVisible(false);
-		rightUnitsPnl = new UnitsPanel(frame.getWidth() * 3 / 4, p2.playerPnl.getHeight(), frame.getWidth() / 4, 500);
-		rightUnitsPnl.setVisible(false);
-		gv.add(leftUnitsPnl);
-		gv.add(rightUnitsPnl);
-		p1.setUnitsPanel(leftUnitsPnl);
-		p2.setUnitsPanel(rightUnitsPnl);
+		gv.renderPlayers(p1, p2);
 		
+		gv.renderUnitPanels();
 		
-		sliceContainer = new JPanel();
-		sliceContainer.setLayout(null);
-		int x = 0;
-		int sliceWidth = frame.getWidth() / SLICES_ON_SCREEN;
-		SliceController[] slices = new SliceController[10];
-		for (int i = 0; i < slices.length; i++) {
-			Rectangle bounds = new Rectangle(x, 0, sliceWidth, frame.getHeight());
-			slices[i] = new SliceController(bounds);
-			// add all of the slice panels to the sliceContainer
-			sliceContainer.add(slices[i].myPanel);
-			x += sliceWidth;
-		}
-		sliceContainer.setBounds(0, 0, x, frame.getHeight());
-		gv.add(sliceContainer);
-
-		// create a sort of two way linked list of slices
-		slices[0].link(null, slices[1]);
-		firstSlice = slices[0];
-		p1.setBaseSlice(slices[0]);
-		for (int i = 1; i < slices.length - 1; i++) {
-			slices[i].link(slices[i - 1], slices[i + 1]);
-		}
-		slices[slices.length - 1].link(slices[slices.length - 2], null);
-		p2.setBaseSlice(slices[slices.length - 1]);
+		firstSlice = gv.renderSlices();
 
 		timer = new Timer(5, this);
 		timer.setActionCommand("tick");
@@ -137,32 +99,22 @@ public class GameController implements KeyListener, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("tick")) {
 			// called for every tick of the timer
-			if (leftScroll && sliceContainer.getLocation().x < 0) {
+			if (leftScroll && gv.sliceContainer.getLocation().x < 0) {
 				if (fastScroll) {
-					scroll(SCROLL_SPEED * 8);
+					gv.scroll(SCROLL_SPEED * 8);
 				} else {
-					scroll(SCROLL_SPEED);
+					gv.scroll(SCROLL_SPEED);
 				}
 			}
-			if (rightScroll && sliceContainer.getLocation().x + sliceContainer.getSize().width > frame.getWidth()) {
+			if (rightScroll && gv.sliceContainer.getLocation().x + gv.sliceContainer.getSize().width > frame.getWidth()) {
 				if (fastScroll) {
-					scroll(-SCROLL_SPEED * 8);
+					gv.scroll(-SCROLL_SPEED * 8);
 				} else {
-					scroll(-SCROLL_SPEED);
+					gv.scroll(-SCROLL_SPEED);
 				}
 			}
 		}
 	}
 	
-	public void scroll(int offset) {
-		Point newP = sliceContainer.getLocation();
-		newP.x += offset;
-		if (newP.x > 0) {
-			newP.x = 0;
-		} else if (newP.x < frame.getWidth() - sliceContainer.getWidth()) {
-			newP.x = frame.getWidth() - sliceContainer.getWidth();
-		}
-		sliceContainer.setLocation(newP);
-	}
-
+	
 }
