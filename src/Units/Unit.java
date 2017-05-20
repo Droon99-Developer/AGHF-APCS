@@ -14,9 +14,7 @@ public abstract class Unit extends JPanel {
 	// GPK: Gold Per Kill (the amount of gold YOUR OPPONENT RECEIVES when they kill your unit)
 	protected final int GPK;
 	
-	// this COST variable is just included so we can use polymorphism with the Unit class
-	// the actual COST of each unit is static in each subclass
-	protected final int COST = 0;
+	// the actual COST of each unit is static in each subclass so it is not included here
 	
 	// keeps track of how many advances are left
 	public int advancesLeft;

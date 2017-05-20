@@ -2,18 +2,22 @@ package AGHF;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import Units.*;
+
 public class UnitsPanel extends JPanel {
-	// if we had any more units it would be better to make this an array but i guess this is fine for just 5 units
-	private SingleUnitPanel airplanePnl = new SingleUnitPanel("Airplane", 100);
-	private SingleUnitPanel tankPnl = new SingleUnitPanel("Tank", 100);
-	private SingleUnitPanel infantryPnl = new SingleUnitPanel("Infantry", 100);
-	private SingleUnitPanel scoutPnl = new SingleUnitPanel("Scout", 100);
-	private SingleUnitPanel medicPnl = new SingleUnitPanel("Medic", 100);
-	
+	private SingleUnitPanel[] SUPnls = new SingleUnitPanel[5];
 	public UnitsPanel(int x, int y, int width, int height) {
 		setLayout(null);
 		setBounds(x,y,width,height);
-
+		SUPnls[0] = new SingleUnitPanel("Air Strike", AirStrike.COST, width, height / 5, 0);
+		SUPnls[1] = new SingleUnitPanel("Tank", Tank.COST, width, height / 5, height / 5);
+		SUPnls[2] = new SingleUnitPanel("Marine", Marine.COST, width, height / 5, height * 2 / 5);
+		SUPnls[3] = new SingleUnitPanel("Infantry", Infantry.COST, width, height / 5, height * 3 / 5);
+		SUPnls[4] = new SingleUnitPanel("Medic", Medic.COST, width, height / 5, height * 4 / 5);
+		
+		for (SingleUnitPanel pnl : SUPnls) {
+			add(pnl);
+		}
 	}
 	
 }

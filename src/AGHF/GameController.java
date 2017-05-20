@@ -50,9 +50,9 @@ public class GameController implements KeyListener, ActionListener {
 		gv.add(p1.playerPnl);
 		gv.add(p2.playerPnl);
 
-		leftUnitsPnl = new UnitsPanel(0, p1.playerPnl.getHeight(), frame.getWidth() / 4, 400);
+		leftUnitsPnl = new UnitsPanel(0, p1.playerPnl.getHeight(), frame.getWidth() / 4, 500);
 		leftUnitsPnl.setVisible(false);
-		rightUnitsPnl = new UnitsPanel(frame.getWidth() * 3 / 4, p2.playerPnl.getHeight(), frame.getWidth() / 4, 400);
+		rightUnitsPnl = new UnitsPanel(frame.getWidth() * 3 / 4, p2.playerPnl.getHeight(), frame.getWidth() / 4, 500);
 		rightUnitsPnl.setVisible(false);
 		gv.add(leftUnitsPnl);
 		gv.add(rightUnitsPnl);
