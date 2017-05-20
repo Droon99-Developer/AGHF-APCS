@@ -21,7 +21,7 @@ public class SliceController {
 	}
 	
 	public void unitsAttack() {
-		// each unit from each side does damage on every unit from opposite side
+		// TODO each unit from each side does damage on every unit from opposite side
 		// after all units have attacked, health is subtracted from each unit
 		// if all enemy units are dead, then surviving units subtract one from turns until next advance
 		if (rightSlice != null) {
@@ -29,15 +29,14 @@ public class SliceController {
 		}
 	}
 	
-	// not yet sure where we'll keep reference to the units and how that will all work
 	public void addUnits(Unit[] units, boolean fromLeftSide) {
-		// add units to correct arraylist
+		// TODO add units to correct arraylist
 	}
 	
 	
 	
 	public void unitsAdvance() {
-		// if a unit is ready to advance, rightSlice.addUnit(...) or leftSlice.addUnit(...) and reset turns until next advance
+		// if a unit is ready to advance, rightSlice.addUnit(...) or leftSlice.addUnit(...) and reset unit.turns until next advance
 		// we could give scouts the ability to advance even when there are enemy units still alive??
 		// (placeholder:)
 		if (rightSlice != null) {

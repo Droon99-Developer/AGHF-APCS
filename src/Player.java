@@ -22,6 +22,7 @@ public class Player implements ActionListener {
 	private UnitsPanel uPnl;
 	private JButton purchaseBtn;
 	private JButton upgradeBtn;
+	private JButton endTurnBtn;
 	
 	public Player(String name, boolean leftSide) {
 		this.name = name;
@@ -33,9 +34,16 @@ public class Player implements ActionListener {
 		gcDelegate = gc;
 	}
 	
+	public void startTurn() {
+		// TODO add the correct amount of gold
+		
+		playerPnl.setVisible(true);
+	}
+	
 	public void setBounds(int x, int y, int width, int height) {
 		 playerPnl.setLayout(null);
 		 playerPnl.setBounds(x, y, width, height);
+		 playerPnl.setVisible(false);
 		 if (leftSide) {
 			 nameLbl.setBounds(0, 0, 100, 50);
 		 } else {
@@ -44,6 +52,10 @@ public class Player implements ActionListener {
 		 nameLbl.setOpaque(true);
 		 nameLbl.setBackground(Color.RED);
 		 playerPnl.add(nameLbl);
+		 
+		 endTurnBtn = new JButton("End Turn");
+		 endTurnBtn.addActionListener(this);
+		 endTurnBtn.setActionCommand("end");
 		 
 		 purchaseBtn = new JButton("Purchase Units");
 		 purchaseBtn.addActionListener(this);
@@ -58,13 +70,16 @@ public class Player implements ActionListener {
 		 if (leftSide) {
 			 purchaseBtn.setBounds(left);
 			 upgradeBtn.setBounds(right);
+			 endTurnBtn.setBounds(playerPnl.getWidth() * 3 / 4, 0, playerPnl.getWidth() / 4, 50);
 		 } else {
 			 purchaseBtn.setBounds(right);
 			 upgradeBtn.setBounds(left);
+			 endTurnBtn.setBounds(0, 0, playerPnl.getWidth() / 4, 50);
 		 }
 		 
 		 playerPnl.add(purchaseBtn);
 		 playerPnl.add(upgradeBtn);
+		 playerPnl.add(endTurnBtn);
 	}
 	
 	public void setBaseSlice(SliceController baseSlice) {
@@ -98,11 +113,15 @@ public class Player implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		gcDelegate.refocus();
 		if (e.getActionCommand().equals("uPnl")) {
-			// toggle whether UnitsPanel is visible or not
 			uPnl.setVisible(!uPnl.isVisible());
 		} else if (e.getActionCommand().equals("upgrade")) {
-			// perform necessary actions to upgrade the base
+			// TODO perform necessary actions to upgrade the base
+		} else if (e.getActionCommand().equals("end")) {
+			uPnl.setVisible(false);
+			playerPnl.setVisible(false);
+			gcDelegate.turnEnded(this);
 		}
 	}
 }

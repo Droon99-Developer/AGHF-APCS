@@ -6,6 +6,10 @@ public class Unit {
 	public int cost;
 	public int GPK;
 	public int maxHealth;
+	
+	// keeps track of how many turns are left until this unit may advance to the next slice
+	public int turnsUntilAdvance;
+	
 	public int getSpeed() {
 		return speed;
 	}

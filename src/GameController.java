@@ -29,6 +29,10 @@ public class GameController implements KeyListener, ActionListener {
 	private final int SCROLL_SPEED = 4;
 	private Timer timer;
 
+	public void refocus() {
+		frame.requestFocus();
+	}
+	
 	public GameController(JFrame frame, Player p1, Player p2) {
 		this.p1 = p1;
 		this.p2 = p2;
@@ -40,8 +44,8 @@ public class GameController implements KeyListener, ActionListener {
 		gv.setBounds(0, 0, frame.getWidth(), frame.getHeight());
 		frame.add(gv);
 
-		p1.setBounds(0, 0, frame.getWidth() / 2, frame.getHeight() / 4);
-		p2.setBounds(frame.getWidth() / 2, 0, frame.getWidth() / 2, frame.getHeight() / 4);
+		p1.setBounds(0, 0, frame.getWidth() / 2, 100);
+		p2.setBounds(frame.getWidth() / 2, 0, frame.getWidth() / 2, 100);
 		gv.add(p1.playerPnl);
 		gv.add(p2.playerPnl);
 
@@ -83,13 +87,23 @@ public class GameController implements KeyListener, ActionListener {
 		timer = new Timer(5, this);
 		timer.setActionCommand("tick");
 		timer.start();
+		p1.startTurn();
 	}
-
-	// not sure how the turn system will work yet, but this is sort of what
-	// happens after each turn
-	public void turn() {
-		firstSlice.unitsAttack();
-		firstSlice.unitsAdvance();
+	
+	public void turnEnded(Player p) {
+		if (p == p1) {
+			p2.startTurn();
+		} else {
+			// we just tell the first slice to make units attack and advance because the slices are linked listed
+			// so the first slice will then tell the second slice to attack & advance, the second tells the third, and so on...
+			firstSlice.unitsAttack();
+			firstSlice.unitsAdvance();
+			// TODO check if either user has lost the game
+			// if nobody lost the game: 
+				p1.startTurn();
+			// we may need to call p1.startTurn(); somewhere else in this class if we want to
+			// somehow make the units animate while they attack and advance
+		}
 	}
 
 	@Override
