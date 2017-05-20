@@ -1,11 +1,15 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Player {
+public class Player implements ActionListener {
 	
 	private int gold = 10;
 	private String name;
@@ -14,29 +18,61 @@ public class Player {
 	private JLabel nameLbl;
 	private SliceController baseSlice;
 	protected JPanel playerPnl = new JPanel();
-	private UnitsPanel unitsPnl;
-	
+	private GameController gcDelegate;
+	private UnitsPanel uPnl;
+	private JButton purchaseBtn;
+	private JButton upgradeBtn;
 	
 	public Player(String name, boolean leftSide) {
 		this.name = name;
 		this.leftSide = leftSide;
-		nameLbl = new JLabel(name);
+		nameLbl = new JLabel(name, JLabel.CENTER);
+	}
+	
+	public void setDelegate(GameController gc) {
+		gcDelegate = gc;
 	}
 	
 	public void setBounds(int x, int y, int width, int height) {
 		 playerPnl.setLayout(null);
 		 playerPnl.setBounds(x, y, width, height);
-		 
-		 nameLbl.setBounds(playerPnl.getWidth() / 2 - 50, 0, 100, 50);
+		 if (leftSide) {
+			 nameLbl.setBounds(0, 0, 100, 50);
+		 } else {
+			 nameLbl.setBounds(playerPnl.getWidth() - 100, 0, 100, 50);
+		 }
+		 nameLbl.setOpaque(true);
+		 nameLbl.setBackground(Color.RED);
 		 playerPnl.add(nameLbl);
 		 
-		 unitsPnl = new UnitsPanel(0, playerPnl.getHeight(), playerPnl.getWidth() / 2, 400);
+		 purchaseBtn = new JButton("Purchase Units");
+		 purchaseBtn.addActionListener(this);
+		 purchaseBtn.setActionCommand("uPnl");
 		 
+		 upgradeBtn = new JButton("Upgrade Base");
+		 upgradeBtn.addActionListener(this);
+		 upgradeBtn.setActionCommand("upgrade");
+		 
+		 Rectangle left = new Rectangle(0, playerPnl.getHeight() - 50, playerPnl.getWidth() / 2, 50);
+		 Rectangle right = new Rectangle(playerPnl.getWidth() / 2, playerPnl.getHeight() - 50, playerPnl.getWidth() / 2, 50);
+		 if (leftSide) {
+			 purchaseBtn.setBounds(left);
+			 upgradeBtn.setBounds(right);
+		 } else {
+			 purchaseBtn.setBounds(right);
+			 upgradeBtn.setBounds(left);
+		 }
+		 
+		 playerPnl.add(purchaseBtn);
+		 playerPnl.add(upgradeBtn);
 	}
 	
 	public void setBaseSlice(SliceController baseSlice) {
 		this.baseSlice = baseSlice;
-		// somehow add the "base" of class "BasePanel" to the base slice controller's view
+	}
+	
+	public void setUnitsPanel(UnitsPanel pnl) {
+		uPnl = pnl;
 	}
 	
 	public void addUnit(Unit newUnit) {
@@ -58,5 +94,15 @@ public class Player {
 	
 	public int amtGold(){
 		return gold;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equals("uPnl")) {
+			// toggle whether UnitsPanel is visible or not
+			uPnl.setVisible(!uPnl.isVisible());
+		} else if (e.getActionCommand().equals("upgrade")) {
+			// perform necessary actions to upgrade the base
+		}
 	}
 }

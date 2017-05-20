@@ -19,29 +19,41 @@ public class GameController implements KeyListener, ActionListener {
 	private JPanel sliceContainer;
 	private SliceController firstSlice;
 	private final int SLICES_ON_SCREEN = 2;
-	
+	private UnitsPanel leftUnitsPnl;
+	private UnitsPanel rightUnitsPnl;
+
 	// scroll with left and right arrow keys and hold shift for speed
 	private boolean leftScroll = false;
 	private boolean rightScroll = false;
 	private boolean fastScroll = false;
 	private final int SCROLL_SPEED = 4;
 	private Timer timer;
-	
+
 	public GameController(JFrame frame, Player p1, Player p2) {
 		this.p1 = p1;
 		this.p2 = p2;
 		this.frame = frame;
 		frame.addKeyListener(this);
 		frame.requestFocus();
-		
+
 		gv = new GameView();
-		gv.setBounds(0,0,frame.getWidth(),frame.getHeight());
+		gv.setBounds(0, 0, frame.getWidth(), frame.getHeight());
 		frame.add(gv);
-		
+
 		p1.setBounds(0, 0, frame.getWidth() / 2, frame.getHeight() / 4);
 		p2.setBounds(frame.getWidth() / 2, 0, frame.getWidth() / 2, frame.getHeight() / 4);
 		gv.add(p1.playerPnl);
 		gv.add(p2.playerPnl);
+
+		leftUnitsPnl = new UnitsPanel(0, p1.playerPnl.getHeight(), frame.getWidth() / 4, 400);
+		leftUnitsPnl.setVisible(false);
+		rightUnitsPnl = new UnitsPanel(frame.getWidth() * 3 / 4, p2.playerPnl.getHeight(), frame.getWidth() / 4, 400);
+		rightUnitsPnl.setVisible(false);
+		gv.add(leftUnitsPnl);
+		gv.add(rightUnitsPnl);
+		p1.setUnitsPanel(leftUnitsPnl);
+		p2.setUnitsPanel(rightUnitsPnl);
+		
 		
 		sliceContainer = new JPanel();
 		sliceContainer.setLayout(null);
@@ -57,7 +69,7 @@ public class GameController implements KeyListener, ActionListener {
 		}
 		sliceContainer.setBounds(0, 0, x, frame.getHeight());
 		gv.add(sliceContainer);
-		
+
 		// create a sort of two way linked list of slices
 		slices[0].link(null, slices[1]);
 		firstSlice = slices[0];
@@ -67,22 +79,22 @@ public class GameController implements KeyListener, ActionListener {
 		}
 		slices[slices.length - 1].link(slices[slices.length - 2], null);
 		p2.setBaseSlice(slices[slices.length - 1]);
-		
-		timer = new Timer(5,this);
+
+		timer = new Timer(5, this);
+		timer.setActionCommand("tick");
 		timer.start();
 	}
-	
-	
-	// not sure how the turn system will work yet, but this is sort of what happens after each turn
+
+	// not sure how the turn system will work yet, but this is sort of what
+	// happens after each turn
 	public void turn() {
 		firstSlice.unitsAttack();
 		firstSlice.unitsAdvance();
 	}
 
-
 	@Override
-	public void keyTyped(KeyEvent e) {}
-
+	public void keyTyped(KeyEvent e) {
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -95,7 +107,6 @@ public class GameController implements KeyListener, ActionListener {
 		}
 	}
 
-
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == 37) {
@@ -107,23 +118,23 @@ public class GameController implements KeyListener, ActionListener {
 		}
 	}
 
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// called for every tick of the timer
-		
-		if (leftScroll && sliceContainer.getLocation().x < 0) {
-			if (fastScroll) {
-				scroll(SCROLL_SPEED * 8);
-			} else {
-				scroll(SCROLL_SPEED);
+		if (e.getActionCommand().equals("tick")) {
+			// called for every tick of the timer
+			if (leftScroll && sliceContainer.getLocation().x < 0) {
+				if (fastScroll) {
+					scroll(SCROLL_SPEED * 8);
+				} else {
+					scroll(SCROLL_SPEED);
+				}
 			}
-		}
-		if (rightScroll && sliceContainer.getLocation().x + sliceContainer.getSize().width > frame.getWidth()) {
-			if (fastScroll) {
-				scroll(-SCROLL_SPEED * 8);
-			} else {
-				scroll(-SCROLL_SPEED);
+			if (rightScroll && sliceContainer.getLocation().x + sliceContainer.getSize().width > frame.getWidth()) {
+				if (fastScroll) {
+					scroll(-SCROLL_SPEED * 8);
+				} else {
+					scroll(-SCROLL_SPEED);
+				}
 			}
 		}
 	}
@@ -138,5 +149,5 @@ public class GameController implements KeyListener, ActionListener {
 		}
 		sliceContainer.setLocation(newP);
 	}
-		
+
 }
