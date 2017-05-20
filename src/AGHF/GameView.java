@@ -1,13 +1,10 @@
 package AGHF;
 
-import java.awt.Color;
-import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 public class GameView extends JPanel {
@@ -45,6 +42,7 @@ public class GameView extends JPanel {
 		p2.setUnitsPanel(rightUnitsPnl);
 	}
 
+	// returns the first slice controller to GameController
 	public SliceController renderSlices() {
 		sliceContainer = new JPanel();
 		sliceContainer.setLayout(null);
@@ -81,5 +79,12 @@ public class GameView extends JPanel {
 			newP.x = getWidth() - sliceContainer.getWidth();
 		}
 		sliceContainer.setLocation(newP);
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		Graphics2D g2  = (Graphics2D)g;
+		// paint all of the units
 	}
 }

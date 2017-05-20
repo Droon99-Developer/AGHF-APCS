@@ -19,12 +19,14 @@ public abstract class Unit extends JPanel {
 	// keeps track of how many advances are left
 	public int advancesLeft;
 	protected int healthLeft;
+	public boolean forDefense;
 	
-	public Unit(int speed, int damage, int maxHealth, int GPK) {
+	public Unit(int speed, int damage, int maxHealth, int GPK, boolean forDefense) {
 		this.SPEED = speed;
 		this.MAX_HEALTH = maxHealth;
 		this.DAMAGE = damage;
 		this.GPK = GPK;
+		this.forDefense = forDefense;
 	}
 	
 	// returns the amount of gold received by this attack (0 if opponent unit doens't die)

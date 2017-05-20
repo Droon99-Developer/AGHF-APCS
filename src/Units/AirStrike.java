@@ -5,13 +5,13 @@ import java.awt.Graphics2D;
 
 public class AirStrike extends Unit {
 	public static final int COST = 50; 
-	public AirStrike() {
+	public AirStrike(boolean forDefense) {
 //		SPEED: 5
 //		DAMAGE: 40
 //		MAX HEALTH: 40 (only killed by anothre air strike)
 //		GPK: 10
-//		constructor structure: int speed, int damage, int maxHealth, int GPK
-		super(5, 40, 1, 10);
+//		constructor structure: int speed, int damage, int maxHealth, int GPK, boolean forDefense
+		super(5, 40, 1, 10, forDefense);
 	}
 	
 	@Override

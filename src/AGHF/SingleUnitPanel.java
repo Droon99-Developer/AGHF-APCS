@@ -3,17 +3,21 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class SingleUnitPanel extends JPanel {
+public class SingleUnitPanel extends JPanel implements ActionListener {
+	private static final long serialVersionUID = 122938938166445779L;
 	private JLabel nameLbl;
 	private JLabel costLbl;
 	private JButton attackBtn = new JButton("Attack");
 	private JButton defendBtn = new JButton("Defend");
 	private int width;
+	private UnitsPanel unitsPnl;
 	
 	public SingleUnitPanel(String name, int cost, int width, int height, int y) {
 		setLayout(null);
@@ -29,8 +33,14 @@ public class SingleUnitPanel extends JPanel {
 		defendBtn.setBounds(width / 2, height / 2, width / 2, height / 2);
 		add(attackBtn);
 		add(defendBtn);
+		attackBtn.addActionListener(this);
+		defendBtn.addActionListener(this);
 		
 		this.width = width;
+	}
+	
+	public void setDelegate(UnitsPanel unitsPnl) {
+		this.unitsPnl = unitsPnl;
 	}
 	
 	@Override
@@ -40,7 +50,11 @@ public class SingleUnitPanel extends JPanel {
 		g2.setColor(Color.BLACK);
 		g2.setStroke(new BasicStroke(3));
 		g2.drawLine(0, 0, width, 0);
-		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		unitsPnl.unitPurchased(this, (e.getSource() == defendBtn));
 	}
 	
 }

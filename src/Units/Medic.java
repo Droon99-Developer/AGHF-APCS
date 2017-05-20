@@ -6,13 +6,13 @@ import java.awt.Graphics2D;
 public class Medic extends Unit{
 	public static final int COST = 12;
 	private final int HEAL_AMT = 2;
-	public Medic() {
+	public Medic(boolean forDefense) {
 //		SPEED: 1
 //		DAMAGE: 0
 //		MAX HEALTH: 6
 //		GPK: 4
-//		constructor structure: int speed, int damage, int maxHealth, int GPK
-		super(1, 0, 6, 4);
+//		constructor structure: int speed, int damage, int maxHealth, int GPK, boolean forDefense
+		super(1, 0, 6, 4, forDefense);
 	}
 	
 	// it's easier to have medic resurrect people if they just died that turn

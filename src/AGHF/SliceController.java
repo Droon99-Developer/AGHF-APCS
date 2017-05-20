@@ -7,8 +7,8 @@ import Units.Unit;
 public class SliceController {
 	public SlicePanel myPanel;
 	// rightUnits will have all the units coming from player 2 from the right side
-	private ArrayList<Unit> leftUnits;
-	private ArrayList<Unit> rightUnits;
+	private ArrayList<Unit> leftUnits = new ArrayList<Unit>();
+	private ArrayList<Unit> rightUnits = new ArrayList<Unit>();
 	
 	private SliceController rightSlice;
 	private SliceController leftSlice;
@@ -33,10 +33,11 @@ public class SliceController {
 	}
 	
 	public void addUnits(Unit[] units, boolean fromLeftSide) {
-		// TODO add units to correct arraylist
+		ArrayList<Unit> correctSide = fromLeftSide ? leftUnits : rightUnits;
+		for (Unit u : units) {
+			correctSide.add(u);	
+		}
 	}
-	
-	
 	
 	public void unitsAdvance() {
 		// TODO if a unit can advance, rightSlice.addUnit(...) or leftSlice.addUnit(...)
