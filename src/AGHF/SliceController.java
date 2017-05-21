@@ -50,7 +50,6 @@ public class SliceController {
 	}
 
 	public void advanceUnits(boolean left) {
-		System.out.println(left);
 		// we could give scouts the ability to advance even when there are enemy
 		// units still alive??
 		ArrayList<Unit> unitsToAdvance = null;
@@ -68,6 +67,7 @@ public class SliceController {
 					if (u.advancesLeft > 0) {
 						u.advancesLeft--;
 						myPanel.remove(unitsToAdvance.get(i));
+						myPanel.repaint();
 						nextSlice.addUnit(unitsToAdvance.remove(i), this);
 						i--;
 					} else {

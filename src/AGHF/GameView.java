@@ -29,15 +29,19 @@ public class GameView extends JPanel {
 		p2.setBounds(getWidth() / 2, 0, getWidth() / 2, 100);
 		add(p1.playerPnl);
 		add(p2.playerPnl);
+//		setComponentZOrder(p1.playerPnl,0);
+//		setComponentZOrder(p2.playerPnl,1);
 	}
 
 	public void renderUnitPanels() {
-		UnitsPanel leftUnitsPnl = new UnitsPanel(0, p1.playerPnl.getHeight(), getWidth() / 4, 500);
+		UnitsPanel leftUnitsPnl = new UnitsPanel(getWidth() / 4, p1.playerPnl.getHeight(), getWidth() / 4, 500);
 		leftUnitsPnl.setVisible(false);
-		UnitsPanel rightUnitsPnl = new UnitsPanel(getWidth() * 3 / 4, p2.playerPnl.getHeight(), getWidth() / 4, 500);
+		UnitsPanel rightUnitsPnl = new UnitsPanel(getWidth() / 2, p2.playerPnl.getHeight(), getWidth() / 4, 500);
 		rightUnitsPnl.setVisible(false);
 		add(leftUnitsPnl);
 		add(rightUnitsPnl);
+//		setComponentZOrder(leftUnitsPnl,2);
+//		setComponentZOrder(rightUnitsPnl,3);
 		p1.setUnitsPanel(leftUnitsPnl);
 		p2.setUnitsPanel(rightUnitsPnl);
 	}
@@ -58,7 +62,7 @@ public class GameView extends JPanel {
 		}
 		sliceContainer.setBounds(0, 0, x, getHeight());
 		add(sliceContainer);
-
+//		setComponentZOrder(sliceContainer, 4);
 		// create a sort of two way linked list of slices
 		slices[0].link(null, slices[1]);
 		p1.setBaseSlice(slices[0]);

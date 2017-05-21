@@ -37,13 +37,12 @@ public class SlicePanel extends JPanel {
 			y += height;
 			u.setLocation(x, y - u.getHeight() / 2);
 		}
-		repaint();
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2 = (Graphics2D) g;
-		// paint all of the units
+		// paint the background landscape
 	}
 }

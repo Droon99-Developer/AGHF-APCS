@@ -73,13 +73,13 @@ public class Player implements ActionListener {
 		 Rectangle right = new Rectangle(playerPnl.getWidth() / 2, playerPnl.getHeight() - 50, playerPnl.getWidth() / 2, 50);
 		 if (leftSide) {
 			 nameLbl.setBounds(0, 0, width / 3, 50);
-			 purchaseBtn.setBounds(left);
-			 upgradeBtn.setBounds(right);
+			 purchaseBtn.setBounds(right);
+			 upgradeBtn.setBounds(left);
 			 endTurnBtn.setBounds(playerPnl.getWidth() * 2 / 3, 0, playerPnl.getWidth() / 3, 50);
 		 } else {
 			 nameLbl.setBounds(width * 2 / 3, 0, width / 3, 50);
-			 purchaseBtn.setBounds(right);
-			 upgradeBtn.setBounds(left);
+			 purchaseBtn.setBounds(left);
+			 upgradeBtn.setBounds(right);
 			 endTurnBtn.setBounds(0, 0, playerPnl.getWidth() / 3, 50);
 		 }
 		 playerPnl.add(nameLbl);
@@ -101,6 +101,9 @@ public class Player implements ActionListener {
 	public void unitPurchased(Unit newUnit, int cost) {
 		changeGold(-cost);
 		baseSlice.addUnit(newUnit, null);
+		System.out.println("repainting panel");
+		playerPnl.repaint();
+		gcDelegate.refocus();
 	}
 
 	@Override
