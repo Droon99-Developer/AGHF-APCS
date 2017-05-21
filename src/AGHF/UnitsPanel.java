@@ -53,7 +53,7 @@ public class UnitsPanel extends JPanel {
 			break;
 		case 4:
 			newUnit = new Medic(forDefense);
-			cost = Infantry.COST;
+			cost = Medic.COST;
 			break;
 		default:
 			System.out.println("error");
