@@ -100,8 +100,7 @@ public class Player implements ActionListener {
 	
 	public void unitPurchased(Unit newUnit, int cost) {
 		changeGold(-cost);
-		Unit[] newUnits = {newUnit};
-		baseSlice.addUnits(newUnits, leftSide);
+		baseSlice.addUnit(newUnit, null);
 	}
 
 	@Override

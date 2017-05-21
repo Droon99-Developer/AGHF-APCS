@@ -55,7 +55,7 @@ public class GameController implements KeyListener, ActionListener {
 			// we just tell the first slice to make units attack and advance because the slices are linked listed
 			// so the first slice will then tell the second slice to attack & advance, the second tells the third, and so on...
 			firstSlice.unitsAttack();
-			firstSlice.unitsAdvance();
+			firstSlice.advanceUnits(true);
 			// TODO check if either user has lost the game
 			// if nobody lost the game: 
 				p1.startTurn();

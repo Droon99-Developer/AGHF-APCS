@@ -2,8 +2,12 @@ package Units;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.File;
+import java.io.IOException;
 
-public class Medic extends Unit{
+import javax.imageio.ImageIO;
+
+public class Medic extends Unit {
 	public static final int COST = 12;
 	private final int HEAL_AMT = 2;
 	public Medic(boolean forDefense) {
@@ -13,6 +17,12 @@ public class Medic extends Unit{
 //		GPK: 4
 //		constructor structure: int speed, int damage, int maxHealth, int GPK, boolean forDefense
 		super(1, 0, 6, 4, forDefense);
+		try {
+		    img = ImageIO.read(new File("assets/medic1.png"));
+		    setSize(img.getWidth(), img.getHeight());
+		} catch (IOException e) {
+			System.out.println("Medic image didn't load");
+		}
 	}
 	
 	// it's easier to have medic resurrect people if they just died that turn
@@ -28,6 +38,6 @@ public class Medic extends Unit{
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2 = (Graphics2D)g;
-		// paint the asset image
+		g2.drawImage(img, null, 0, 0);
 	}
 }

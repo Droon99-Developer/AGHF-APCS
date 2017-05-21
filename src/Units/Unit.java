@@ -2,10 +2,12 @@ package Units;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-public abstract class Unit extends JPanel {
+public abstract class Unit extends JPanel implements Cloneable {
+	private static final long serialVersionUID = 7989260034732663649L;
 	// SPEED is the total number of advances the unit can make in a single turn
 	// advancing: move 1 slice forward
 	protected final int SPEED;
@@ -21,12 +23,17 @@ public abstract class Unit extends JPanel {
 	protected int healthLeft;
 	public boolean forDefense;
 	
+	protected BufferedImage img = null;
+	
 	public Unit(int speed, int damage, int maxHealth, int GPK, boolean forDefense) {
+		setLayout(null);
 		this.SPEED = speed;
-		this.MAX_HEALTH = maxHealth;
 		this.DAMAGE = damage;
+		this.MAX_HEALTH = maxHealth;
 		this.GPK = GPK;
 		this.forDefense = forDefense;
+		advancesLeft = SPEED;
+		healthLeft = MAX_HEALTH;
 	}
 	
 	// returns the amount of gold received by this attack (0 if opponent unit doens't die)
@@ -37,6 +44,10 @@ public abstract class Unit extends JPanel {
 			return u.GPK;
 		}
 		return 0;
+	}
+	
+	public void resetAdvances() {
+		advancesLeft = SPEED;
 	}
 	
 	// paint is declared here so polymorphism works
