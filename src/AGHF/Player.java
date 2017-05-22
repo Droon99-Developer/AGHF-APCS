@@ -99,11 +99,13 @@ public class Player implements ActionListener {
 	}
 	
 	public void unitPurchased(Unit newUnit, int cost) {
-		changeGold(-cost);
-		baseSlice.addUnit(newUnit, null);
-		System.out.println("repainting panel");
-		playerPnl.repaint();
-		gcDelegate.refocus();
+		if(cost <= gold){
+			changeGold(-cost);
+			baseSlice.addUnit(newUnit, null);
+			System.out.println("repainting panel");
+			playerPnl.repaint();
+			gcDelegate.refocus();
+		}
 	}
 
 	@Override
