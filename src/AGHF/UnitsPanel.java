@@ -28,6 +28,12 @@ public class UnitsPanel extends JPanel {
 		this.delegate = delegate;
 	}
 
+	public void updateButtons(int gold) {
+		for (SingleUnitPanel sup : SUPnls) {
+			sup.setEnabled(sup.price <= gold);
+		}
+	}
+	
 	public void unitPurchased(SingleUnitPanel source, boolean forDefense) {
 		int i = -1;
 		// finds the index of the source in SUPnls

@@ -44,6 +44,7 @@ public class Player implements ActionListener {
 	public void changeGold(int offset) {
 		gold += offset;
 		goldLbl.setText(String.format("%d", gold));
+		uPnl.updateButtons(gold);
 	}
 	
 	public void setBounds(int x, int y, int width, int height) {

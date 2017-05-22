@@ -14,6 +14,7 @@ public class SingleUnitPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 122938938166445779L;
 	private JLabel nameLbl;
 	private JLabel costLbl;
+	public int price;
 	private JButton attackBtn = new JButton("Attack");
 	private JButton defendBtn = new JButton("Defend");
 	private int width;
@@ -26,6 +27,7 @@ public class SingleUnitPanel extends JPanel implements ActionListener {
 		nameLbl.setBounds(0, 0, width, height / 4);
 		costLbl = new JLabel(String.format("%d Gold", cost), JLabel.CENTER);
 		costLbl.setBounds(0,height / 4, width, height / 4);
+		price = cost;
 		add(nameLbl);
 		add(costLbl);
 		
@@ -37,6 +39,11 @@ public class SingleUnitPanel extends JPanel implements ActionListener {
 		defendBtn.addActionListener(this);
 		
 		this.width = width;
+	}
+	
+	public void setEnabled(boolean enabled) {
+		attackBtn.setEnabled(enabled);
+		defendBtn.setEnabled(enabled);
 	}
 	
 	public void setDelegate(UnitsPanel unitsPnl) {
