@@ -29,7 +29,7 @@ public class Player implements ActionListener {
 	public Player(String name, boolean leftSide) {
 		this.leftSide = leftSide;
 		nameLbl = new JLabel(name, JLabel.CENTER);
-		goldLbl = new JLabel(String.format("%d", gold), JLabel.CENTER);
+		goldLbl = new JLabel(String.format("%d", gold) , JLabel.CENTER);
 	}
 
 	public void setDelegate(GameController gc) {
@@ -46,7 +46,7 @@ public class Player implements ActionListener {
 	public void changeGold(int offset) {
 		// economy money stuff
 		gold += offset;
-		goldLbl.setText(String.format("%d", gold));
+		goldLbl.setText(String.format("%d", gold) + " Gold");
 		uPnl.updateButtons(gold);
 	}
 
