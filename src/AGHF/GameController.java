@@ -74,7 +74,6 @@ public class GameController implements KeyListener, ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println(e.getKeyCode());
 		if (e.getKeyCode() == 37 || e.getKeyCode() == 65) {
 			leftScroll = true;
 		} else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) {

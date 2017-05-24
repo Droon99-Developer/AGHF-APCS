@@ -55,7 +55,7 @@ public class GameView extends JPanel {
 		SliceController[] slices = new SliceController[10];
 		for (int i = 0; i < slices.length; i++) {
 			Rectangle bounds = new Rectangle(x, 0, sliceWidth, getHeight());
-			slices[i] = new SliceController(bounds);
+			slices[i] = new SliceController(bounds, i);
 			// add all of the slice panels to the sliceContainer
 			sliceContainer.add(slices[i].myPanel);
 			x += sliceWidth;

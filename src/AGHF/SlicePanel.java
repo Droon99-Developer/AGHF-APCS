@@ -3,19 +3,30 @@ package AGHF;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import Units.Unit;
 
 public class SlicePanel extends JPanel {
 	private static final long serialVersionUID = 1521411056254603629L;
-
-	public SlicePanel() {
+	protected BufferedImage img = null;
+	
+	public SlicePanel(int index) {
 		setLayout(null);
-		Color a = new Color((float) Math.random(), (float) Math.random(), (float) Math.random());
-		setBackground(a);
+		try {
+		    img = ImageIO.read(new File(String.format("assets/Desert Map/APCSmap0slide%d.png", index)));
+		    setSize(img.getWidth(), img.getHeight());
+		} catch (IOException e) {
+			System.out.println("map image didn't load");
+		}
 	}
 
 	public void renderNewUnit(Unit newUnit, ArrayList<Unit> units, boolean left) {
@@ -44,5 +55,6 @@ public class SlicePanel extends JPanel {
 		super.paint(g);
 		Graphics2D g2 = (Graphics2D) g;
 		// paint the background landscape
+		g2.drawImage(img, AffineTransform.getScaleInstance((double)getWidth() / (double)img.getWidth(), 1), null);
 	}
 }

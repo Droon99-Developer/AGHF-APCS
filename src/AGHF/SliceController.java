@@ -17,8 +17,8 @@ public class SliceController implements Runnable {
 	private SliceController rightSlice;
 	private SliceController leftSlice;
 
-	public SliceController(Rectangle bounds) {
-		myPanel = new SlicePanel();
+	public SliceController(Rectangle bounds, int index) {
+		myPanel = new SlicePanel(index);
 		myPanel.setBounds(bounds);
 	}
 
