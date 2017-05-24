@@ -74,9 +74,10 @@ public class GameController implements KeyListener, ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == 37) {
+		System.out.println(e.getKeyCode());
+		if (e.getKeyCode() == 37 || e.getKeyCode() == 65) {
 			leftScroll = true;
-		} else if (e.getKeyCode() == 39) {
+		} else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) {
 			rightScroll = true;
 		} else if (e.getKeyCode() == 16) {
 			fastScroll = true;
@@ -85,9 +86,9 @@ public class GameController implements KeyListener, ActionListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == 37) {
+		if (e.getKeyCode() == 37 || e.getKeyCode() == 65) {
 			leftScroll = false;
-		} else if (e.getKeyCode() == 39) {
+		} else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) {
 			rightScroll = false;
 		} else if (e.getKeyCode() == 16) {
 			fastScroll = false;
