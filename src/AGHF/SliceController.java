@@ -1,6 +1,7 @@
 package AGHF;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import Units.*;
@@ -36,15 +37,16 @@ public class SliceController implements Runnable {
 			if (!attackU.getClass().toString().equals("AirStrike")) {
 				for (Unit defendU : defending) {
 					if (!defendU.getClass().toString().equals("AirStrike")) {
-						final int FRAMES = 40;
-						int time = 0;
-						double xMove = (defendU.getLocation().x - attackU.getLocation().x) / FRAMES;
-						double yMove = (defendU.getLocation().y - attackU.getLocation().y) / FRAMES;
-						while (time < FRAMES) {
-							time++;
-							attackU.setLocation((int)(attackU.getLocation().x + xMove), (int)(attackU.getLocation().y + yMove));
+						final double FRAMES = 20;
+						double currF = 0;
+						Point start = attackU.getLocation();
+						double xMove = defendU.getLocation().x - attackU.getLocation().x;
+						double yMove = defendU.getLocation().y - attackU.getLocation().y;
+						while (currF < FRAMES) {
+							currF++;
+							attackU.setLocation((int)(start.x + xMove * (currF / FRAMES)), (int)(start.y + yMove * (currF / FRAMES)));
 							try {
-								Thread.sleep(4);
+								Thread.sleep(16);
 							} catch (InterruptedException e) {
 								System.out.println("failed");
 								e.printStackTrace();
@@ -52,17 +54,17 @@ public class SliceController implements Runnable {
 						}
 						attackU.attack(defendU);
 						defendU.repaint();
-						time = 0;
-						while (time < FRAMES) {
-							time++;
-							attackU.setLocation((int)(attackU.getLocation().x - xMove), (int)(attackU.getLocation().y - yMove));
+						while (currF > 0) {
+							currF--;
+							attackU.setLocation((int)(start.x + xMove * (currF / FRAMES)), (int)(start.y + yMove * (currF / FRAMES)));
 							try {
-								Thread.sleep(4);
+								Thread.sleep(16);
 							} catch (InterruptedException e) {
 								System.out.println("failed");
 								e.printStackTrace();
 							}
 						}
+						System.out.println("--------------");
 					}
 				}
 			}
