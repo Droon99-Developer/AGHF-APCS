@@ -6,7 +6,10 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
-
+/*
+ * Controls map view
+ * Renders units and slices
+ */
 public class GameController implements KeyListener, ActionListener {
 	private Player p1;
 	private Player p2;

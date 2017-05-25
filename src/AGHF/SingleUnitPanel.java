@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/*
+ * Sets up the top bar for players
+ */
 public class SingleUnitPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 122938938166445779L;
 	private JLabel nameLbl;

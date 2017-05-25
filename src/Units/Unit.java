@@ -9,7 +9,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
+/*
+ * Superclass for units
+ */
 public abstract class Unit extends JPanel {
 	private static final long serialVersionUID = 7989260034732663649L;
 	// SPEED is the total number of advances the unit can make in a single turn

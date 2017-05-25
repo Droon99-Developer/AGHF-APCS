@@ -13,7 +13,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-
+/*
+ * Sets up frame
+ * Sets up start view
+ */
 public class StartGameView implements ActionListener {
 	private JButton newGameBtn;
 	private JButton quitBtn;
