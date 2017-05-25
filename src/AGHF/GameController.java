@@ -66,7 +66,7 @@ public class GameController implements KeyListener, ActionListener {
 	public void attacksDone() {
 		// TODO check if either user has lost the game
 		// if nobody lost the game: 
-			p1.startTurn();
+			
 		// we may need to call p1.startTurn(); somewhere else in this class if we want to
 		// somehow make the units animate while they attack and advance
 		firstSlice.advanceUnits(true);
