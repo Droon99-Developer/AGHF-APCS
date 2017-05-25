@@ -15,12 +15,6 @@ public class Tank extends Unit {
 //		MAX HEALTH: 10
 //		GPK: 5
 //		constructor structure: int speed, int damage, int maxHealth, int GPK, boolean forDefense
-		super(1, 7, 10, 5, forDefense);
-		try {
-		    img = ImageIO.read(new File("assets/tank1.png"));
-		    setSize(img.getWidth(), img.getHeight());
-		} catch (IOException e) {
-			System.out.println("Tank image didn't load");
-		}
+		super(1, 7, 10, 5, forDefense, "assets/tank1.png");
 	}
 }

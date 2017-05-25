@@ -17,12 +17,6 @@ public class Infantry extends Unit {
 //		MAX HEALTH: 7
 //		GPK: 3
 //		constructor structure: int speed, int damage, int maxHealth, int GPK, boolean forDefense
-		super(2, 3, 7, 3, forDefense);
-		try {
-		    img = ImageIO.read(new File("assets/infantry1new.png"));
-		    setSize(img.getWidth(), img.getHeight());
-		} catch (IOException e) {
-			System.out.println("Infantry image didn't load");
-		}
+		super(2, 3, 7, 3, forDefense, "assets/infantry1new.png");
 	}
 }

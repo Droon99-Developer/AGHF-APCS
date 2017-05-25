@@ -1,9 +1,13 @@
 package Units;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public abstract class Unit extends JPanel {
@@ -25,7 +29,7 @@ public abstract class Unit extends JPanel {
 	
 	protected BufferedImage img = null;
 	
-	public Unit(int speed, int damage, int maxHealth, int GPK, boolean forDefense) {
+	public Unit(int speed, int damage, int maxHealth, int GPK, boolean forDefense, String filePath) {
 		setLayout(null);
 		setOpaque(false);
 		this.SPEED = speed;
@@ -35,6 +39,12 @@ public abstract class Unit extends JPanel {
 		this.forDefense = forDefense;
 		advancesLeft = SPEED;
 		healthLeft = MAX_HEALTH;
+		try {
+		    img = ImageIO.read(new File(filePath));
+		    setSize(img.getWidth(), img.getHeight() + 10);
+		} catch (IOException e) {
+			System.out.println("unit image didn't load");
+		}
 	}
 	
 	// returns the amount of gold received by this attack (0 if opponent unit doens't die)
@@ -56,6 +66,8 @@ public abstract class Unit extends JPanel {
 		Graphics2D g2 = (Graphics2D)g;
 		g2.drawImage(img, null, 0, 0);
 		// TODO paint some sort of health bar underneath the unit
+		g2.setColor(Color.RED);
+//		g2.drawRect(0, getHeight(), , height);
 	}
 	
 }

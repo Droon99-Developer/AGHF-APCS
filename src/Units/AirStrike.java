@@ -16,12 +16,6 @@ public class AirStrike extends Unit {
 //		MAX HEALTH: 40 (only killed by anothre air strike)
 //		GPK: 10
 //		constructor structure: int speed, int damage, int maxHealth, int GPK, boolean forDefense
-		super(5, 40, 1, 10, forDefense);
-		try {
-		    img = ImageIO.read(new File("assets/jet1.png"));
-		    setSize(img.getWidth(), img.getHeight());
-		} catch (IOException e) {
-			System.out.println("AirStrike image didn't load");
-		}
+		super(5, 40, 1, 10, forDefense, "assets/jet1.png");
 	}
 }

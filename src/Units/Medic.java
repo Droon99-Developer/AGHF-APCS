@@ -16,13 +16,7 @@ public class Medic extends Unit {
 //		MAX HEALTH: 6
 //		GPK: 4
 //		constructor structure: int speed, int damage, int maxHealth, int GPK, boolean forDefense
-		super(1, 0, 6, 4, forDefense);
-		try {
-		    img = ImageIO.read(new File("assets/medic1.png"));
-		    setSize(img.getWidth(), img.getHeight());
-		} catch (IOException e) {
-			System.out.println("Medic image didn't load");
-		}
+		super(1, 0, 6, 4, forDefense, "assets/medic1.png");
 	}
 	
 	// it's easier to have medic resurrect people if they just died that turn
