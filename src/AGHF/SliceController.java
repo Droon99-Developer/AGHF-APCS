@@ -47,6 +47,7 @@ public class SliceController implements Runnable {
 							}
 						}
 						attackU.attack(defendU);
+						defendU.repaint();
 						time = 0;
 						while (time < FRAMES) {
 							time++;

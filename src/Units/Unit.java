@@ -29,6 +29,8 @@ public abstract class Unit extends JPanel {
 	
 	protected BufferedImage img = null;
 	
+	private final int HEALTH_BAR_HEIGHT = 5;
+	
 	public Unit(int speed, int damage, int maxHealth, int GPK, boolean forDefense, String filePath) {
 		setLayout(null);
 		setOpaque(false);
@@ -41,7 +43,7 @@ public abstract class Unit extends JPanel {
 		healthLeft = MAX_HEALTH;
 		try {
 		    img = ImageIO.read(new File(filePath));
-		    setSize(img.getWidth(), img.getHeight() + 10);
+		    setSize(img.getWidth(), img.getHeight() + HEALTH_BAR_HEIGHT);
 		} catch (IOException e) {
 			System.out.println("unit image didn't load");
 		}
@@ -65,9 +67,11 @@ public abstract class Unit extends JPanel {
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D)g;
 		g2.drawImage(img, null, 0, 0);
-		// TODO paint some sort of health bar underneath the unit
+		g2.setColor(Color.BLACK);
+		g2.drawRect(0, getHeight() - HEALTH_BAR_HEIGHT, getWidth() - 1, HEALTH_BAR_HEIGHT - 1);
 		g2.setColor(Color.RED);
-//		g2.drawRect(0, getHeight(), , height);
+		int width =  (int)(((double)healthLeft / (double)MAX_HEALTH) * (double)(getWidth() - 2));
+		g2.fillRect(1, getHeight() - HEALTH_BAR_HEIGHT + 1, width, HEALTH_BAR_HEIGHT - 2);
 	}
 	
 }
