@@ -3,7 +3,9 @@ package AGHF;
 import javax.swing.JPanel;
 
 import Units.*;
-
+/*
+ * Lists all units in a slice
+ */
 public class UnitsPanel extends JPanel {
 	private static final long serialVersionUID = 8863470085783682511L;
 	private SingleUnitPanel[] SUPnls = new SingleUnitPanel[5];

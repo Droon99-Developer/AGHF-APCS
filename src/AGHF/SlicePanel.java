@@ -17,7 +17,9 @@ import javax.swing.JPanel;
 
 import Units.Infantry;
 import Units.Unit;
-
+/*
+ * Renders the units and the map
+ */
 public class SlicePanel extends JPanel {
 	private static final long serialVersionUID = 1521411056254603629L;
 	protected BufferedImage img = null;

@@ -9,7 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Units.Unit;
-
+/*
+ * Contains all information about players
+ * Makes top panel active
+ */
 public class Player implements ActionListener {
 
 	private int gold = 0;

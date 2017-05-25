@@ -4,7 +4,11 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import Units.*;
-
+/*
+ * Logic for slices
+ * Attack animation
+ * etc.
+ */
 public class SliceController implements Runnable {
 	public SlicePanel myPanel;
 	// rightUnits will have all the units coming from player 2 from the right
