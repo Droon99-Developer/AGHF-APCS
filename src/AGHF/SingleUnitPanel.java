@@ -51,8 +51,7 @@ public class SingleUnitPanel extends JPanel implements ActionListener {
 	}
 	
 	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
+	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setColor(Color.BLACK);
 		g2.setStroke(new BasicStroke(3));

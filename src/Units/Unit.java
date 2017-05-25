@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-public abstract class Unit extends JPanel implements Cloneable {
+public abstract class Unit extends JPanel {
 	private static final long serialVersionUID = 7989260034732663649L;
 	// SPEED is the total number of advances the unit can make in a single turn
 	// advancing: move 1 slice forward
@@ -27,6 +27,7 @@ public abstract class Unit extends JPanel implements Cloneable {
 	
 	public Unit(int speed, int damage, int maxHealth, int GPK, boolean forDefense) {
 		setLayout(null);
+		setOpaque(false);
 		this.SPEED = speed;
 		this.DAMAGE = damage;
 		this.MAX_HEALTH = maxHealth;
@@ -50,10 +51,11 @@ public abstract class Unit extends JPanel implements Cloneable {
 		advancesLeft = SPEED;
 	}
 	
-	// paint is declared here so polymorphism works
 	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-	};
+	public void paintComponent(Graphics g) {
+		Graphics2D g2 = (Graphics2D)g;
+		g2.drawImage(img, null, 0, 0);
+		// TODO paint some sort of health bar underneath the unit
+	}
 	
 }

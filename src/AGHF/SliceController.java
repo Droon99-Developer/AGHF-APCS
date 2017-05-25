@@ -99,14 +99,10 @@ public class SliceController implements Runnable {
 	}
 	
 	public void addUnit(Unit unit, SliceController source) {
-		ArrayList<Unit> correctSide;
-		if (source == leftSlice) {
-			correctSide = leftUnits;
-		} else {
-			correctSide = rightUnits;
-		}
+		ArrayList<Unit> correctSide = (source == leftSlice) ? leftUnits : rightUnits;
 		correctSide.add(unit);
 		myPanel.renderNewUnit(unit, correctSide, source == leftSlice);
+		myPanel.repaint();
 	}
 
 	public void advanceUnits(boolean left) {

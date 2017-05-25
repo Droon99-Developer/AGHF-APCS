@@ -41,6 +41,8 @@ public class GameController implements KeyListener, ActionListener {
 		gv.renderUnitPanels();
 		
 		firstSlice = gv.renderSlices();
+		
+		gv.addComponents();
 
 		timer = new Timer(5, this);
 		timer.setActionCommand("tick");

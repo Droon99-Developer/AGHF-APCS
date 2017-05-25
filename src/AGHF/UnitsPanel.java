@@ -66,7 +66,6 @@ public class UnitsPanel extends JPanel {
 			break;
 		}
 		delegate.unitPurchased(newUnit, cost);
-		repaint();
 	}
 
 }

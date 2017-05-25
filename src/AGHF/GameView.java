@@ -5,9 +5,10 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-public class GameView extends JPanel {
+public class GameView extends JLayeredPane {
 	private static final long serialVersionUID = -4430897747513766248L;
 	// this class is responsible for drawing the mini map overview and quit
 	// button
@@ -27,10 +28,6 @@ public class GameView extends JPanel {
 		this.p2 = p2;
 		p1.setBounds(0, 0, getWidth() / 2, 100);
 		p2.setBounds(getWidth() / 2, 0, getWidth() / 2, 100);
-		add(p1.playerPnl);
-		add(p2.playerPnl);
-//		setComponentZOrder(p1.playerPnl,0);
-//		setComponentZOrder(p2.playerPnl,1);
 	}
 
 	public void renderUnitPanels() {
@@ -38,10 +35,6 @@ public class GameView extends JPanel {
 		leftUnitsPnl.setVisible(false);
 		UnitsPanel rightUnitsPnl = new UnitsPanel(getWidth() / 2, p2.playerPnl.getHeight(), getWidth() / 4, 500);
 		rightUnitsPnl.setVisible(false);
-		add(leftUnitsPnl);
-		add(rightUnitsPnl);
-//		setComponentZOrder(leftUnitsPnl,2);
-//		setComponentZOrder(rightUnitsPnl,3);
 		p1.setUnitsPanel(leftUnitsPnl);
 		p2.setUnitsPanel(rightUnitsPnl);
 	}
@@ -61,8 +54,7 @@ public class GameView extends JPanel {
 			x += sliceWidth;
 		}
 		sliceContainer.setBounds(0, 0, x, getHeight());
-		add(sliceContainer);
-//		setComponentZOrder(sliceContainer, 4);
+
 		// create a sort of two way linked list of slices
 		slices[0].link(null, slices[1]);
 		p1.setBaseSlice(slices[0]);
@@ -86,9 +78,17 @@ public class GameView extends JPanel {
 	}
 	
 	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
+	public void paintComponent(Graphics g) {
 		Graphics2D g2  = (Graphics2D)g;
-		// paint all of the units
+		// TODO paint the mini map
+	}
+
+	public void addComponents() {
+		add(sliceContainer, 0);
+		moveToBack(sliceContainer);
+		add(p1.playerPnl, 0);
+		add(p2.playerPnl, 0);
+		add(p1.uPnl, 0);
+		add(p2.uPnl, 0);
 	}
 }

@@ -11,8 +11,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import Units.Infantry;
 import Units.Unit;
 
 public class SlicePanel extends JPanel {
@@ -21,6 +24,7 @@ public class SlicePanel extends JPanel {
 	
 	public SlicePanel(int index) {
 		setLayout(null);
+		setOpaque(false);
 		try {
 		    img = ImageIO.read(new File(String.format("assets/Desert Map/APCSmap0slide%d.png", index)));
 		    setSize(img.getWidth(), img.getHeight());
@@ -51,10 +55,8 @@ public class SlicePanel extends JPanel {
 	}
 
 	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
+	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		// paint the background landscape
 		g2.drawImage(img, AffineTransform.getScaleInstance((double)getWidth() / (double)img.getWidth(), 1), null);
 	}
 }

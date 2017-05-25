@@ -16,7 +16,7 @@ public class Player implements ActionListener {
 	private boolean leftSide;
 	private SliceController baseSlice;
 	private GameController gcDelegate;
-	private UnitsPanel uPnl;
+	public UnitsPanel uPnl;
 
 	// PlayerPanel UI elements
 	protected JPanel playerPnl = new JPanel();
@@ -107,8 +107,6 @@ public class Player implements ActionListener {
 		// economy money stuff
 		changeGold(-cost);
 		baseSlice.addUnit(newUnit, null);
-		System.out.println("repainting panel");
-		playerPnl.repaint();
 		gcDelegate.refocus();
 	}
 

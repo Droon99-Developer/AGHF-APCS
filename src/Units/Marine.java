@@ -24,11 +24,4 @@ public class Marine extends Unit{
 			System.out.println("Marine image didn't load");
 		}
 	}
-	
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-		Graphics2D g2 = (Graphics2D)g;
-		g2.drawImage(img, null, 0, 0);
-	}
 }
