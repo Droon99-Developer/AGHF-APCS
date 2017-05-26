@@ -93,4 +93,5 @@ public class GameView extends JLayeredPane {
 		add(p1.uPnl, 0);
 		add(p2.uPnl, 0);
 	}
+	
 }

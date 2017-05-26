@@ -105,6 +105,10 @@ public class Player implements ActionListener {
 		uPnl = pnl;
 		uPnl.setPlayer(this);
 	}
+	
+	public boolean turn(){
+		return playerPnl.isVisible();
+	}
 
 	public void unitPurchased(Unit newUnit, int cost) {
 		// economy money stuff
