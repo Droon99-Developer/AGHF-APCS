@@ -3,6 +3,8 @@ package Units;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -73,6 +75,13 @@ public abstract class Unit extends JPanel {
 	
 	public void resetAdvances() {
 		advancesLeft = SPEED;
+	}
+	
+	public void flipImage(){
+		AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+		tx.translate(-img.getWidth(null), 0);
+		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+		img = op.filter(img, null);
 	}
 	
 	@Override

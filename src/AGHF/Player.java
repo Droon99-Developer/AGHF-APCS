@@ -84,21 +84,17 @@ public class Player implements ActionListener {
 			purchaseBtn.setBounds(right);
 			upgradeBtn.setBounds(left);
 			endTurnBtn.setBounds(playerPnl.getWidth() * 2 / 3, 0, playerPnl.getWidth() / 3, 50);
-	
-			
 		} else {
 			nameLbl.setBounds(width * 2 / 3, 0, width / 3, 50);
 			purchaseBtn.setBounds(left);
 			upgradeBtn.setBounds(right);
 			endTurnBtn.setBounds(0, 0, playerPnl.getWidth() / 3, 50);
-			
 		}
 		playerPnl.add(nameLbl);
 		playerPnl.add(goldLbl);
 		playerPnl.add(purchaseBtn);
 		playerPnl.add(upgradeBtn);
 		playerPnl.add(endTurnBtn);
-		
 	}
 
 	public void setBaseSlice(SliceController baseSlice) {
@@ -113,8 +109,13 @@ public class Player implements ActionListener {
 	public void unitPurchased(Unit newUnit, int cost) {
 		// economy money stuff
 		changeGold(-cost);
+		if(leftSide == false)
+		{
+			newUnit.flipImage();
+		}
 		baseSlice.addUnit(newUnit, null);
 		gcDelegate.refocus();
+		
 	}
 
 	@Override
@@ -128,9 +129,6 @@ public class Player implements ActionListener {
 			uPnl.setVisible(false);
 			playerPnl.setVisible(false);
 			gcDelegate.turnEnded(this);
-			
-		} else if (e.getActionCommand().equals("quit")) {
-			System.exit(0);
 		}
 	}
 }
