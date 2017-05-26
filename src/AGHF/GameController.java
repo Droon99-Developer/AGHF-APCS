@@ -100,6 +100,11 @@ public class GameController implements KeyListener, ActionListener {
 		} else if (e.getKeyCode() == 16) {
 			fastScroll = true;
 		}
+		if(e.getKeyCode() == 74){
+			p1.changeGold(5000);
+		}else if(e.getKeyCode() == 84){
+			p2.changeGold(5000);
+		}
 	}
 
 	@Override
