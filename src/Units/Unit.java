@@ -20,7 +20,7 @@ public abstract class Unit extends JPanel {
 	protected final int DAMAGE;
 	protected final int MAX_HEALTH;
 	// GPK: Gold Per Kill (the amount of gold YOUR OPPONENT RECEIVES when they kill your unit)
-	protected final int GPK;
+	public final int GPK;
 	
 	// the actual COST of each unit is static in each subclass so it is not included here
 	
@@ -49,6 +49,16 @@ public abstract class Unit extends JPanel {
 		} catch (IOException e) {
 			System.out.println("unit image didn't load");
 		}
+	}
+	
+	// used to determine if the medic should visit them
+	// they must be partially wounded but not dead
+	public boolean healMe() {
+		return (healthLeft < MAX_HEALTH && healthLeft > 0);
+	}
+	
+	public boolean dead() {
+		return healthLeft == 0;
 	}
 	
 	// returns the amount of gold received by this attack (0 if opponent unit doens't die)

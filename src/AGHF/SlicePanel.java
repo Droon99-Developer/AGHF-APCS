@@ -17,19 +17,20 @@ import javax.swing.JPanel;
 
 import Units.Infantry;
 import Units.Unit;
+
 /*
  * Renders the units and the map
  */
 public class SlicePanel extends JPanel {
 	private static final long serialVersionUID = 1521411056254603629L;
 	protected BufferedImage img = null;
-	
+
 	public SlicePanel(int index) {
 		setLayout(null);
 		setOpaque(false);
 		try {
-		    img = ImageIO.read(new File(String.format("assets/Desert Map/APCSmap0slide%d.png", index)));
-		    
+			img = ImageIO.read(new File(String.format("assets/Desert Map/APCSmap0slide%d.png", index)));
+
 		} catch (IOException e) {
 			System.out.println("map image didn't load");
 		}
@@ -39,26 +40,29 @@ public class SlicePanel extends JPanel {
 		add(newUnit);
 		renderUnits(units, left);
 	}
-	
+
 	public void renderUnits(ArrayList<Unit> units, boolean left) {
-		int x;
-		if (left) {
-			x = getWidth() / 4 - units.get(0).getWidth() / 2;
-		} else {
-			x = getWidth() * 3 / 4 - units.get(0).getWidth() / 2;
+		if (units.size() > 0) {
+			int x;
+			if (left) {
+				x = getWidth() / 4 - units.get(0).getWidth() / 2;
+			} else {
+				x = getWidth() * 3 / 4 - units.get(0).getWidth() / 2;
+			}
+			// the landscape starts 2/3 of the way down the screen
+			int y = getHeight() * 2 / 3;
+			int height = getHeight() / 3 / (units.size() + 1);
+			for (Unit u : units) {
+				y += height;
+				u.setLocation(x, y - u.getHeight() / 2);
+			}
 		}
-		// the landscape starts 2/3 of the way down the screen
-		int y = getHeight() * 2 / 3;
-		int height = getHeight() / 3 / (units.size() + 1);
-		for (Unit u : units) {
-			y += height;
-			u.setLocation(x, y - u.getHeight() / 2);
-		}
+		repaint();
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(img, AffineTransform.getScaleInstance((double)getWidth() / (double)img.getWidth(), 1), null);
+		g2.drawImage(img, AffineTransform.getScaleInstance((double) getWidth() / (double) img.getWidth(), 1), null);
 	}
 }
