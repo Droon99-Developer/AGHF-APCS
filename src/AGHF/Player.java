@@ -109,10 +109,6 @@ public class Player implements ActionListener {
 	public void unitPurchased(Unit newUnit, int cost) {
 		// economy money stuff
 		changeGold(-cost);
-		if(leftSide == false)
-		{
-			newUnit.flipImage();
-		}
 		baseSlice.addUnit(newUnit, null);
 		gcDelegate.refocus();
 		
