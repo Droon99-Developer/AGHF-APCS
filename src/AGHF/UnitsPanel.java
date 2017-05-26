@@ -69,5 +69,9 @@ public class UnitsPanel extends JPanel {
 		}
 		delegate.unitPurchased(newUnit, cost);
 	}
+	
+	public boolean getVisible(){
+		return this.isVisible();
+	}
 
 }

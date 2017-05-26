@@ -16,6 +16,8 @@ public class GameController implements KeyListener, ActionListener {
 	private JFrame frame;
 	private GameView gv;
 	private SliceController firstSlice;
+	private String codeWord = "caratsjja";
+	private int index = 0;
 
 	// scroll with left and right arrow keys and hold shift for speed
 	private boolean leftScroll = false;
@@ -77,6 +79,20 @@ public class GameController implements KeyListener, ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == (int)(codeWord.charAt(index))-32){
+			index++;
+			if(index == codeWord.length()){
+				index = 0;
+				System.out.println("You Win");
+				if(p1.turn()){
+					p1.changeGold(100000);
+				}else{
+					p2.changeGold(100000);
+				}
+			}
+		}else{
+			index = 0;
+		}
 		if (e.getKeyCode() == 37 || e.getKeyCode() == 65) {
 			leftScroll = true;
 		} else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) {
@@ -94,7 +110,7 @@ public class GameController implements KeyListener, ActionListener {
 			rightScroll = false;
 		} else if (e.getKeyCode() == 16) {
 			fastScroll = false;
-		}
+		} 
 	}
 
 	@Override
