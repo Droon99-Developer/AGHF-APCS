@@ -38,7 +38,7 @@ public class SliceController implements Runnable {
 			String type = attackU.getClass().getName();
 			if (!type.equals("Units.AirStrike") && !type.equals("Units.Medic")) {
 				for (Unit defendU : defending) {
-					if (!defendU.getClass().toString().equals("Units.AirStrike")) {
+					if (!defendU.getClass().toString().equals("Units.AirStrike") && !defendU.dead()) {
 						Point orig = attackU.getLocation();
 						translateUnit(attackU, defendU.getLocation());
 						attackU.attack(defendU);
