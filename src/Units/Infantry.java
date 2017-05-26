@@ -17,6 +17,6 @@ public class Infantry extends Unit {
 //		MAX HEALTH: 7
 //		GPK: 3
 //		constructor structure: int speed, int damage, int maxHealth, int GPK, boolean forDefense
-		super(2, 3, 7, 3, forDefense, "assets/infantry1new.png");
+		super(2, 3, 7, 3, forDefense, "assets/InfantrySprite1.png");
 	}
 }

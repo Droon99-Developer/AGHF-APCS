@@ -15,6 +15,6 @@ public class Marine extends Unit{
 //		MAX HEALTH: 3
 //		GPK: 1
 //		constructor structure: int speed, int damage, int maxHealth, int GPK, boolean forDefense
-		super(2, 8, 3, 1, forDefense, "assets/scout1.png");
+		super(2, 8, 3, 1, forDefense, "assets/MarineSprite1.png");
 	}
 }

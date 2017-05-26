@@ -16,6 +16,6 @@ public class AirStrike extends Unit {
 //		MAX HEALTH: 40 (only killed by anothre air strike)
 //		GPK: 10
 //		constructor structure: int speed, int damage, int maxHealth, int GPK, boolean forDefense
-		super(5, 40, 1, 10, forDefense, "assets/jet1.png");
+		super(5, 40, 1, 10, forDefense, "assets/JetSprite1.png");
 	}
 }

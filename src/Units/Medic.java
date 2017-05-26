@@ -16,7 +16,7 @@ public class Medic extends Unit {
 //		MAX HEALTH: 6
 //		GPK: 4
 //		constructor structure: int speed, int damage, int maxHealth, int GPK, boolean forDefense
-		super(1, 0, 6, 4, forDefense, "assets/medic1.png");
+		super(1, 0, 6, 4, forDefense, "assets/MedicSprite1.png");
 	}
 	
 	// it's easier to have medic resurrect people if they just died that turn

@@ -15,6 +15,6 @@ public class Tank extends Unit {
 //		MAX HEALTH: 10
 //		GPK: 5
 //		constructor structure: int speed, int damage, int maxHealth, int GPK, boolean forDefense
-		super(1, 7, 10, 5, forDefense, "assets/tank1.png");
+		super(1, 7, 10, 5, forDefense, "assets/TankSprite1.png");
 	}
 }
