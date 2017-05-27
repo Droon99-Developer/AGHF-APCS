@@ -33,7 +33,7 @@ public class SliceController implements Runnable {
 			String type = attackU.getClass().getName();
 			if (!type.equals("Units.AirStrike") && !type.equals("Units.Medic")) {
 				for (Unit defendU : defending) {
-					if (!defendU.getClass().toString().equals("Units.AirStrike") && !defendU.dead()) {
+					if (!defendU.getClass().getName().equals("Units.AirStrike") && !defendU.dead()) {
 						Point orig = attackU.getLocation();
 						myPanel.translateUnit(attackU, defendU.getLocation());
 						attackU.attack(defendU);
@@ -47,7 +47,7 @@ public class SliceController implements Runnable {
 
 	private void healAnimation(ArrayList<Unit> units) {
 		for (Unit medic : units) {
-			if (medic.getClass().getName().equals("Units.Medic")) {
+			if (medic.getClass().getName().equals("Units.Medic") && !medic.dead()) {
 				for (Unit patient : units) {
 					if (patient.healMe()) {
 						Point orig = medic.getLocation();
@@ -121,7 +121,7 @@ public class SliceController implements Runnable {
 		int i = 0;
 		while (i < units.size()) {
 			Unit u = units.get(i);
-			if (u.advancesLeft > 0 && (justScouts && u.getClass().getName().equals("Units.Scout") || !justScouts)) {
+			if (u.advancesLeft > 0 && !u.forDefense && (justScouts && u.getClass().getName().equals("Units.Scout") || !justScouts)) {
 				u.advancesLeft--;
 				myPanel.remove(u);
 				retArr.add(units.remove(i));
