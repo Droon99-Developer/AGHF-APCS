@@ -121,7 +121,7 @@ public class SliceController implements Runnable {
 		int i = 0;
 		while (i < units.size()) {
 			Unit u = units.get(i);
-			if (u.advancesLeft > 0 && !u.forDefense && (justScouts && u.getClass().getName().equals("Units.Marine") || !justScouts)) {
+			if (u.advancesLeft > 0 && !u.forDefense && (justScouts && u.getClass().getName().equals("Units.Scout") || !justScouts)) {
 				u.advancesLeft--;
 				myPanel.remove(u);
 				retArr.add(units.remove(i));

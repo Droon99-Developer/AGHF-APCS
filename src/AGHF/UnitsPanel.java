@@ -16,7 +16,7 @@ public class UnitsPanel extends JPanel {
 		setBounds(x, y, width, height);
 		SUPnls[0] = new SingleUnitPanel("Air Strike", AirStrike.COST, width, height / 5, 0);
 		SUPnls[1] = new SingleUnitPanel("Tank", Tank.COST, width, height / 5, height / 5);
-		SUPnls[2] = new SingleUnitPanel("Marine", Marine.COST, width, height / 5, height * 2 / 5);
+		SUPnls[2] = new SingleUnitPanel("Scout", Scout.COST, width, height / 5, height * 2 / 5);
 		SUPnls[3] = new SingleUnitPanel("Infantry", Infantry.COST, width, height / 5, height * 3 / 5);
 		SUPnls[4] = new SingleUnitPanel("Medic", Medic.COST, width, height / 5, height * 4 / 5);
 
@@ -52,8 +52,8 @@ public class UnitsPanel extends JPanel {
 			cost = Tank.COST;
 			break;
 		case 2:
-			newUnit = new Marine(forDefense);
-			cost = Marine.COST;
+			newUnit = new Scout(forDefense);
+			cost = Scout.COST;
 			break;
 		case 3:
 			newUnit = new Infantry(forDefense);

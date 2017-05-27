@@ -1,12 +1,6 @@
 package Units;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
+import java.awt.event.MouseEvent;
 
 public class Infantry extends Unit {
 	private static final long serialVersionUID = -8817023425073765339L;

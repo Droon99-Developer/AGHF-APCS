@@ -1,8 +1,11 @@
 package Units;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +15,7 @@ import javax.swing.JPanel;
 /*
  * Superclass for units
  */
-public abstract class Unit extends JPanel {
+public abstract class Unit extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 7989260034732663649L;
 	// SPEED is the total number of advances the unit can make in a single turn
 	// advancing: move 1 slice forward
@@ -41,6 +44,7 @@ public abstract class Unit extends JPanel {
 		this.MAX_HEALTH = maxHealth;
 		this.GPK = GPK;
 		this.forDefense = forDefense;
+		addMouseListener(this);
 		advancesLeft = SPEED;
 		healthLeft = MAX_HEALTH;
 		try {
@@ -50,6 +54,26 @@ public abstract class Unit extends JPanel {
 			System.out.println("unit image didn't load");
 		}
 	}
+	
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+	@Override
+	public void mouseClicked(MouseEvent e){
+        if(e.getClickCount()==2){
+            forDefense = !forDefense;
+        }
+        repaint();
+    }
 	
 	// used to determine if the medic should visit them
 	// they must be partially wounded but not dead
@@ -80,8 +104,13 @@ public abstract class Unit extends JPanel {
 		Graphics2D g2 = (Graphics2D)g;
 		g2.drawImage(img, null, 0, 0);
 		g2.setColor(Color.BLACK);
+		g2.setStroke(new BasicStroke(1));
 		g2.drawRect(0, getHeight() - HEALTH_BAR_HEIGHT, getWidth() - 1, HEALTH_BAR_HEIGHT - 1);
-		g2.setColor(Color.RED);
+		if (forDefense) {
+			g2.setColor(Color.RED);
+		} else {
+			g2.setColor(Color.GREEN);
+		}
 		int width =  (int)(((double)healthLeft / (double)MAX_HEALTH) * (double)(getWidth() - 2));
 		g2.fillRect(1, getHeight() - HEALTH_BAR_HEIGHT + 1, width, HEALTH_BAR_HEIGHT - 2);
 	}

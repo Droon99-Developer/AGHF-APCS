@@ -107,9 +107,6 @@ public class GameController implements KeyListener, ActionListener {
 	private void advanceMiddle(boolean left) {
 		ArrayList<Unit> units;
 		int i = 0;
-		if (!left) {
-			System.out.println("break");
-		}
 		do {
 			units = slices[MIDDLE + i].unitsToAdvance(left);
 			i += left ? 1 : -1;

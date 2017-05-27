@@ -1,13 +1,7 @@
 package Units;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 public class Medic extends Unit {
+	private static final long serialVersionUID = 1276738901146746049L;
 	public static final int COST = 12;
 	private final int HEAL_AMT = 2;
 	public Medic(boolean forDefense) {

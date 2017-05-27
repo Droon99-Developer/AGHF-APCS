@@ -1,5 +1,6 @@
 package AGHF;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -80,5 +81,8 @@ public class SlicePanel extends JPanel {
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(img, AffineTransform.getScaleInstance((double) getWidth() / (double) img.getWidth(), 1), null);
+		g2.setColor(Color.BLACK);
+		g2.setStroke(new BasicStroke(1));
+		g2.drawLine(getWidth() - 1, 0, getWidth() - 1, getHeight());
 	}
 }

@@ -16,7 +16,7 @@ public class GameView extends JLayeredPane {
 	// button
 	// and also rendering stuff
 
-	private final int SLICES_ON_SCREEN = 2;
+	private final int SLICES_ON_SCREEN = 9;
 	private Player p1;
 	private Player p2;
 	public JPanel sliceContainer;
@@ -44,17 +44,16 @@ public class GameView extends JLayeredPane {
 	public SliceController[] renderSlices() {
 		sliceContainer = new JPanel();
 		sliceContainer.setLayout(null);
-		int x = 0;
-		int sliceWidth = getWidth() / SLICES_ON_SCREEN;
+		double sliceWidth = (double)getWidth() / (double)SLICES_ON_SCREEN;
 		SliceController[] slices = new SliceController[9];
 		for (int i = 0; i < slices.length; i++) {
-			Rectangle bounds = new Rectangle(x, 0, sliceWidth, getHeight());
+			double x = sliceWidth * (double)i;
+			Rectangle bounds = new Rectangle(Math.round((float)x), 0, Math.round((float)sliceWidth), getHeight());
 			slices[i] = new SliceController(bounds, i);
 			// add all of the slice panels to the sliceContainer
 			sliceContainer.add(slices[i].myPanel);
-			x += sliceWidth;
 		}
-		sliceContainer.setBounds(0, 0, x, getHeight());
+		sliceContainer.setBounds(0, 0, Math.round((float)(sliceWidth * (double)slices.length)), getHeight());
 		return slices;
 	}
 

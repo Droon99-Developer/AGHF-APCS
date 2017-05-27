@@ -3,6 +3,7 @@ package AGHF;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -30,7 +31,7 @@ public class StartGameView implements ActionListener {
 	
 	public StartGameView() {
 		frame = new JFrame();
-		frame.setSize(720, 720);
+		frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLayout(null);
