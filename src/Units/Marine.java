@@ -11,10 +11,10 @@ public class Marine extends Unit{
 	public static final int COST = 5;
 	public Marine(boolean forDefense) {
 //		SPEED: 2
-//		DAMAGE: 8
-//		MAX HEALTH: 3
+//		DAMAGE: 4
+//		MAX HEALTH: 7
 //		GPK: 1
 //		constructor structure: int speed, int damage, int maxHealth, int GPK, boolean forDefense
-		super(2, 8, 3, 1, forDefense, "assets/MarineSprite1.png");
+		super(2, 4, 7, 1, forDefense, "assets/MarineSprite1.png");
 	}
 }

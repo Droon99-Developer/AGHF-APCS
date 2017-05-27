@@ -10,8 +10,10 @@ import javax.swing.Timer;
 
 import Units.Unit;
 /*
- * Controls map view
- * Renders units and slices
+ * Controls map view, quit button, and scrolling
+ * Tells GameView to render units and slices
+ * Implements advancement algorithm
+ * Core turn logic
  */
 public class GameController implements KeyListener, ActionListener {
 	private Player p1;
@@ -50,7 +52,6 @@ public class GameController implements KeyListener, ActionListener {
 		if (i < slices.length - 1) {
 			slices[i + 1].startAttacks(this);
 		} else {
-			advanceUnits();
 			p1.startTurn();
 		}
 	}
@@ -99,16 +100,20 @@ public class GameController implements KeyListener, ActionListener {
 			sc.renderUnits(true);
 			sc.renderUnits(false);
 			sc.resetUnitAdvances();
-		}	
+		}
+		slices[0].startAttacks(this);
 	}
 	
 	private void advanceMiddle(boolean left) {
 		ArrayList<Unit> units;
 		int i = 0;
+		if (!left) {
+			System.out.println("break");
+		}
 		do {
-			units = slices[MIDDLE + i].unitsToAdvance(true);
+			units = slices[MIDDLE + i].unitsToAdvance(left);
 			i += left ? 1 : -1;
-			slices[MIDDLE + i].addUnits(units, true);
+			slices[MIDDLE + i].addUnits(units, left);
 		} while (units.size() > 0 && (left && i < MIDDLE || !left && i > -MIDDLE));
 	}
 	
@@ -142,7 +147,7 @@ public class GameController implements KeyListener, ActionListener {
 		if (p == p1) {
 			p2.startTurn();
 		} else {
-			slices[0].startAttacks(this);
+			advanceUnits();
 		}
 	}
 

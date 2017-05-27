@@ -13,10 +13,10 @@ public class Medic extends Unit {
 	public Medic(boolean forDefense) {
 //		SPEED: 1
 //		DAMAGE: 0
-//		MAX HEALTH: 6
+//		MAX HEALTH: 7
 //		GPK: 4
 //		constructor structure: int speed, int damage, int maxHealth, int GPK, boolean forDefense
-		super(1, 0, 6, 4, forDefense, "assets/MedicSprite1.png");
+		super(1, 0, 7, 4, forDefense, "assets/MedicSprite1.png");
 	}
 	
 	// it's easier to have medic resurrect people if they just died that turn
