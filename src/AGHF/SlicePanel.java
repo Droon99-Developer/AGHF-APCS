@@ -3,6 +3,7 @@ package AGHF;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
@@ -30,15 +31,30 @@ public class SlicePanel extends JPanel {
 		setOpaque(false);
 		try {
 			img = ImageIO.read(new File(String.format("assets/Desert Map/APCSmap0slide%d.png", index)));
-
 		} catch (IOException e) {
 			System.out.println("map image didn't load");
 		}
 	}
-
-	public void renderNewUnit(Unit newUnit, ArrayList<Unit> units, boolean left) {
-		add(newUnit);
-		renderUnits(units, left);
+	
+	public void translateUnit(Unit u, Point dest) {
+		// don't waste time staying in place
+		if (!u.getLocation().equals(dest)) {
+			final double FRAMES = 20;
+			double currF = 0;
+			Point start = u.getLocation();
+			double xMove = dest.x - start.x;
+			double yMove = dest.y - start.y;
+			while (currF < FRAMES) {
+				currF++;
+				u.setLocation((int) (start.x + xMove * (currF / FRAMES)), (int) (start.y + yMove * (currF / FRAMES)));
+				try {
+					Thread.sleep(16);
+				} catch (InterruptedException e) {
+					System.err.println("attacking animation thread interrupted");
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	public void renderUnits(ArrayList<Unit> units, boolean left) {

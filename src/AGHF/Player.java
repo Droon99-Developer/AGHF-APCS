@@ -17,7 +17,6 @@ public class Player implements ActionListener {
 
 	private int gold = 0;
 	private boolean leftSide;
-	private SliceController baseSlice;
 	private GameController gcDelegate;
 	public UnitsPanel uPnl;
 
@@ -97,10 +96,6 @@ public class Player implements ActionListener {
 		playerPnl.add(endTurnBtn);
 	}
 
-	public void setBaseSlice(SliceController baseSlice) {
-		this.baseSlice = baseSlice;
-	}
-
 	public void setUnitsPanel(UnitsPanel pnl) {
 		uPnl = pnl;
 		uPnl.setPlayer(this);
@@ -113,8 +108,7 @@ public class Player implements ActionListener {
 	public void unitPurchased(Unit newUnit, int cost) {
 		// economy money stuff
 		changeGold(-cost);
-		baseSlice.addUnit(newUnit, null);
-		gcDelegate.refocus();
+		gcDelegate.unitPurchased(newUnit, this);
 		
 	}
 

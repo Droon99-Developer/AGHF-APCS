@@ -41,8 +41,7 @@ public class GameView extends JLayeredPane {
 		p2.setUnitsPanel(rightUnitsPnl);
 	}
 
-	// returns the first slice controller to GameController
-	public SliceController renderSlices() {
+	public SliceController[] renderSlices() {
 		sliceContainer = new JPanel();
 		sliceContainer.setLayout(null);
 		int x = 0;
@@ -56,16 +55,7 @@ public class GameView extends JLayeredPane {
 			x += sliceWidth;
 		}
 		sliceContainer.setBounds(0, 0, x, getHeight());
-
-		// create a sort of two way linked list of slices
-		slices[0].link(null, slices[1]);
-		p1.setBaseSlice(slices[0]);
-		for (int i = 1; i < slices.length - 1; i++) {
-			slices[i].link(slices[i - 1], slices[i + 1]);
-		}
-		slices[slices.length - 1].link(slices[slices.length - 2], null);
-		p2.setBaseSlice(slices[slices.length - 1]);
-		return slices[0];
+		return slices;
 	}
 
 	public void scroll(int offset) {
