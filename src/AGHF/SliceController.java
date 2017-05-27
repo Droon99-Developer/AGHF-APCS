@@ -136,7 +136,7 @@ public class SliceController implements Runnable {
 	public ArrayList<Unit> unitsToAdvance(boolean left) {
 		ArrayList<Unit> retArr = new ArrayList<Unit>();
 		if (left && !leftUnits.isEmpty()) {
-			retArr = uta(leftUnits, rightUnits.isEmpty());
+			retArr = uta(leftUnits, !rightUnits.isEmpty());
 		} else if (!left && leftUnits.isEmpty()) {
 			retArr = uta(rightUnits, !leftUnits.isEmpty());
 		}

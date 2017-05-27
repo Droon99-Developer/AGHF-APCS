@@ -46,7 +46,7 @@ public class GameView extends JLayeredPane {
 		sliceContainer.setLayout(null);
 		int x = 0;
 		int sliceWidth = getWidth() / SLICES_ON_SCREEN;
-		SliceController[] slices = new SliceController[10];
+		SliceController[] slices = new SliceController[9];
 		for (int i = 0; i < slices.length; i++) {
 			Rectangle bounds = new Rectangle(x, 0, sliceWidth, getHeight());
 			slices[i] = new SliceController(bounds, i);

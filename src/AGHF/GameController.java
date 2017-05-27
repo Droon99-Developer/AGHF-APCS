@@ -59,12 +59,12 @@ public class GameController implements KeyListener, ActionListener {
 	// returns true if any units were advanced forward
 	private boolean advancePointers(int i, boolean movingOut) {
 		int offset = movingOut ? 1 : -1;
-		ArrayList<Unit> rightIncoming = slices[MIDDLE + i].unitsToAdvance(movingOut);
-		slices[MIDDLE + i - offset].addUnits(rightIncoming, movingOut);
+		ArrayList<Unit> rightIncoming = slices[MIDDLE + i].unitsToAdvance(!movingOut);
+		slices[MIDDLE + i - offset].addUnits(rightIncoming, !movingOut);
 		ArrayList<Unit> leftIncoming = slices[MIDDLE - i].unitsToAdvance(movingOut);
 		slices[MIDDLE - i + offset].addUnits(leftIncoming, movingOut);
 		// we are not done until there are no more units that can advance
-		return !leftIncoming.isEmpty() || !rightIncoming.isEmpty();
+		return leftIncoming.isEmpty() && rightIncoming.isEmpty();
 	}
 	
 	private void advanceUnits() {
