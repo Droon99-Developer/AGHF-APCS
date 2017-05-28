@@ -31,7 +31,7 @@ public class StartGameView implements ActionListener {
 	
 	public StartGameView() {
 		frame = new JFrame();
-		frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+		frame.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 30);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLayout(null);

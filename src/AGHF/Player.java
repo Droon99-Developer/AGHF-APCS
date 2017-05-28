@@ -13,7 +13,7 @@ import Units.Unit;
  * Contains all information about players
  * Makes top panel active
  */
-public class Player implements ActionListener {
+public class Player implements ActionListener, Runnable {
 
 	private int gold = 0;
 	private boolean leftSide;
@@ -101,15 +101,21 @@ public class Player implements ActionListener {
 		uPnl.setPlayer(this);
 	}
 	
-	public boolean turn(){
+	public boolean turn() {
 		return playerPnl.isVisible();
 	}
 
 	public void unitPurchased(Unit newUnit, int cost) {
 		// economy money stuff
 		changeGold(-cost);
-		gcDelegate.unitPurchased(newUnit, this);
+		newUnit.leftSide = leftSide;
 		
+		// prevent Player from purchasing unit while animation is playing
+		playerPnl.setVisible(false);
+		uPnl.setVisible(false);
+		gcDelegate.unitPurchased(newUnit, this);
+		playerPnl.setVisible(true);
+		uPnl.setVisible(true);
 	}
 
 	@Override
@@ -122,7 +128,16 @@ public class Player implements ActionListener {
 		} else if (e.getActionCommand().equals("end")) {
 			uPnl.setVisible(false);
 			playerPnl.setVisible(false);
-			gcDelegate.turnEnded(this);
+			// we are currently on the AWT-EventQueue-0 thread
+			// we are about to do animations which use Thread.sleep()
+			// so we need to move to a new thread
+			Thread t = new Thread(this, "Advance & Attack Animation Thread");
+			t.start();
 		}
+	}
+
+	@Override
+	public void run() {
+		gcDelegate.turnEnded(this);
 	}
 }

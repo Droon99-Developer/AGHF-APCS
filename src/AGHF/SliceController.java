@@ -11,7 +11,7 @@ import Units.*;
  * Attack animation
  * etc.
  */
-public class SliceController implements Runnable {
+public class SliceController {
 	public SlicePanel myPanel;
 	// leftUnits has p1 units
 	// rightUnits has p2 units
@@ -21,7 +21,7 @@ public class SliceController implements Runnable {
 	private GameController gcDelegate;
 
 	private int index;
-	
+
 	public SliceController(Rectangle bounds, int index) {
 		this.index = index;
 		myPanel = new SlicePanel(index);
@@ -64,48 +64,44 @@ public class SliceController implements Runnable {
 	private int disposeDead(ArrayList<Unit> units, boolean left) {
 		int i = 0;
 		int goldEarned = 0;
+		boolean reposition = false;
 		while (i < units.size()) {
 			if (units.get(i).dead()) {
 				myPanel.remove(units.get(i));
 				goldEarned += units.get(i).GPK;
 				units.remove(i);
+				reposition = true;
 			} else {
 				i++;
 			}
 		}
-		myPanel.renderUnits(units, left);
+		if (reposition) {
+			if (!units.isEmpty()) {
+				ArrayList<Unit> temp = new ArrayList<Unit>();
+				myPanel.incomingUnits(temp, units, left);
+			}
+			myPanel.repaint();
+		}
 		return goldEarned;
 	}
-	
-	@Override
-	public void run() {
+
+	public int[] performAttacks() {
 		attackAnimation(leftUnits, rightUnits);
 		attackAnimation(rightUnits, leftUnits);
 		healAnimation(leftUnits);
 		healAnimation(rightUnits);
-		gcDelegate.doneAttacking(index, disposeDead(leftUnits, true), disposeDead(rightUnits, false));
+		int[] goldEarned = { disposeDead(leftUnits, true), disposeDead(rightUnits, false) };
+		return goldEarned;
 	}
 
-	public void startAttacks(GameController delegate) {
-		gcDelegate = delegate;
-		Thread t = new Thread(this);
-		t.start();
-	}
-
-	// add a unit to the panel and correct ArrayList
+	// add units to the panel and correct ArrayList
 	public void addUnits(ArrayList<Unit> units, boolean left) {
-		ArrayList<Unit> correctSide = left ? leftUnits : rightUnits;
-		correctSide.addAll(units);
-		for (Unit u : units) {
-			myPanel.add(u);
+		if (units.size() > 0) {
+			ArrayList<Unit> correctSide = left ? leftUnits : rightUnits;
+			myPanel.incomingUnits(units, correctSide, left);
 		}
 	}
 
-	public void renderUnits(boolean left) {
-		ArrayList<Unit> correctSide = left ? leftUnits : rightUnits;
-		myPanel.renderUnits(correctSide, left);
-	}
-	
 	public void resetUnitAdvances() {
 		for (Unit u : leftUnits) {
 			u.resetAdvances();
@@ -114,31 +110,35 @@ public class SliceController implements Runnable {
 			u.resetAdvances();
 		}
 	}
-	
+
 	// return units to advance from an ArrayList of units
-	private ArrayList<Unit> uta(ArrayList<Unit> units, boolean justScouts) {
+	private ArrayList<Unit> uta(ArrayList<Unit> units, boolean justScouts, boolean left) {
 		ArrayList<Unit> retArr = new ArrayList<Unit>();
 		int i = 0;
 		while (i < units.size()) {
 			Unit u = units.get(i);
-			if (u.advancesLeft > 0 && !u.forDefense && (justScouts && u.getClass().getName().equals("Units.Scout") || !justScouts)) {
+			if (u.advancesLeft > 0 && !u.forDefense
+					&& (justScouts && u.getClass().getName().equals("Units.Scout") || !justScouts)) {
 				u.advancesLeft--;
-				myPanel.remove(u);
 				retArr.add(units.remove(i));
 			} else {
 				i++;
 			}
 		}
+		myPanel.advanceUnits(retArr, units, left);
+		for (Unit u : retArr) {
+			myPanel.remove(u);
+		}
 		return retArr;
 	}
-	
+
 	// returns the all units that can advance from a given side
 	public ArrayList<Unit> unitsToAdvance(boolean left) {
 		ArrayList<Unit> retArr = new ArrayList<Unit>();
 		if (left && !leftUnits.isEmpty()) {
-			retArr = uta(leftUnits, !rightUnits.isEmpty());
+			retArr = uta(leftUnits, !rightUnits.isEmpty(), true);
 		} else if (!left && !rightUnits.isEmpty()) {
-			retArr = uta(rightUnits, !leftUnits.isEmpty());
+			retArr = uta(rightUnits, !leftUnits.isEmpty(), false);
 		}
 		return retArr;
 	}

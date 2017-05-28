@@ -32,6 +32,8 @@ public abstract class Unit extends JPanel implements MouseListener {
 	protected int healthLeft;
 	public boolean forDefense;
 	
+	public boolean leftSide;
+	
 	protected BufferedImage img = null;
 	
 	private final int HEALTH_BAR_HEIGHT = 5;

@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 /*
  * Sets up the top bar for players
  */
-public class SingleUnitPanel extends JPanel implements ActionListener {
+public class SingleUnitPanel extends JPanel implements ActionListener, Runnable {
 	private static final long serialVersionUID = 122938938166445779L;
 	private JLabel nameLbl;
 	private JLabel costLbl;
@@ -21,6 +21,7 @@ public class SingleUnitPanel extends JPanel implements ActionListener {
 	private JButton defendBtn = new JButton("Defend");
 	private int width;
 	private UnitsPanel unitsPnl;
+	private boolean forDefense;
 	
 	public SingleUnitPanel(String name, int cost, int width, int height, int y) {
 		setLayout(null);
@@ -62,7 +63,14 @@ public class SingleUnitPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		unitsPnl.unitPurchased(this, (e.getSource() == defendBtn));
+		Thread t = new Thread(this, "New Unit Animation Thread");
+		forDefense = e.getSource() == defendBtn;
+		t.start();
+	}
+
+	@Override
+	public void run() {
+		unitsPnl.unitPurchased(this, forDefense);
 	}
 	
 }

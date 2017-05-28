@@ -1,4 +1,5 @@
 package AGHF;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -9,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import Units.Unit;
+
 /*
  * Controls map view, quit button, and scrolling
  * Tells GameView to render units and slices
@@ -31,32 +33,24 @@ public class GameController implements KeyListener, ActionListener {
 	private boolean fastScroll = false;
 	private final int SCROLL_SPEED = 4;
 	private Timer timer;
-	
+
 	public void refocus() {
 		frame.requestFocus();
 	}
-	
+
 	public void unitPurchased(Unit newUnit, Player p) {
 		frame.requestFocus();
 		boolean left = p == p1;
 		SliceController slice = left ? slices[0] : slices[slices.length - 1];
+		// set the y location to the door of the base so units appear in base and slide to position
+		newUnit.setLocation(0, frame.getHeight() * 5 / 6 - 14 - newUnit.getHeight() / 2);
 		ArrayList<Unit> newUnits = new ArrayList<Unit>();
 		newUnits.add(newUnit);
 		slice.addUnits(newUnits, left);
-		slice.renderUnits(left);
 	}
-	
-	public void doneAttacking(int i, int p1Gold, int p2Gold) {
-		p1.changeGold(p1Gold);
-		p2.changeGold(p2Gold);
-		if (i < slices.length - 1) {
-			slices[i + 1].startAttacks(this);
-		} else {
-			p1.startTurn();
-		}
-	}
-	
-	// advances the units to or from the given the 2 pointers (MIDDLE + i and MIDDLE - i)
+
+	// advances the units to or from the given the 2 pointers (MIDDLE + i and
+	// MIDDLE - i)
 	// returns true if any units were advanced forward
 	private boolean advancePointers(int i, boolean movingOut) {
 		int offset = movingOut ? 1 : -1;
@@ -67,14 +61,15 @@ public class GameController implements KeyListener, ActionListener {
 		// we are not done until there are no more units that can advance
 		return leftIncoming.isEmpty() && rightIncoming.isEmpty();
 	}
-	
+
 	private void advanceUnits() {
 		// THE ALGORITHM:
-		// first: advance all units not on the middle slice (repeat this until no more units can advance):
-		//		move two pointers outward from the middle by one slice at a time, advancing each unit by one slice inward
+		// first: repeat this until no more units can advance:
+		// 		move two pointers outward from the middle by one slice at a time, advancing each unit by one slice towards the middle
 		// 		move pointers back inward towards the center, this time moving units outward
-		// second: advance units on the middle slice until they are all done advancing
-		// third: update all of the graphics and reset the advances of all units
+		// 		advance units on the middle slice until they are all done advancing
+		// second: update all of the graphics and reset the advances of all
+		// units
 		boolean done = false;
 		// main loop to advance units not on middle slice
 		while (!done) {
@@ -91,29 +86,26 @@ public class GameController implements KeyListener, ActionListener {
 				done = done && advancePointers(i, false);
 				i--;
 			}
+			// advance units on middle slice
+			done = done && advanceMiddle(true);
+			done = done && advanceMiddle(false);
+			// in case the right side had just scouts that are gone now
+			done = done && advanceMiddle(true);
 		}
-		// advance units on middle slice
-		advanceMiddle(true);
-		advanceMiddle(false);
+
 		// update graphics and reset unit advances
 		for (SliceController sc : slices) {
-			sc.renderUnits(true);
-			sc.renderUnits(false);
 			sc.resetUnitAdvances();
 		}
-		slices[0].startAttacks(this);
 	}
-	
-	private void advanceMiddle(boolean left) {
-		ArrayList<Unit> units;
-		int i = 0;
-		do {
-			units = slices[MIDDLE + i].unitsToAdvance(left);
-			i += left ? 1 : -1;
-			slices[MIDDLE + i].addUnits(units, left);
-		} while (units.size() > 0 && (left && i < MIDDLE || !left && i > -MIDDLE));
+
+	private boolean advanceMiddle(boolean left) {
+		ArrayList<Unit> units = slices[MIDDLE].unitsToAdvance(left);
+		int i = left ? 1 : -1;
+		slices[MIDDLE + i].addUnits(units, left);
+		return units.isEmpty();
 	}
-	
+
 	public GameController(JFrame frame, Player p1, Player p2) {
 		this.p1 = p1;
 		this.p2 = p2;
@@ -126,12 +118,12 @@ public class GameController implements KeyListener, ActionListener {
 		frame.add(gv);
 
 		gv.renderPlayers(p1, p2);
-		
+
 		gv.renderUnitPanels();
-		
+
 		slices = gv.renderSlices();
 		MIDDLE = slices.length / 2;
-		
+
 		gv.addComponents();
 
 		timer = new Timer(5, this);
@@ -139,12 +131,19 @@ public class GameController implements KeyListener, ActionListener {
 		timer.start();
 		p1.startTurn();
 	}
-	
+
 	public void turnEnded(Player p) {
 		if (p == p1) {
 			p2.startTurn();
 		} else {
 			advanceUnits();
+			// perform attacking
+			for (SliceController sc : slices) {
+				int[] goldEarned = sc.performAttacks();
+				p1.changeGold(goldEarned[0]);
+				p2.changeGold(goldEarned[1]);
+			}
+			p1.startTurn();
 		}
 	}
 
@@ -154,18 +153,18 @@ public class GameController implements KeyListener, ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == (int)(codeWord.charAt(index))-32){
+		if (e.getKeyCode() == (int) (codeWord.charAt(index)) - 32) {
 			index++;
-			if(index == codeWord.length()){
+			if (index == codeWord.length()) {
 				index = 0;
 				System.out.println("You Win");
-				if(p1.turn()){
+				if (p1.turn()) {
 					p1.changeGold(100000);
-				}else{
+				} else {
 					p2.changeGold(100000);
 				}
 			}
-		}else{
+		} else {
 			index = 0;
 		}
 		if (e.getKeyCode() == 37 || e.getKeyCode() == 65) {
@@ -175,9 +174,9 @@ public class GameController implements KeyListener, ActionListener {
 		} else if (e.getKeyCode() == 16) {
 			fastScroll = true;
 		}
-		if(e.getKeyCode() == 74){
+		if (e.getKeyCode() == 74) {
 			p1.changeGold(5000);
-		}else if(e.getKeyCode() == 84){
+		} else if (e.getKeyCode() == 84) {
 			p2.changeGold(5000);
 		}
 	}
@@ -190,7 +189,7 @@ public class GameController implements KeyListener, ActionListener {
 			rightScroll = false;
 		} else if (e.getKeyCode() == 16) {
 			fastScroll = false;
-		} 
+		}
 	}
 
 	@Override
@@ -204,7 +203,8 @@ public class GameController implements KeyListener, ActionListener {
 					gv.scroll(SCROLL_SPEED);
 				}
 			}
-			if (rightScroll && gv.sliceContainer.getLocation().x + gv.sliceContainer.getSize().width > frame.getWidth()) {
+			if (rightScroll
+					&& gv.sliceContainer.getLocation().x + gv.sliceContainer.getSize().width > frame.getWidth()) {
 				if (fastScroll) {
 					gv.scroll(-SCROLL_SPEED * 8);
 				} else {
@@ -212,6 +212,6 @@ public class GameController implements KeyListener, ActionListener {
 				}
 			}
 		}
-	}	
-	
+	}
+
 }
