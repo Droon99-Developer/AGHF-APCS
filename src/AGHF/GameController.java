@@ -33,6 +33,7 @@ public class GameController implements KeyListener, ActionListener {
 	private boolean fastScroll = false;
 	private final int SCROLL_SPEED = 4;
 	private Timer timer;
+	private boolean leftTurn = true;
 
 	public void refocus() {
 		frame.requestFocus();
@@ -40,15 +41,20 @@ public class GameController implements KeyListener, ActionListener {
 
 	public void unitPurchased(Unit newUnit, Player p) {
 		frame.requestFocus();
+		newUnit.setTurnChecker(this);
 		boolean left = p == p1;
 		SliceController slice = left ? slices[0] : slices[slices.length - 1];
-		// set the y location to the door of the base so units appear in base and slide to position
+		// set the y location to middle of unit area
 		newUnit.setLocation(0, frame.getHeight() * 5 / 6 - 14 - newUnit.getHeight() / 2);
 		ArrayList<Unit> newUnits = new ArrayList<Unit>();
 		newUnits.add(newUnit);
 		slice.addUnits(newUnits, left);
 	}
 
+	public boolean checkTurn(boolean left) {
+		return left == leftTurn;
+	}
+	
 	// advances the units to or from the given the 2 pointers (MIDDLE + i and
 	// MIDDLE - i)
 	// returns true if any units were advanced forward
@@ -133,6 +139,7 @@ public class GameController implements KeyListener, ActionListener {
 	}
 
 	public void turnEnded(Player p) {
+		leftTurn = !leftTurn;
 		if (p == p1) {
 			p2.startTurn();
 		} else {
@@ -158,7 +165,7 @@ public class GameController implements KeyListener, ActionListener {
 			if (index == codeWord.length()) {
 				index = 0;
 				System.out.println("You Win");
-				if (p1.turn()) {
+				if (leftTurn) {
 					p1.changeGold(100000);
 				} else {
 					p2.changeGold(100000);

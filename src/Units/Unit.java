@@ -12,6 +12,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
+import AGHF.GameController;
+
 /*
  * Superclass for units
  */
@@ -22,21 +25,27 @@ public abstract class Unit extends JPanel implements MouseListener {
 	protected final int SPEED;
 	protected final int DAMAGE;
 	protected final int MAX_HEALTH;
-	// GPK: Gold Per Kill (the amount of gold YOUR OPPONENT RECEIVES when they kill your unit)
+	// GPK: Gold Per Kill (the amount of gold YOUR OPPONENT RECEIVES when they
+	// kill your unit)
 	public final int GPK;
-	
-	// the actual COST of each unit is static in each subclass so it is not included here
-	
+
+	// the actual COST of each unit is static in each subclass so it is not
+	// included here
+
 	// keeps track of how many advances are left
 	public int advancesLeft;
 	protected int healthLeft;
 	public boolean forDefense;
-	
-	public boolean leftSide;
-	
+
+	private boolean leftSide;
+
+	private GameController turnChecker;
+
 	protected BufferedImage img = null;
-	
+
 	private final int HEALTH_BAR_HEIGHT = 5;
+
+	private String filePath;
 	
 	public Unit(int speed, int damage, int maxHealth, int GPK, boolean forDefense, String filePath) {
 		setLayout(null);
@@ -49,9 +58,14 @@ public abstract class Unit extends JPanel implements MouseListener {
 		addMouseListener(this);
 		advancesLeft = SPEED;
 		healthLeft = MAX_HEALTH;
+		this.filePath = filePath;
+	}
+
+	public void setSide(boolean left) {
+		leftSide = left;
 		try {
-		    img = ImageIO.read(new File(filePath));
-		    setSize(img.getWidth(), img.getHeight() + HEALTH_BAR_HEIGHT);
+			img = ImageIO.read(new File(filePath));
+			setSize(img.getWidth(), img.getHeight() + HEALTH_BAR_HEIGHT);
 		} catch (IOException e) {
 			System.out.println("unit image didn't load");
 		}
@@ -60,34 +74,43 @@ public abstract class Unit extends JPanel implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 	}
+
 	@Override
 	public void mouseReleased(MouseEvent e) {
 	}
+
 	@Override
 	public void mouseEntered(MouseEvent e) {
 	}
+
 	@Override
 	public void mouseExited(MouseEvent e) {
 	}
+
 	@Override
-	public void mouseClicked(MouseEvent e){
-        if(e.getClickCount()==2){
-            forDefense = !forDefense;
-        }
-        repaint();
-    }
+	public void mouseClicked(MouseEvent e) {
+		if (e.getClickCount() == 2 && turnChecker.checkTurn(leftSide)) {
+			forDefense = !forDefense;
+		}
+		repaint();
+	}
+
+	public void setTurnChecker(GameController tc) {
+		turnChecker = tc;
+	}
 	
 	// used to determine if the medic should visit them
 	// they must be partially wounded but not dead
 	public boolean healMe() {
 		return (healthLeft < MAX_HEALTH && healthLeft > 0);
 	}
-	
+
 	public boolean dead() {
 		return healthLeft == 0;
 	}
-	
-	// returns the amount of gold received by this attack (0 if opponent unit doens't die)
+
+	// returns the amount of gold received by this attack (0 if opponent unit
+	// doens't die)
 	public int attack(Unit u) {
 		u.healthLeft -= DAMAGE;
 		if (u.healthLeft <= 0) {
@@ -96,14 +119,14 @@ public abstract class Unit extends JPanel implements MouseListener {
 		}
 		return 0;
 	}
-	
+
 	public void resetAdvances() {
 		advancesLeft = SPEED;
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
-		Graphics2D g2 = (Graphics2D)g;
+		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(img, null, 0, 0);
 		g2.setColor(Color.BLACK);
 		g2.setStroke(new BasicStroke(1));
@@ -113,8 +136,8 @@ public abstract class Unit extends JPanel implements MouseListener {
 		} else {
 			g2.setColor(Color.GREEN);
 		}
-		int width =  (int)(((double)healthLeft / (double)MAX_HEALTH) * (double)(getWidth() - 2));
+		int width = (int) (((double) healthLeft / (double) MAX_HEALTH) * (double) (getWidth() - 2));
 		g2.fillRect(1, getHeight() - HEALTH_BAR_HEIGHT + 1, width, HEALTH_BAR_HEIGHT - 2);
 	}
-	
+
 }

@@ -100,15 +100,11 @@ public class Player implements ActionListener, Runnable {
 		uPnl = pnl;
 		uPnl.setPlayer(this);
 	}
-	
-	public boolean turn() {
-		return playerPnl.isVisible();
-	}
 
 	public void unitPurchased(Unit newUnit, int cost) {
 		// economy money stuff
 		changeGold(-cost);
-		newUnit.leftSide = leftSide;
+		newUnit.setSide(leftSide);
 		
 		// prevent Player from purchasing unit while animation is playing
 		playerPnl.setVisible(false);

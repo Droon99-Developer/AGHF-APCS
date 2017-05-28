@@ -9,6 +9,7 @@ import Units.*;
 /*
  * Logic for slices
  * Attack animation
+ * Advancement animation
  * etc.
  */
 public class SliceController {
