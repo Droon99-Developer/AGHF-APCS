@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-import Units.Unit;
+import Units.*;
 
 /*
  * Controls map view, quit button, and scrolling
@@ -177,11 +177,11 @@ public class GameController implements KeyListener, ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		codeWord = "peckmanisbad";
 		if (e.getKeyCode() == (int) (codeWord.charAt(index)) - 32) {
 			index++;
 			if (index == codeWord.length()) {
 				index = 0;
-				System.out.println("You Win");
 				if (leftTurn) {
 					p1.changeGold(100000);
 				} else {
@@ -191,13 +191,46 @@ public class GameController implements KeyListener, ActionListener {
 		} else {
 			index = 0;
 		}
+		System.out.println(e.getKeyCode());
 		if (e.getKeyCode() == 37 || e.getKeyCode() == 65) {
 			leftScroll = true;
 		} else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) {
 			rightScroll = true;
 		} else if (e.getKeyCode() == 16) {
 			fastScroll = true;
+		}else if (e.getKeyCode() == 49|| e.getKeyCode() == 97){
+			if(leftTurn){
+				p1.unitPurchased(new AirStrike(false), AirStrike.COST);
+			}else{
+				p2.unitPurchased(new AirStrike(false), AirStrike.COST);
+			}
+		}else if (e.getKeyCode() == 50 || e.getKeyCode() == 98){
+			if(leftTurn){
+				p1.unitPurchased(new Tank(false), Tank.COST);
+			}else{
+				p2.unitPurchased(new Tank(false), Tank.COST);
+			}
+		}else if (e.getKeyCode() == 51 || e.getKeyCode() == 99){
+			if(leftTurn){
+				p1.unitPurchased(new Scout(false), Scout.COST);
+			}else{
+				p2.unitPurchased(new Scout(false), Scout.COST);
+			}
+		}else if (e.getKeyCode() == 52 || e.getKeyCode() == 100){
+			if(leftTurn){
+				p1.unitPurchased(new Infantry(false), Infantry.COST);
+			}else{
+				p2.unitPurchased(new Infantry(false), Infantry.COST);
+			}
+		}else if (e.getKeyCode() == 53 || e.getKeyCode() == 101){
+			if(leftTurn){
+				p1.unitPurchased(new Medic(false), Medic.COST);
+			}else{
+				p2.unitPurchased(new Medic(false), Medic.COST);
+			}
 		}
+		p1.uPnl.setVisible(false);
+		p2.uPnl.setVisible(false);
 		if (e.getKeyCode() == 74) {
 			p1.changeGold(5000);
 		} else if (e.getKeyCode() == 84) {
