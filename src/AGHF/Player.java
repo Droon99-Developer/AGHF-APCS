@@ -140,4 +140,8 @@ public class Player implements ActionListener, Runnable {
 	public void run() {
 		gcDelegate.turnEnded(this);
 	}
+	
+	public int getGold(){
+		return gold;
+	}
 }

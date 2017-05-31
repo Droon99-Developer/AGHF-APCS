@@ -199,38 +199,81 @@ public class GameController implements KeyListener, ActionListener {
 		} else if (e.getKeyCode() == 16) {
 			fastScroll = true;
 		}else if (e.getKeyCode() == 49|| e.getKeyCode() == 97){
-			if(leftTurn){
+			if(leftTurn && p1.getGold() >= AirStrike.COST){
 				p1.unitPurchased(new AirStrike(false), AirStrike.COST);
-			}else{
+			}else if(p2.getGold() >= AirStrike.COST){
 				p2.unitPurchased(new AirStrike(false), AirStrike.COST);
 			}
+			p1.uPnl.setVisible(false);
+			p2.uPnl.setVisible(false);
 		}else if (e.getKeyCode() == 50 || e.getKeyCode() == 98){
-			if(leftTurn){
+			if(leftTurn && p1.getGold() >= Tank.COST){
 				p1.unitPurchased(new Tank(false), Tank.COST);
-			}else{
+			}else if(p2.getGold() >= Tank.COST){
 				p2.unitPurchased(new Tank(false), Tank.COST);
 			}
+			p1.uPnl.setVisible(false);
+			p2.uPnl.setVisible(false);
 		}else if (e.getKeyCode() == 51 || e.getKeyCode() == 99){
-			if(leftTurn){
+			if(leftTurn && p1.getGold() >= Scout.COST){
 				p1.unitPurchased(new Scout(false), Scout.COST);
-			}else{
+			}else if(p2.getGold() >= Scout.COST){
 				p2.unitPurchased(new Scout(false), Scout.COST);
 			}
+			p1.uPnl.setVisible(false);
+			p2.uPnl.setVisible(false);
 		}else if (e.getKeyCode() == 52 || e.getKeyCode() == 100){
-			if(leftTurn){
+			if(leftTurn && p1.getGold() >= Infantry.COST){
 				p1.unitPurchased(new Infantry(false), Infantry.COST);
-			}else{
+			}else if(p2.getGold() >= Infantry.COST){
 				p2.unitPurchased(new Infantry(false), Infantry.COST);
 			}
+			p1.uPnl.setVisible(false);
+			p2.uPnl.setVisible(false);
 		}else if (e.getKeyCode() == 53 || e.getKeyCode() == 101){
-			if(leftTurn){
+			if(leftTurn && p1.getGold() >= Medic.COST){
 				p1.unitPurchased(new Medic(false), Medic.COST);
-			}else{
+			}else if(p2.getGold() >= Medic.COST){
 				p2.unitPurchased(new Medic(false), Medic.COST);
 			}
+			p1.uPnl.setVisible(false);
+			p2.uPnl.setVisible(false);
+		}else if(e.getKeyCode() == 10){
+			if(leftTurn){
+				p1.uPnl.setVisible(false);
+				p1.playerPnl.setVisible(false);
+				// we are currently on the AWT-EventQueue-0 thread
+				// we are about to do animations which use Thread.sleep()
+				// so we need to move to a new thread
+				Thread t = new Thread(p1, "Advance & Attack Animation Thread");
+				t.start();
+			}else{
+				p2.uPnl.setVisible(false);
+				p2.playerPnl.setVisible(false);
+				// we are currently on the AWT-EventQueue-0 thread
+				// we are about to do animations which use Thread.sleep()
+				// so we need to move to a new thread
+				Thread t = new Thread(p2, "Advance & Attack Animation Thread");
+				t.start();
+			}
+		}else if(e.getKeyCode() == 61){
+			if(leftTurn){
+				if(p1.uPnl.getVisible()){
+					p1.uPnl.setVisible(false);
+				}else{
+					p1.uPnl.setVisible(true);
+				}
+			}else{
+				if(p2.uPnl.getVisible()){
+					p2.uPnl.setVisible(false);
+				}else{
+					p2.uPnl.setVisible(true);
+				}
+			}
+		}else if(e.getKeyCode() == 45){
+			System.out.println("Upgrading Base");
 		}
-		p1.uPnl.setVisible(false);
-		p2.uPnl.setVisible(false);
+		
 		if (e.getKeyCode() == 74) {
 			p1.changeGold(5000);
 		} else if (e.getKeyCode() == 84) {

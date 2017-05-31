@@ -33,3 +33,15 @@ ________________________________________________________________________________
 |               Cost               |                50                |  18  |    5   |     8    |            12            |
 |       Gold Gained Per Kill       |                10                |   5  |    1   |     3    |             4            |
 _____________________________________________________________________________________________________________________________
+
+KEY SHORTCUTS
+
+Upgrade Base: -
+End Turn: [Enter]
+Show Units Panel: =
+Buy Air Strike: 1
+Buy Tank: 2
+Buy Marine: 3
+Buy Infantry: 4
+Buy Medic: 5
+Scroll: A and D
