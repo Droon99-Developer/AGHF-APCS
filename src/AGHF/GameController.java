@@ -160,6 +160,7 @@ public class GameController implements KeyListener, ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		codeWord = "peckmanisbad";
 		if (e.getKeyCode() == (int) (codeWord.charAt(index)) - 32) {
 			index++;
 			if (index == codeWord.length()) {
