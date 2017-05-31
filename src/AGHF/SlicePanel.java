@@ -41,6 +41,11 @@ public class SlicePanel extends JPanel {
 		}
 	}
 
+	public void addBase(Base b) {
+		b.setLocation(getWidth() / 2 - b.getWidth() / 2, getHeight() * 2 / 3 - b.getHeight() - 14);
+		add(b);
+	}
+	
 	public void translateUnit(Unit u, Point dest) {
 		// don't waste time staying in place
 		if (!u.getLocation().equals(dest)) {

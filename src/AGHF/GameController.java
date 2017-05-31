@@ -99,7 +99,7 @@ public class GameController implements KeyListener, ActionListener {
 			done = done && advanceMiddle(true);
 		}
 
-		// update graphics and reset unit advances
+		// reset unit advances
 		for (SliceController sc : slices) {
 			sc.resetUnitAdvances();
 		}
@@ -128,6 +128,8 @@ public class GameController implements KeyListener, ActionListener {
 		gv.renderUnitPanels();
 
 		slices = gv.renderSlices();
+		slices[0].setBase(new Base());
+		slices[slices.length - 1].setBase(new Base());
 		MIDDLE = slices.length / 2;
 
 		gv.addComponents();
@@ -150,7 +152,22 @@ public class GameController implements KeyListener, ActionListener {
 				p1.changeGold(goldEarned[0]);
 				p2.changeGold(goldEarned[1]);
 			}
-			p1.startTurn();
+			// check if anyone has lost
+			if (slices[0].myBase.healthLeft == 0 || slices[slices.length - 1].myBase.healthLeft == 0) {
+				if (slices[0].myBase.healthLeft != 0) {
+					// p2 lost
+					System.out.println(p1.getName() + " won the game!");
+				} else if (slices[slices.length - 1].myBase.healthLeft != 0) {
+					// p1 lost
+					System.out.println(p2.getName() + " won the game!");
+				} else {
+					// tie
+					System.out.println("The game ended in a tie!");
+				}
+				System.exit(0);
+			} else {
+				p1.startTurn();
+			}
 		}
 	}
 

@@ -34,6 +34,10 @@ public class Player implements ActionListener, Runnable {
 		goldLbl = new JLabel(String.format("%d", gold) , JLabel.CENTER);
 	}
 
+	public String getName() {
+		return nameLbl.getText();
+	}
+	
 	public void setDelegate(GameController gc) {
 		gcDelegate = gc;
 	}

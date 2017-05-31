@@ -13,6 +13,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import AGHF.Base;
 import AGHF.GameController;
 
 /*
@@ -118,6 +119,13 @@ public abstract class Unit extends JPanel implements MouseListener {
 			return u.GPK;
 		}
 		return 0;
+	}
+	
+	public void attack(Base b) {
+		b.healthLeft -= DAMAGE;
+		if (b.healthLeft <= 0) {
+			b.healthLeft = 0;
+		}
 	}
 
 	public void resetAdvances() {

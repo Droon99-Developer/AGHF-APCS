@@ -23,24 +23,40 @@ public class SliceController {
 
 	private int index;
 
+	public Base myBase = null;
+
 	public SliceController(Rectangle bounds, int index) {
 		this.index = index;
 		myPanel = new SlicePanel(index);
 		myPanel.setBounds(bounds);
 	}
 
+	public void setBase(Base b) {
+		myBase = b;
+		myPanel.addBase(myBase);
+	}
+
 	private void attackAnimation(ArrayList<Unit> attacking, ArrayList<Unit> defending) {
 		for (Unit attackU : attacking) {
 			String type = attackU.getClass().getName();
-			if (!type.equals("Units.AirStrike") && !type.equals("Units.Medic")) {
-				for (Unit defendU : defending) {
-					if (!defendU.getClass().getName().equals("Units.AirStrike") && !defendU.dead()) {
-						Point orig = attackU.getLocation();
-						myPanel.translateUnit(attackU, defendU.getLocation());
-						attackU.attack(defendU);
-						defendU.repaint();
-						myPanel.translateUnit(attackU, orig);
+			if (!type.equals("Units.Medic")) {
+				if (!type.equals("Units.AirStrike") && !defending.isEmpty()) {
+					for (Unit defendU : defending) {
+						if (!defendU.getClass().getName().equals("Units.AirStrike") && !defendU.dead()) {
+							Point orig = attackU.getLocation();
+							myPanel.translateUnit(attackU, defendU.getLocation());
+							attackU.attack(defendU);
+							defendU.repaint();
+							myPanel.translateUnit(attackU, orig);
+						}
 					}
+				// ugly if statement to tell if units should attack the base
+				} else if (index == 0 && attacking == rightUnits || myBase != null && index != 0 && attacking == leftUnits) {
+					Point orig = attackU.getLocation();
+					myPanel.translateUnit(attackU, myBase.getLocation());
+					attackU.attack(myBase);
+					myBase.repaint();
+					myPanel.translateUnit(attackU, orig);
 				}
 			}
 		}
