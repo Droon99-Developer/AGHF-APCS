@@ -21,6 +21,7 @@ import javax.swing.WindowConstants;
 public class StartGameView implements ActionListener {
 	private JButton newGameBtn;
 	private JButton quitBtn;
+	private JButton directionsBtn;
 	private JTextField p1Name;
 	private JTextField p2Name;
 	private JLabel p1Lbl;
@@ -38,16 +39,21 @@ public class StartGameView implements ActionListener {
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
 		frame.setName("AGHF");
+		directionsBtn = new JButton("Directions");
+		directionsBtn.setBounds(frame.getWidth() / 2 - 80, frame.getHeight() * 3 / 4 - 50, 160, 70);
+		directionsBtn.addActionListener(this);
+		directionsBtn.setActionCommand("directions");
 		newGameBtn = new JButton("Create New Game");
 		quitBtn = new JButton("Quit");
 		quitBtn.setBounds(frame.getWidth() / 2 - 80, frame.getHeight() * 3 / 4 + 50, 160, 70);
 		quitBtn.addActionListener(this);
 		quitBtn.setActionCommand("quit");
-		newGameBtn.setBounds(frame.getWidth() / 2 - 80, frame.getHeight() * 3 / 4 - 50, 160, 70);
+		newGameBtn.setBounds(frame.getWidth() / 2 - 80, frame.getHeight() * 3 / 4 - 150, 160, 70);
 		newGameBtn.addActionListener(this);
 		newGameBtn.setActionCommand("setup");
 		frame.add(newGameBtn);
 		frame.add(quitBtn);
+		frame.add(directionsBtn);
 	}
 
 	@Override
@@ -136,6 +142,22 @@ public class StartGameView implements ActionListener {
 			newGameBtn.setText("Create New Game");
 			quitBtn.setText("Quit");
 			quitBtn.setActionCommand("quit");
+			newGameBtn.setVisible(true);
+			frame.repaint();
+		}else if(e.getActionCommand().equals("directions")){
+			newGameBtn.setVisible(false);
+			quitBtn.setText("Back");
+			quitBtn.setActionCommand("bacc");
+			DirectionPanel d = new DirectionPanel();
+			d.nextSlide();
+			frame.add(d);
+			frame.repaint();
+		}else if(e.getActionCommand().equals("bacc")){
+			newGameBtn.setActionCommand("setup");
+			newGameBtn.setText("Create New Game");
+			quitBtn.setText("Quit");
+			quitBtn.setActionCommand("quit");
+			newGameBtn.setVisible(true);
 			frame.repaint();
 		}
 	}

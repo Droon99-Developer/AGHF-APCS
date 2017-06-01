@@ -44,4 +44,4 @@ Buy Tank: 2
 Buy Marine: 3
 Buy Infantry: 4
 Buy Medic: 5
-Scroll: A and D
+Scroll: A and D or Left and Right Arrow Keys
