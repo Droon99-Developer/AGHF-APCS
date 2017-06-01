@@ -183,15 +183,14 @@ public class GameController implements KeyListener, ActionListener {
 			if (index == codeWord.length()) {
 				index = 0;
 				if (leftTurn) {
-					p1.changeGold(100000);
+					p1.changeGold(AirStrike.COST * 100);
 				} else {
-					p2.changeGold(100000);
+					p2.changeGold(AirStrike.COST * 100);
 				}
 			}
 		} else {
 			index = 0;
 		}
-		System.out.println(e.getKeyCode());
 		if (e.getKeyCode() == 37 || e.getKeyCode() == 65) {
 			leftScroll = true;
 		} else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) {
@@ -271,7 +270,6 @@ public class GameController implements KeyListener, ActionListener {
 				}
 			}
 		}else if(e.getKeyCode() == 45){
-			System.out.println("Upgrading Base");
 		}
 		
 		if (e.getKeyCode() == 74) {
