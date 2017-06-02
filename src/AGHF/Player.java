@@ -45,7 +45,16 @@ public class Player implements ActionListener, Runnable {
 	public void startTurn() {
 		// TODO add the correct amount of gold
 		// economy money stuff
-		changeGold(20);
+		GameController.turnNumber++;
+		if (GameController.turnNumber >= GameController.turnRamp){
+		Economy.STARTVALUE = Economy.STARTVALUE*GameController.rampNumber;
+		GameController.turnNumber = 0;
+		GameController.turnRamp++;
+		if(GameController.turnNumber % 2 == 0){
+			GameController.rampNumber++;
+		}
+		}
+		changeGold(Economy.STARTVALUE);
 		playerPnl.setVisible(true);
 	}
 

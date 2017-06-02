@@ -26,7 +26,9 @@ public class GameController implements KeyListener, ActionListener {
 	private final int MIDDLE;
 	private String codeWord = "jarjascat"; // pronounced JAR-ja-scat
 	private int index = 0;
-
+	public static int turnNumber = 0;
+	public static int turnRamp = 3;
+	public static int rampNumber = 2;
 	// scroll with left and right arrow keys and hold shift for speed
 	private boolean leftScroll = false;
 	private boolean rightScroll = false;
