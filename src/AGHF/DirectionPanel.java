@@ -53,7 +53,7 @@ public class DirectionPanel extends JPanel {
 				{"Speed (#Number of slices moved per turn)", 5, 1, 2, 4, 1},
 				{"Strength", 40, 7, 3, 1, "Heals own team by 2 per turn"},
 				{"Health", 40, 10, 7, 2, 7},
-				{"Cost", 50, 18, 8, 2, 12},
+				{"Cost", Economy.AIRSTRIKECOST, Economy.TANKCOST, Economy.INFANTRYCOST, Economy.SCOUTCOST, Economy.MEDICCOST},
 				{"Reward", 10, 5, 3, 1, 4}
 		};
 		units = new JTable(data, columnNames);
