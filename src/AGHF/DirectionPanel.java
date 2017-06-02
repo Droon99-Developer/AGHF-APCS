@@ -9,16 +9,15 @@ public class DirectionPanel extends JPanel {
 	private JLabel slideTitle = new JLabel();
 	private JLabel words = new JLabel();
 	private JTable units;
-	
 	public void nextSlide(){
 		slide++;
-		if(slide == 1){
+		if(slide % 4 == 1){
 			Objectives();
-		}else if(slide == 2){
+		}else if(slide %4 == 2){
 			Turn();
-		}else if(slide == 3){
+		}else if(slide % 4== 3){
 			unitTable();
-		}else if(slide == 4){
+		}else if(slide%4 == 4){
 			shortcuts();
 		}
 	}
@@ -26,6 +25,7 @@ public class DirectionPanel extends JPanel {
 		slideTitle.setText("OBJECTIVE");
 		slideTitle.setLocation(this.getWidth()/2 - slideTitle.getWidth()/2, 20);
 		slideTitle.setVisible(true);
+		this.add(slideTitle);
 		words.setText("The goal of the game is to destroy the base on the opposite side of the map as yours. /n This is accomplished by sending military units to war with the other player. /n Diplomacy doesn/'t work, so don/'t /try it.");
 		words.setLocation(this.getWidth()/2 - slideTitle.getWidth()/2, slideTitle.getHeight() + 50);
 		words.setVisible(true);

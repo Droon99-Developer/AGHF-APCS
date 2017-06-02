@@ -29,6 +29,7 @@ public class StartGameView implements ActionListener {
 	private Player p1;
 	private Player p2;
 	private JFrame frame;
+	private DirectionPanel d;
 	
 	public StartGameView() {
 		frame = new JFrame();
@@ -125,6 +126,7 @@ public class StartGameView implements ActionListener {
 			frame.remove(p2Name);
 			frame.remove(newGameBtn);
 			frame.remove(quitBtn);
+			frame.remove(directionsBtn);
 			//quitBtn.setBounds(frame.getWidth() / 2 - 80, frame.getHeight() * 3 / 4 - 500, 160, 70);
 			//frame.add(quitBtn);
 			frame.repaint();
@@ -148,7 +150,13 @@ public class StartGameView implements ActionListener {
 			newGameBtn.setVisible(false);
 			quitBtn.setText("Back");
 			quitBtn.setActionCommand("bacc");
-			DirectionPanel d = new DirectionPanel();
+			directionsBtn.setText("Next");
+			directionsBtn.setActionCommand("next");
+			d = new DirectionPanel();
+			d.nextSlide();
+			frame.add(d);
+			frame.repaint();
+		}else if(e.getActionCommand().equals("next")){
 			d.nextSlide();
 			frame.add(d);
 			frame.repaint();
@@ -157,6 +165,8 @@ public class StartGameView implements ActionListener {
 			newGameBtn.setText("Create New Game");
 			quitBtn.setText("Quit");
 			quitBtn.setActionCommand("quit");
+			directionsBtn.setText("Directions");
+			directionsBtn.setActionCommand("directions");
 			newGameBtn.setVisible(true);
 			frame.repaint();
 		}
