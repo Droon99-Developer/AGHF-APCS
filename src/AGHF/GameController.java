@@ -56,7 +56,7 @@ public class GameController implements KeyListener, ActionListener {
 	public boolean checkTurn(boolean left) {
 		return left == leftTurn;
 	}
-	
+
 	// advances the units to or from the given the 2 pointers (MIDDLE + i and
 	// MIDDLE - i)
 	// returns true if any units were advanced forward
@@ -73,9 +73,11 @@ public class GameController implements KeyListener, ActionListener {
 	private void advanceUnits() {
 		// THE ALGORITHM:
 		// first: repeat this until no more units can advance:
-		// 		move two pointers outward from the middle by one slice at a time, advancing each unit by one slice towards the middle
-		// 		move pointers back inward towards the center, this time moving units outward
-		// 		advance units on the middle slice until they are all done advancing
+		// move two pointers outward from the middle by one slice at a time,
+		// advancing each unit by one slice towards the middle
+		// move pointers back inward towards the center, this time moving units
+		// outward
+		// advance units on the middle slice until they are all done advancing
 		// second: update all of the graphics and reset the advances of all
 		// units
 		boolean done = false;
@@ -199,48 +201,48 @@ public class GameController implements KeyListener, ActionListener {
 			rightScroll = true;
 		} else if (e.getKeyCode() == 16) {
 			fastScroll = true;
-		}else if (e.getKeyCode() == 49|| e.getKeyCode() == 97){
-			if(leftTurn && p1.getGold() >= Economy.AIRSTRIKECOST){
+		} else if (e.getKeyCode() == 49 || e.getKeyCode() == 97) {
+			if (leftTurn && p1.getGold() >= Economy.AIRSTRIKECOST) {
 				p1.unitPurchased(new AirStrike(false), Economy.AIRSTRIKECOST);
-			}else if(p2.getGold() >= Economy.AIRSTRIKECOST){
+			} else if (p2.getGold() >= Economy.AIRSTRIKECOST) {
 				p2.unitPurchased(new AirStrike(false), Economy.AIRSTRIKECOST);
 			}
 			p1.uPnl.setVisible(false);
 			p2.uPnl.setVisible(false);
-		}else if (e.getKeyCode() == 50 || e.getKeyCode() == 98){
-			if(leftTurn && p1.getGold() >= Economy.TANKCOST){
+		} else if (e.getKeyCode() == 50 || e.getKeyCode() == 98) {
+			if (leftTurn && p1.getGold() >= Economy.TANKCOST) {
 				p1.unitPurchased(new Tank(false), Economy.TANKCOST);
-			}else if(p2.getGold() >= Economy.TANKCOST){
+			} else if (p2.getGold() >= Economy.TANKCOST) {
 				p2.unitPurchased(new Tank(false), Economy.TANKCOST);
 			}
 			p1.uPnl.setVisible(false);
 			p2.uPnl.setVisible(false);
-		}else if (e.getKeyCode() == 51 || e.getKeyCode() == 99){
-			if(leftTurn && p1.getGold() >= Economy.SCOUTCOST){
+		} else if (e.getKeyCode() == 51 || e.getKeyCode() == 99) {
+			if (leftTurn && p1.getGold() >= Economy.SCOUTCOST) {
 				p1.unitPurchased(new Scout(false), Economy.SCOUTCOST);
-			}else if(p2.getGold() >= Economy.SCOUTCOST){
+			} else if (p2.getGold() >= Economy.SCOUTCOST) {
 				p2.unitPurchased(new Scout(false), Economy.SCOUTCOST);
 			}
 			p1.uPnl.setVisible(false);
 			p2.uPnl.setVisible(false);
-		}else if (e.getKeyCode() == 52 || e.getKeyCode() == 100){
-			if(leftTurn && p1.getGold() >= Economy.INFANTRYCOST){
+		} else if (e.getKeyCode() == 52 || e.getKeyCode() == 100) {
+			if (leftTurn && p1.getGold() >= Economy.INFANTRYCOST) {
 				p1.unitPurchased(new Infantry(false), Economy.INFANTRYCOST);
-			}else if(p2.getGold() >= Economy.INFANTRYCOST){
+			} else if (p2.getGold() >= Economy.INFANTRYCOST) {
 				p2.unitPurchased(new Infantry(false), Economy.INFANTRYCOST);
 			}
 			p1.uPnl.setVisible(false);
 			p2.uPnl.setVisible(false);
-		}else if (e.getKeyCode() == 53 || e.getKeyCode() == 101){
-			if(leftTurn && p1.getGold() >= Economy.MEDICCOST){
+		} else if (e.getKeyCode() == 53 || e.getKeyCode() == 101) {
+			if (leftTurn && p1.getGold() >= Economy.MEDICCOST) {
 				p1.unitPurchased(new Medic(false), Economy.MEDICCOST);
-			}else if(p2.getGold() >= Economy.MEDICCOST){
+			} else if (p2.getGold() >= Economy.MEDICCOST) {
 				p2.unitPurchased(new Medic(false), Economy.MEDICCOST);
 			}
 			p1.uPnl.setVisible(false);
 			p2.uPnl.setVisible(false);
-		}else if(e.getKeyCode() == 10){
-			if(leftTurn){
+		} else if (e.getKeyCode() == 10) {
+			if (leftTurn) {
 				p1.uPnl.setVisible(false);
 				p1.playerPnl.setVisible(false);
 				// we are currently on the AWT-EventQueue-0 thread
@@ -248,7 +250,7 @@ public class GameController implements KeyListener, ActionListener {
 				// so we need to move to a new thread
 				Thread t = new Thread(p1, "Advance & Attack Animation Thread");
 				t.start();
-			}else{
+			} else {
 				p2.uPnl.setVisible(false);
 				p2.playerPnl.setVisible(false);
 				// we are currently on the AWT-EventQueue-0 thread
@@ -257,23 +259,23 @@ public class GameController implements KeyListener, ActionListener {
 				Thread t = new Thread(p2, "Advance & Attack Animation Thread");
 				t.start();
 			}
-		}else if(e.getKeyCode() == 61){
-			if(leftTurn){
-				if(p1.uPnl.getVisible()){
+		} else if (e.getKeyCode() == 61) {
+			if (leftTurn) {
+				if (p1.uPnl.getVisible()) {
 					p1.uPnl.setVisible(false);
-				}else{
+				} else {
 					p1.uPnl.setVisible(true);
 				}
-			}else{
-				if(p2.uPnl.getVisible()){
+			} else {
+				if (p2.uPnl.getVisible()) {
 					p2.uPnl.setVisible(false);
-				}else{
+				} else {
 					p2.uPnl.setVisible(true);
 				}
 			}
-		}else if(e.getKeyCode() == 45){
+		} else if (e.getKeyCode() == 45) {
 		}
-		
+
 		if (e.getKeyCode() == 74) {
 			p1.changeGold(5000);
 		} else if (e.getKeyCode() == 84) {

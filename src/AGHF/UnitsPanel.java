@@ -3,6 +3,7 @@ package AGHF;
 import javax.swing.JPanel;
 
 import Units.*;
+
 /*
  * Lists all units in a slice
  */
@@ -35,11 +36,12 @@ public class UnitsPanel extends JPanel {
 			sup.setEnabled(sup.price <= gold);
 		}
 	}
-	
+
 	public void unitPurchased(SingleUnitPanel source, boolean forDefense) {
 		int i = -1;
 		// finds the index of the source in SUPnls
-		while (++i < SUPnls.length && SUPnls[i] != source){}
+		while (++i < SUPnls.length && SUPnls[i] != source) {
+		}
 		int cost = 0;
 		Unit newUnit = null;
 		switch (i) {
@@ -69,8 +71,8 @@ public class UnitsPanel extends JPanel {
 		}
 		delegate.unitPurchased(newUnit, cost);
 	}
-	
-	public boolean getVisible(){
+
+	public boolean getVisible() {
 		return this.isVisible();
 	}
 

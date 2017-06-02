@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+
 /*
  * Sets up frame
  * Sets up start view
@@ -30,10 +31,11 @@ public class StartGameView implements ActionListener {
 	private Player p2;
 	private JFrame frame;
 	private DirectionPanel d;
-	
+
 	public StartGameView() {
 		frame = new JFrame();
-		frame.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 30);
+		frame.setSize((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
+				(int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 30);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLayout(null);
@@ -64,10 +66,10 @@ public class StartGameView implements ActionListener {
 			p2Lbl = new JLabel("Player 2 Name:");
 			p1Name = new JTextField("Player 1");
 			p1Name.setForeground(Color.GRAY);
-			
+
 			p2Name = new JTextField("Player 2");
 			p2Name.setForeground(Color.GRAY);
-			
+
 			p1Name.addFocusListener(new FocusListener() {
 				@Override
 				public void focusGained(FocusEvent e) {
@@ -76,6 +78,7 @@ public class StartGameView implements ActionListener {
 						p1Name.setForeground(Color.BLACK);
 					}
 				}
+
 				@Override
 				public void focusLost(FocusEvent e) {
 					if (p1Name.getText().isEmpty()) {
@@ -92,6 +95,7 @@ public class StartGameView implements ActionListener {
 						p2Name.setForeground(Color.BLACK);
 					}
 				}
+
 				@Override
 				public void focusLost(FocusEvent e) {
 					if (p2Name.getText().isEmpty()) {
@@ -100,11 +104,11 @@ public class StartGameView implements ActionListener {
 					}
 				}
 			});
-			
+
 			Point ref = new Point(frame.getWidth() / 4, frame.getHeight() / 2);
 			p1Name.setBounds(ref.x - 100, ref.y, 200, 40);
 			p1Lbl.setBounds(ref.x - 50, ref.y - 40, 100, 40);
-			
+
 			ref.x = frame.getWidth() * 3 / 4;
 			p2Name.setBounds(ref.x - 100, ref.y, 200, 40);
 			p2Lbl.setBounds(ref.x - 50, ref.y - 40, 100, 40);
@@ -127,15 +131,16 @@ public class StartGameView implements ActionListener {
 			frame.remove(newGameBtn);
 			frame.remove(quitBtn);
 			frame.remove(directionsBtn);
-			//quitBtn.setBounds(frame.getWidth() / 2 - 80, frame.getHeight() * 3 / 4 - 500, 160, 70);
-			//frame.add(quitBtn);
+			// quitBtn.setBounds(frame.getWidth() / 2 - 80, frame.getHeight() *
+			// 3 / 4 - 500, 160, 70);
+			// frame.add(quitBtn);
 			frame.repaint();
-			GameController gc = new GameController(frame,p1,p2);
+			GameController gc = new GameController(frame, p1, p2);
 			p1.setDelegate(gc);
 			p2.setDelegate(gc);
-		}else if(e.getActionCommand().equals("quit")){
-			System.exit(0);		
-		}else if(e.getActionCommand().equals("back")){
+		} else if (e.getActionCommand().equals("quit")) {
+			System.exit(0);
+		} else if (e.getActionCommand().equals("back")) {
 			frame.remove(p1Lbl);
 			frame.remove(p2Lbl);
 			frame.remove(p1Name);
@@ -146,7 +151,7 @@ public class StartGameView implements ActionListener {
 			quitBtn.setActionCommand("quit");
 			newGameBtn.setVisible(true);
 			frame.repaint();
-		}else if(e.getActionCommand().equals("directions")){
+		} else if (e.getActionCommand().equals("directions")) {
 			newGameBtn.setVisible(false);
 			quitBtn.setText("Back");
 			quitBtn.setActionCommand("bacc");
@@ -156,11 +161,11 @@ public class StartGameView implements ActionListener {
 			d.nextSlide();
 			frame.add(d);
 			frame.repaint();
-		}else if(e.getActionCommand().equals("next")){
+		} else if (e.getActionCommand().equals("next")) {
 			d.nextSlide();
 			frame.add(d);
 			frame.repaint();
-		}else if(e.getActionCommand().equals("bacc")){
+		} else if (e.getActionCommand().equals("bacc")) {
 			newGameBtn.setActionCommand("setup");
 			newGameBtn.setText("Create New Game");
 			quitBtn.setText("Quit");

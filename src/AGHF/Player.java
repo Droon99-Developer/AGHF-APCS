@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Units.Unit;
+
 /*
  * Contains all information about players
  * Makes top panel active
@@ -31,13 +32,13 @@ public class Player implements ActionListener, Runnable {
 	public Player(String name, boolean leftSide) {
 		this.leftSide = leftSide;
 		nameLbl = new JLabel(name, JLabel.CENTER);
-		goldLbl = new JLabel(String.format("%d", gold) , JLabel.CENTER);
+		goldLbl = new JLabel(String.format("%d", gold), JLabel.CENTER);
 	}
 
 	public String getName() {
 		return nameLbl.getText();
 	}
-	
+
 	public void setDelegate(GameController gc) {
 		gcDelegate = gc;
 	}
@@ -46,13 +47,13 @@ public class Player implements ActionListener, Runnable {
 		// TODO add the correct amount of gold
 		// economy money stuff
 		GameController.turnNumber++;
-		if (GameController.turnNumber >= GameController.turnRamp){
-		Economy.STARTVALUE = Economy.STARTVALUE*GameController.rampNumber;
-		GameController.turnNumber = 0;
-		GameController.turnRamp++;
-		if(GameController.turnNumber % 2 == 0){
-			GameController.rampNumber++;
-		}
+		if (GameController.turnNumber >= GameController.turnRamp) {
+			Economy.STARTVALUE = Economy.STARTVALUE * GameController.rampNumber;
+			GameController.turnNumber = 0;
+			GameController.turnRamp++;
+			if (GameController.turnNumber % 2 == 0) {
+				GameController.rampNumber++;
+			}
 		}
 		changeGold(Economy.STARTVALUE);
 		playerPnl.setVisible(true);
@@ -118,7 +119,7 @@ public class Player implements ActionListener, Runnable {
 		// economy money stuff
 		changeGold(-cost);
 		newUnit.setSide(leftSide);
-		
+
 		// prevent Player from purchasing unit while animation is playing
 		playerPnl.setVisible(false);
 		uPnl.setVisible(false);
@@ -149,8 +150,8 @@ public class Player implements ActionListener, Runnable {
 	public void run() {
 		gcDelegate.turnEnded(this);
 	}
-	
-	public int getGold(){
+
+	public int getGold() {
 		return gold;
 	}
 }

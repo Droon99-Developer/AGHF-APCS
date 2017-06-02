@@ -50,8 +50,9 @@ public class SliceController {
 							myPanel.translateUnit(attackU, orig);
 						}
 					}
-				// ugly if statement to tell if units should attack the base
-				} else if (index == 0 && attacking == rightUnits || myBase != null && index != 0 && attacking == leftUnits) {
+					// ugly if statement to tell if units should attack the base
+				} else if (index == 0 && attacking == rightUnits
+						|| myBase != null && index != 0 && attacking == leftUnits) {
 					Point orig = attackU.getLocation();
 					myPanel.translateUnit(attackU, myBase.getLocation());
 					attackU.attack(myBase);

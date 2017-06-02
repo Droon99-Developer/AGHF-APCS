@@ -1,4 +1,5 @@
 package AGHF;
+
 public class Economy {
 	public static final int INFANTRYCOST = 8;
 	public static final int AIRSTRIKECOST = 50;

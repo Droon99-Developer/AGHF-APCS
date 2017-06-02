@@ -1,4 +1,5 @@
 package AGHF;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 /*
  * Sets up the top bar for players
  */
@@ -22,40 +24,40 @@ public class SingleUnitPanel extends JPanel implements ActionListener, Runnable 
 	private int width;
 	private UnitsPanel unitsPnl;
 	private boolean forDefense;
-	
+
 	public SingleUnitPanel(String name, int cost, int width, int height, int y) {
 		setLayout(null);
 		setBounds(0, y, width, height);
 		nameLbl = new JLabel(name, JLabel.CENTER);
 		nameLbl.setBounds(0, 0, width, height / 4);
 		costLbl = new JLabel(String.format("%d Gold", cost), JLabel.CENTER);
-		costLbl.setBounds(0,height / 4, width, height / 4);
+		costLbl.setBounds(0, height / 4, width, height / 4);
 		price = cost;
 		add(nameLbl);
 		add(costLbl);
-		
+
 		attackBtn.setBounds(0, height / 2, width / 2, height / 2);
 		defendBtn.setBounds(width / 2, height / 2, width / 2, height / 2);
 		add(attackBtn);
 		add(defendBtn);
 		attackBtn.addActionListener(this);
 		defendBtn.addActionListener(this);
-		
+
 		this.width = width;
 	}
-	
+
 	public void setEnabled(boolean enabled) {
 		attackBtn.setEnabled(enabled);
 		defendBtn.setEnabled(enabled);
 	}
-	
+
 	public void setDelegate(UnitsPanel unitsPnl) {
 		this.unitsPnl = unitsPnl;
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
-		Graphics2D g2 = (Graphics2D)g;
+		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(Color.BLACK);
 		g2.setStroke(new BasicStroke(3));
 		g2.drawLine(0, 0, width, 0);
@@ -72,5 +74,5 @@ public class SingleUnitPanel extends JPanel implements ActionListener, Runnable 
 	public void run() {
 		unitsPnl.unitPurchased(this, forDefense);
 	}
-	
+
 }
