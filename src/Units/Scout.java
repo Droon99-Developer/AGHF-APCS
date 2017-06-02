@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 
 public class Scout extends Unit {
 	private static final long serialVersionUID = -3919096808132824140L;
-	public static final int COST = 5;
 	public Scout(boolean forDefense) {
 //		SPEED: 2
 //		DAMAGE: 3

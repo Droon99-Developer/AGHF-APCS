@@ -183,9 +183,9 @@ public class GameController implements KeyListener, ActionListener {
 			if (index == codeWord.length()) {
 				index = 0;
 				if (leftTurn) {
-					p1.changeGold(AirStrike.COST * 100);
+					p1.changeGold(Economy.AIRSTRIKECOST * 100);
 				} else {
-					p2.changeGold(AirStrike.COST * 100);
+					p2.changeGold(Economy.AIRSTRIKECOST * 100);
 				}
 			}
 		} else {
@@ -198,42 +198,42 @@ public class GameController implements KeyListener, ActionListener {
 		} else if (e.getKeyCode() == 16) {
 			fastScroll = true;
 		}else if (e.getKeyCode() == 49|| e.getKeyCode() == 97){
-			if(leftTurn && p1.getGold() >= AirStrike.COST){
-				p1.unitPurchased(new AirStrike(false), AirStrike.COST);
-			}else if(p2.getGold() >= AirStrike.COST){
-				p2.unitPurchased(new AirStrike(false), AirStrike.COST);
+			if(leftTurn && p1.getGold() >= Economy.AIRSTRIKECOST){
+				p1.unitPurchased(new AirStrike(false), Economy.AIRSTRIKECOST);
+			}else if(p2.getGold() >= Economy.AIRSTRIKECOST){
+				p2.unitPurchased(new AirStrike(false), Economy.AIRSTRIKECOST);
 			}
 			p1.uPnl.setVisible(false);
 			p2.uPnl.setVisible(false);
 		}else if (e.getKeyCode() == 50 || e.getKeyCode() == 98){
-			if(leftTurn && p1.getGold() >= Tank.COST){
-				p1.unitPurchased(new Tank(false), Tank.COST);
-			}else if(p2.getGold() >= Tank.COST){
-				p2.unitPurchased(new Tank(false), Tank.COST);
+			if(leftTurn && p1.getGold() >= Economy.TANKCOST){
+				p1.unitPurchased(new Tank(false), Economy.TANKCOST);
+			}else if(p2.getGold() >= Economy.TANKCOST){
+				p2.unitPurchased(new Tank(false), Economy.TANKCOST);
 			}
 			p1.uPnl.setVisible(false);
 			p2.uPnl.setVisible(false);
 		}else if (e.getKeyCode() == 51 || e.getKeyCode() == 99){
-			if(leftTurn && p1.getGold() >= Scout.COST){
-				p1.unitPurchased(new Scout(false), Scout.COST);
-			}else if(p2.getGold() >= Scout.COST){
-				p2.unitPurchased(new Scout(false), Scout.COST);
+			if(leftTurn && p1.getGold() >= Economy.SCOUTCOST){
+				p1.unitPurchased(new Scout(false), Economy.SCOUTCOST);
+			}else if(p2.getGold() >= Economy.SCOUTCOST){
+				p2.unitPurchased(new Scout(false), Economy.SCOUTCOST);
 			}
 			p1.uPnl.setVisible(false);
 			p2.uPnl.setVisible(false);
 		}else if (e.getKeyCode() == 52 || e.getKeyCode() == 100){
-			if(leftTurn && p1.getGold() >= Infantry.COST){
-				p1.unitPurchased(new Infantry(false), Infantry.COST);
-			}else if(p2.getGold() >= Infantry.COST){
-				p2.unitPurchased(new Infantry(false), Infantry.COST);
+			if(leftTurn && p1.getGold() >= Economy.INFANTRYCOST){
+				p1.unitPurchased(new Infantry(false), Economy.INFANTRYCOST);
+			}else if(p2.getGold() >= Economy.INFANTRYCOST){
+				p2.unitPurchased(new Infantry(false), Economy.INFANTRYCOST);
 			}
 			p1.uPnl.setVisible(false);
 			p2.uPnl.setVisible(false);
 		}else if (e.getKeyCode() == 53 || e.getKeyCode() == 101){
-			if(leftTurn && p1.getGold() >= Medic.COST){
-				p1.unitPurchased(new Medic(false), Medic.COST);
-			}else if(p2.getGold() >= Medic.COST){
-				p2.unitPurchased(new Medic(false), Medic.COST);
+			if(leftTurn && p1.getGold() >= Economy.MEDICCOST){
+				p1.unitPurchased(new Medic(false), Economy.MEDICCOST);
+			}else if(p2.getGold() >= Economy.MEDICCOST){
+				p2.unitPurchased(new Medic(false), Economy.MEDICCOST);
 			}
 			p1.uPnl.setVisible(false);
 			p2.uPnl.setVisible(false);

@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 
 public class Infantry extends Unit {
 	private static final long serialVersionUID = -8817023425073765339L;
-	public static final int COST = 8;
 	public Infantry(boolean forDefense) {
 //		SPEED: 2
 //		DAMAGE: 2

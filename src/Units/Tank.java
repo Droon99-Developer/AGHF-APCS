@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 
 public class Tank extends Unit {
 	private static final long serialVersionUID = 6718417382710113994L;
-	public static final int COST = 18; 
 	public Tank(boolean forDefense) {
 //		SPEED: 1
 //		DAMAGE: 6

@@ -9,7 +9,6 @@ import javax.imageio.ImageIO;
 
 public class AirStrike extends Unit {
 	static final long serialVersionUID = 5667678708220137591L;
-	public static final int COST = 50; 
 	public AirStrike(boolean forDefense) {
 //		SPEED: 5
 //		DAMAGE: 40
