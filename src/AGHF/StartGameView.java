@@ -158,6 +158,8 @@ public class StartGameView implements ActionListener {
 			directionsBtn.setText("Next");
 			directionsBtn.setActionCommand("next");
 			d = new DirectionPanel();
+			d.setLayout(null);
+			d.setBounds(0, 0, frame.getWidth(), frame.getHeight());
 			d.nextSlide();
 			frame.add(d);
 			frame.repaint();
@@ -172,6 +174,7 @@ public class StartGameView implements ActionListener {
 			quitBtn.setActionCommand("quit");
 			directionsBtn.setText("Directions");
 			directionsBtn.setActionCommand("directions");
+			d.setVisible(false);
 			newGameBtn.setVisible(true);
 			frame.repaint();
 		}
