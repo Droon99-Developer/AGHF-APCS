@@ -32,11 +32,10 @@ public class StartGameView implements ActionListener {
 	private Player p1;
 	private Player p2;
 	private JFrame frame;
-	private Container c;
 	private DirectionPanel d;
 	private Font font;
 	private Font font2;
-
+	private Container c;
 	public StartGameView() {
 		frame = new JFrame();
 		frame.setSize((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
@@ -50,7 +49,8 @@ public class StartGameView implements ActionListener {
 
 		c = frame.getContentPane();
 		//need to pick a color if want a diff color background
-		//c.setBackground(Color.getHSBColor(new Float(0.3218391),new Float(0.61702126),new Float(0.36862746)));
+		c.setBackground(Color.getHSBColor(new Float(0),new Float(0),new Float(.933334)));
+		
 		
 		font = new Font("Dialog", Font.BOLD | Font.HANGING_BASELINE, 180);
 		font2 = new Font("Dialog", Font.PLAIN | Font.ROMAN_BASELINE, 20);

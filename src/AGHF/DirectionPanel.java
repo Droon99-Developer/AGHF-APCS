@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 public class DirectionPanel extends JPanel {
+	private static final long serialVersionUID = -2489201723379904949L;
 	private int slide = 0;
 	private JLabel slideTitle = new JLabel();
 	private ArrayList<JLabel> instructions = new ArrayList<JLabel>();

@@ -1,10 +1,11 @@
 package AGHF;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import Units.*;
+
+import Units.Medic;
+import Units.Unit;
 
 /*
  * Logic for slices
@@ -18,8 +19,7 @@ public class SliceController {
 	// rightUnits has p2 units
 	private ArrayList<Unit> leftUnits = new ArrayList<Unit>();
 	private ArrayList<Unit> rightUnits = new ArrayList<Unit>();
-
-	private GameController gcDelegate;
+	//private GameController gcDelegate;
 
 	private int index;
 

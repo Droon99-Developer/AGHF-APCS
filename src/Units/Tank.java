@@ -1,7 +1,5 @@
 package Units;
 
-import java.awt.event.MouseEvent;
-
 public class Tank extends Unit {
 	private static final long serialVersionUID = 6718417382710113994L;
 

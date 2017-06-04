@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class Base extends JPanel {
+	private static final long serialVersionUID = 7586801578776886932L;
 	private double maxHealth = 100;
 	public double healthLeft;
 	public int level = 1;

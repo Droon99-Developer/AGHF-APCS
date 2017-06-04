@@ -1,7 +1,5 @@
 package Units;
 
-import java.awt.event.MouseEvent;
-
 public class Infantry extends Unit {
 	private static final long serialVersionUID = -8817023425073765339L;
 

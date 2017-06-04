@@ -8,9 +8,6 @@ import java.awt.Rectangle;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-/*
- * Nothing yet
- */
 public class GameView extends JLayeredPane {
 	private static final long serialVersionUID = -4430897747513766248L;
 	// this class is responsible for drawing the mini map overview and quit
@@ -71,6 +68,7 @@ public class GameView extends JLayeredPane {
 
 	@Override
 	public void paintComponent(Graphics g) {
+		@SuppressWarnings("unused")
 		Graphics2D g2 = (Graphics2D) g;
 		// TODO paint the mini map
 	}
