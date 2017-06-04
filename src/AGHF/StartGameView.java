@@ -1,6 +1,7 @@
 package AGHF;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -31,6 +32,7 @@ public class StartGameView implements ActionListener {
 	private Player p1;
 	private Player p2;
 	private JFrame frame;
+	private Container c;
 	private DirectionPanel d;
 	private Font font;
 	private Font font2;
@@ -46,6 +48,10 @@ public class StartGameView implements ActionListener {
 		frame.setLocationRelativeTo(null);
 		frame.setName("AGHF");
 
+		c = frame.getContentPane();
+		//need to pick a color if want a diff color background
+		//c.setBackground(Color.getHSBColor(new Float(0.3218391),new Float(0.61702126),new Float(0.36862746)));
+		
 		font = new Font("Dialog", Font.BOLD | Font.HANGING_BASELINE, 180);
 		font2 = new Font("Dialog", Font.PLAIN | Font.ROMAN_BASELINE, 20);
 
@@ -141,8 +147,8 @@ public class StartGameView implements ActionListener {
 
 			quitBtn.setText("Back");
 			quitBtn.setActionCommand("back");
-			quitBtn.setLocation(frame.getWidth()/2-78, frame.getHeight()/2 + 200);
-			
+			quitBtn.setLocation(frame.getWidth() / 2 - 78, frame.getHeight() / 2 + 200);
+
 			frame.add(p1Lbl);
 			frame.add(p2Lbl);
 			frame.add(p1Name);
@@ -163,6 +169,7 @@ public class StartGameView implements ActionListener {
 			frame.remove(newGameBtn);
 			frame.remove(quitBtn);
 			frame.remove(directionsBtn);
+			frame.remove(lblTitle);
 			frame.repaint();
 
 			GameController gc = new GameController(frame, p1, p2);
@@ -208,6 +215,7 @@ public class StartGameView implements ActionListener {
 			directionsBtn.setActionCommand("directions");
 			d.setVisible(false);
 			newGameBtn.setVisible(true);
+			frame.add(lblTitle);
 			frame.repaint();
 		} else if (e.getActionCommand().equals("quit")) {
 			System.exit(0);

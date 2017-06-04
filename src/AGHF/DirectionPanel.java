@@ -37,24 +37,29 @@ public class DirectionPanel extends JPanel {
 		
 		slideTitle.setText("OBJECTIVE");
 		slideTitle.setFont(font);
-		slideTitle.setBounds(75, 20, this.getWidth(),140);
+		slideTitle.setBounds(65, 20, this.getWidth(),140);
 		slideTitle.setVisible(true);
 		add(slideTitle);
 		
 		instructions.add(new JLabel());
-		instructions.get(0).setText("The goal of the game is to destroy the base on the opposite side of the map as yours.");
+		instructions.get(0).setText("The goal of the game is to destroy the base on the");
 		instructions.add(new JLabel());
-		instructions.get(1).setText("This is accomplished by sending military units to war with the other player.");
+		instructions.get(1).setText("opposite side of the map as yours. This is accomplished");
 		instructions.add(new JLabel());
-		instructions.get(2).setText(" Diplomacy doesn't work, so don't try it.");
+		instructions.get(2).setText("by sending military units to war with the other player. ");
+		instructions.add(new JLabel());
+		instructions.get(3).setText("Diplomacy doesn't work, so don't try it.");
 		
 		//"The goal of the game is to destroy the base on the opposite side of the map as yours. /n This is accomplished by sending military units to war with the other player. /n Diplomacy doesn/'t work, so don/'t /try it.");
 		for(int i = 0; i < instructions.size(); i++){
-			instructions.get(i).setFont(font2);
+			instructions.get(i).setFont(font3);
 			instructions.get(i).setVisible(true);
-			instructions.get(i).setBounds(this.getWidth() / 2 - instructions.get(i).getWidth() / 2 - 500, slideTitle.getHeight() + 140  + 80*i,1000,50);
+			instructions.get(i).setBounds(255, slideTitle.getHeight() + 140 + 60*i,1000,40);
 			add(instructions.get(i));
 		}
+		instructions.get(0).setBounds(this.getWidth() / 2 - instructions.get(0).getWidth() / 2 , 280,1000,40);
+		
+		
 	}
 	
 	private void turn(){
@@ -119,7 +124,7 @@ public class DirectionPanel extends JPanel {
 				{ "Reward", 10, 5, 3, 1, 4 }};
 		
 		units = new JTable(data, columnNames);
-		units.setBounds(this.getWidth() / 2 - units.getWidth() / 2 - 625, slideTitle.getHeight() + 50, this.getWidth() - 200, this.getHeight()- 450);
+		units.setBounds((this.getWidth()/2 - units.getWidth()) / 2 -150, (this.getHeight()/2 - units.getHeight()) / 2, 1000, 275);
 		units.setFont(font3);
 		units.setRowHeight(45);
 		for(int i = 0; i < data.length; i++){
@@ -127,21 +132,22 @@ public class DirectionPanel extends JPanel {
 		}
 		extra = new JLabel("Speed: Number of slices moved per turn");
 		extra2 = new JLabel("Medics heal their own team by 2 each turn");
-		extra.setBounds(50, this.getHeight()- 190, 500, 40);
-		extra2.setBounds(50, this.getHeight()- 230, 500, 40);
+		extra.setBounds(220, this.getHeight()- 280, 1000, 50);
+		extra2.setBounds(220, this.getHeight()- 350, 1000, 50);
 		units.setVisible(true);
 		extra.setVisible(true);
 		extra2.setVisible(true);
-		extra.setFont(font2);
-		extra2.setFont(font2);
+		extra.setFont(font3);
+		extra2.setFont(font3);
 		add(extra);
 		add(extra2);
 		add(units);
 	}
 
 	private void shortcuts() {
-		units.setVisible(false);
-		
+		remove(units);
+		remove(extra);
+		remove(extra2);
 		slideTitle.setText("KEYBOARD SHORTCUTS");
 		
 		String[] columnNames = { "Operation", "Key" };
@@ -157,11 +163,11 @@ public class DirectionPanel extends JPanel {
 				{ "Scroll", "A and D or Left and Right Arrow Keys" }};
 		
 		KeyShorts = new JTable(data, columnNames);
-		KeyShorts.setSize(800, 160);
-		KeyShorts.setFont(font2);
-		KeyShorts.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		KeyShorts.setLocation(this.getWidth() / 2 - KeyShorts.getWidth() / 2, slideTitle.getHeight() + 50);
-		KeyShorts.setVisible(true);
+		KeyShorts.setBounds(this.getWidth() / 2 - units.getWidth() / 2 + 0 , slideTitle.getHeight() + 50, this.getWidth() - 495, this.getHeight()- 450);
+		KeyShorts.setFont(font3);
+		KeyShorts.setRowHeight(40);
+		KeyShorts.getColumnModel().getColumn(0).setPreferredWidth(55);
+		KeyShorts.getColumnModel().getColumn(1).setPreferredWidth(400);
 		add(KeyShorts);
 	}
 }

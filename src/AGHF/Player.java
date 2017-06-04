@@ -1,6 +1,7 @@
 package AGHF;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,11 +29,14 @@ public class Player implements ActionListener, Runnable {
 	private JButton purchaseBtn;
 	private JButton upgradeBtn;
 	private JButton endTurnBtn;
+	private Font font = new Font("Dialog", Font.PLAIN | Font.ROMAN_BASELINE, 20);
 
 	public Player(String name, boolean leftSide) {
 		this.leftSide = leftSide;
 		nameLbl = new JLabel(name, JLabel.CENTER);
+		nameLbl.setFont(font);
 		goldLbl = new JLabel(String.format("%d", gold), JLabel.CENTER);
+		goldLbl.setFont(font);
 	}
 
 	public String getName() {
@@ -78,14 +82,17 @@ public class Player implements ActionListener, Runnable {
 		goldLbl.setBounds(width / 3, 0, width / 3, 50);
 
 		endTurnBtn = new JButton("End Turn");
+		endTurnBtn.setFont(font);
 		endTurnBtn.addActionListener(this);
 		endTurnBtn.setActionCommand("end");
 
 		purchaseBtn = new JButton("Purchase Units");
+		purchaseBtn.setFont(font);
 		purchaseBtn.addActionListener(this);
 		purchaseBtn.setActionCommand("uPnl");
 
 		upgradeBtn = new JButton("Upgrade Base");
+		upgradeBtn.setFont(font);
 		upgradeBtn.addActionListener(this);
 		upgradeBtn.setActionCommand("upgrade");
 
