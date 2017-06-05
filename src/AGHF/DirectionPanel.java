@@ -16,9 +16,10 @@ public class DirectionPanel extends JPanel {
 	private JTable KeyShorts;
 	private JLabel extra;
 	private JLabel extra2;
-	private Font font = new Font("Dialog", Font.BOLD | Font.HANGING_BASELINE, 110);
+	private Font font = new Font("Dialog", Font.BOLD | Font.HANGING_BASELINE, 100);
 	private Font font2 = new Font("Dialog", Font.PLAIN | Font.ROMAN_BASELINE, 20);
 	private Font font3 = new Font("Dialog", Font.PLAIN | Font.ROMAN_BASELINE, 35);
+	private Font font4 = new Font("Dialog", Font.PLAIN | Font.ROMAN_BASELINE, 25);
 	public void nextSlide() {
 		slide++;
 		if(slide % 4 == 1){
@@ -119,27 +120,28 @@ public class DirectionPanel extends JPanel {
 		Object[][] data = { 
 				{ "Vehicle", "Air Strike", "Tank", "Infantry", "Marine", "Medic" },
 				{ "Speed", 5, 1, 2, 4, 1 },
-				{ "Strength", 40, 7, 3, 1, "n/a" }, { "Health", 40, 10, 7, 2, 7 },
+				{ "Strength", 40, 7, 3, 1, "n/a" }, 
+				{ "Health", 40, 10, 7, 2, 7 },
 				{ "Cost", Economy.AIRSTRIKECOST, Economy.TANKCOST, Economy.INFANTRYCOST, Economy.SCOUTCOST,
 						Economy.MEDICCOST },
 				{ "Reward", 10, 5, 3, 1, 4 }};
 		
 		units = new JTable(data, columnNames);
 		units.setBounds((this.getWidth()/2 - units.getWidth()) / 2 -150, (this.getHeight()/2 - units.getHeight()) / 2, 1000, 275);
-		units.setFont(font3);
+		units.setFont(new Font("Dialog", Font.PLAIN | Font.ROMAN_BASELINE, 25));
 		units.setRowHeight(45);
 		for(int i = 0; i < data.length; i++){
 			units.getColumnModel().getColumn(i).setPreferredWidth(200);
 		}
 		extra = new JLabel("Speed: Number of slices moved per turn");
 		extra2 = new JLabel("Medics heal their own team by 2 each turn");
-		extra.setBounds(220, this.getHeight()- 280, 1000, 50);
-		extra2.setBounds(220, this.getHeight()- 350, 1000, 50);
+		extra.setBounds(220, units.getHeight()*1 + units.getHeight()/2  + 50, 1000, 50);
+		extra2.setBounds(220, units.getHeight()*1 + units.getHeight()/2 + 100, 1000, 50);
 		units.setVisible(true);
 		extra.setVisible(true);
 		extra2.setVisible(true);
-		extra.setFont(font3);
-		extra2.setFont(font3);
+		extra.setFont(font4);
+		extra2.setFont(font4);
 		add(extra);
 		add(extra2);
 		add(units);
