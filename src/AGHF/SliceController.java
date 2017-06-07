@@ -74,10 +74,6 @@ public class SliceController {
 					{
 						for (Unit defendU : defending)
 						{
-							if(defendU.dead())
-							{
-								break;
-							}
 							Point orig = attackU.getLocation();
 							Point end = defendU.getLocation();
 							Point middle = defendU.getLocation();
@@ -105,7 +101,7 @@ public class SliceController {
 		}
 		else
 		{
-			for (Unit defendU : attacking)
+			for (Unit defendU : defending)
 			{
 				String type = defendU.getClass().getName();
 				if (!type.equals("Units.Medic"))
@@ -114,15 +110,16 @@ public class SliceController {
 					{
 						for (Unit attackU : attacking)
 						{
-							Point orig = attackU.getLocation();
+							Point orig = defendU.getLocation();
 							Point end = attackU.getLocation();
 							Point middle = attackU.getLocation();
 							middle.setLocation((((orig.getX())+(end.getX()))/2),(((orig.getY())+(end.getY()))/2));
+							myPanel.translateUnit(defendU, middle);
 							myPanel.translateUnit(attackU, middle);
-							myPanel.translateUnit(attackU, middle);
-							defendU.attack(defendU);
+							defendU.attack(attackU);
+							attackU.attack(defendU);
 							myPanel.translateUnit(attackU, end);
-							myPanel.translateUnit(attackU, orig);
+							myPanel.translateUnit(defendU, orig);
 							attackU.repaint();
 							defendU.repaint();
 						}
@@ -182,7 +179,6 @@ public class SliceController {
 
 	public int[] performAttacks() {
 		attackAnimation(leftUnits, rightUnits);
-		attackAnimation(rightUnits, leftUnits);
 		healAnimation(leftUnits);
 		healAnimation(rightUnits);
 		int[] goldEarned = { disposeDead(leftUnits, true), disposeDead(rightUnits, false) };
