@@ -66,9 +66,9 @@ public class SlicePanel extends JPanel {
 		}
 	}
 
-	private int[] createYDest(ArrayList<Unit> units) {
+	private int[] createYDest(ArrayList<Unit> units, boolean air) {
 		int[] yDest = new int[units.size()];
-		double y = getHeight() * 2 / 3 - 14;
+		double y = air ? 0 : getHeight() * 2 / 3 - 14;
 		double height = getHeight() / 3;
 		for (int i = 0; i < units.size(); i++) {
 			yDest[i] = Math.round((float) ((double) (y + (i + 1) / (double) (units.size() + 1) * height)))
@@ -91,13 +91,9 @@ public class SlicePanel extends JPanel {
 		}
 	}
 
-	public void incomingUnits(ArrayList<Unit> newUnits, ArrayList<Unit> oldUnits, boolean left) {
-		for (Unit u : newUnits) {
-			add(u);
-			oldUnits.add(u);
-		}
+	public void incomingUnits(ArrayList<Unit> oldUnits, boolean left, int numOfNew) {
 		int[] yOrig = new int[oldUnits.size()];
-		int[] yDest = createYDest(oldUnits);
+		int[] yDest = createYDest(oldUnits, oldUnits.get(0).getClass().getName().equals("Units.AirStrike"));
 		int[] yMove = new int[oldUnits.size()];
 		for (int i = 0; i < yMove.length; i++) {
 			yOrig[i] = oldUnits.get(i).getLocation().y;
@@ -108,7 +104,7 @@ public class SlicePanel extends JPanel {
 		int xDest = left ? getWidth() / 4 - widest / 2 : getWidth() * 3 / 4 - widest / 2;
 		double xMove = xDest - xOrig;
 		// the index at which we are dealing with new units
-		int newThreshold = oldUnits.size() - newUnits.size();
+		int newThreshold = oldUnits.size() - numOfNew;
 		for (double currF = 0; currF <= FRAMES; currF++) {
 			for (int i = 0; i < oldUnits.size(); i++) {
 				double percent = currF / FRAMES;
@@ -128,12 +124,12 @@ public class SlicePanel extends JPanel {
 		if (moveUnits.size() > 0) {
 			int widest = longestWidth(moveUnits);
 			int xDest = left ? getWidth() + widest : -widest;
-			// all units have same x position
+			// all units have same x start position
 			double xStart = (int) moveUnits.get(0).getLocation().x;
 			double xMove = xDest - xStart;
 
 			int[] yOrig = new int[stayUnits.size()];
-			int[] yDest = createYDest(stayUnits);
+			int[] yDest = createYDest(stayUnits, moveUnits.get(0).getClass().getName().equals("Units.AirStrike"));
 			int[] yMove = new int[stayUnits.size()];
 			for (int i = 0; i < yMove.length; i++) {
 				yOrig[i] = stayUnits.get(i).getLocation().y;

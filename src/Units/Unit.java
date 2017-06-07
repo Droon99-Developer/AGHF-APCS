@@ -128,6 +128,10 @@ public abstract class Unit extends JPanel implements MouseListener {
 		}
 	}
 
+	public void kill() {
+		healthLeft = 0;
+	}
+	
 	public void resetAdvances() {
 		advancesLeft = SPEED;
 	}

@@ -24,7 +24,7 @@ public class GameController implements KeyListener, ActionListener {
 	private GameView gv;
 	private SliceController[] slices;
 	private final int MIDDLE;
-	private String codeWord = "jarjascat"; // pronounced JAR-ja-scat
+	private String codeWord = "peckmanisbad";
 	private int index = 0;
 
 	// scroll with left and right arrow keys and hold shift for speed
@@ -98,7 +98,7 @@ public class GameController implements KeyListener, ActionListener {
 			// in case the right side had just scouts that are gone now
 			done = done && advanceMiddle(true);
 		}
-
+		
 		// reset unit advances
 		for (SliceController sc : slices) {
 			sc.resetUnitAdvances();
@@ -177,7 +177,6 @@ public class GameController implements KeyListener, ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		codeWord = "peckmanisbad";
 		if (e.getKeyCode() == (int) (codeWord.charAt(index)) - 32) {
 			index++;
 			if (index == codeWord.length()) {
