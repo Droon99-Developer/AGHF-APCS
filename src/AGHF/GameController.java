@@ -52,7 +52,7 @@ public class GameController implements KeyListener, ActionListener {
 		newUnits.add(newUnit);
 		slice.addUnits(newUnits, left);
 	}
-
+	
 	public boolean checkTurn(boolean left) {
 		return left == leftTurn;
 	}
@@ -132,8 +132,15 @@ public class GameController implements KeyListener, ActionListener {
 		gv.renderUnitPanels();
 
 		slices = gv.renderSlices();
-		slices[0].setBase(new Base());
-		slices[slices.length - 1].setBase(new Base());
+		
+		Base b1 = new Base();
+		p1.setBase(b1);
+		slices[0].setBase(b1);
+		
+		Base b2 = new Base();
+		p2.setBase(b2);
+		slices[slices.length - 1].setBase(b2);
+		
 		MIDDLE = slices.length / 2;
 
 		gv.addComponents();

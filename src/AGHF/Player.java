@@ -30,7 +30,12 @@ public class Player implements ActionListener, Runnable {
 	private JButton upgradeBtn;
 	private JButton endTurnBtn;
 	private Font font = new Font("Dialog", Font.PLAIN | Font.ROMAN_BASELINE, 20);
-
+	private Base myBase;
+	
+	public void setBase(Base b) {
+		myBase = b;
+	}
+	
 	public Player(String name, boolean leftSide) {
 		this.leftSide = leftSide;
 		nameLbl = new JLabel(name, JLabel.CENTER);
@@ -136,7 +141,7 @@ public class Player implements ActionListener, Runnable {
 		if (e.getActionCommand().equals("uPnl")) {
 			uPnl.setVisible(!uPnl.isVisible());
 		} else if (e.getActionCommand().equals("upgrade")) {
-			// TODO perform necessary actions to upgrade the base
+			upgradeBtn.setEnabled(myBase.upgrade());
 		} else if (e.getActionCommand().equals("end")) {
 			uPnl.setVisible(false);
 			playerPnl.setVisible(false);

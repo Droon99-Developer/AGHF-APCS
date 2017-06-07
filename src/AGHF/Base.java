@@ -2,6 +2,7 @@ package AGHF;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -48,11 +49,15 @@ public class Base extends JPanel {
 		g2.setColor(Color.RED);
 		int width = (int) (((double) healthLeft / (double) maxHealth) * (double) (getWidth() - 2));
 		g2.fillRect(1, getHeight() - HEALTH_BAR_HEIGHT + 1, width, HEALTH_BAR_HEIGHT - 2);
+		g2.setFont(new Font(null, 0, 20));
+		g2.drawString(level + "", getWidth() / 2 - 5, 30);
 	}
 
-	public void upgrade() {
+	public boolean upgrade() {
 		level++;
 		healthLeft *= 1.5;
 		maxHealth *= 1.5;
+		repaint();
+		return level < 3;
 	}
 }
