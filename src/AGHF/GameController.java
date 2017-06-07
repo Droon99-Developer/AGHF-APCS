@@ -159,6 +159,10 @@ public class GameController implements KeyListener, ActionListener {
 			GameController.turnNumber++;
 			if (GameController.turnNumber >= GameController.turnRamp) {
 				Economy.STARTVALUE = Economy.STARTVALUE * GameController.rampNumber;
+				if(Economy.STARTVALUE > Economy.AIRSTRIKECOST * 1000000){
+					Economy.STARTVALUE = Economy.AIRSTRIKECOST * 1000000;
+					GameController.rampNumber = 1;
+				}
 				GameController.turnNumber = 0;
 				GameController.turnRamp++;
 				if (GameController.turnNumber % 2 == 0) {
@@ -196,9 +200,9 @@ public class GameController implements KeyListener, ActionListener {
 			if (index == codeWord.length()) {
 				index = 0;
 				if (leftTurn) {
-					p1.changeGold(Economy.AIRSTRIKECOST * 100);
+					p1.changeGold(Economy.AIRSTRIKECOST * 10000000);
 				} else {
-					p2.changeGold(Economy.AIRSTRIKECOST * 100);
+					p2.changeGold(Economy.AIRSTRIKECOST * 10000000);
 				}
 			}
 		} else {

@@ -50,15 +50,6 @@ public class Player implements ActionListener, Runnable {
 	public void startTurn() {
 		// TODO add the correct amount of gold
 		// economy money stuff
-		GameController.turnNumber++;
-		if (GameController.turnNumber >= GameController.turnRamp) {
-			Economy.STARTVALUE = Economy.STARTVALUE * GameController.rampNumber;
-			GameController.turnNumber = 0;
-			GameController.turnRamp++;
-			if (GameController.turnNumber % 2 == 0) {
-				GameController.rampNumber++;
-			}
-		}
 		changeGold(Economy.STARTVALUE);
 		playerPnl.setVisible(true);
 	}
@@ -66,6 +57,10 @@ public class Player implements ActionListener, Runnable {
 	public void changeGold(int offset) {
 		// economy money stuff
 		gold += offset;
+		if(gold > 2000000000 || gold < 0){//2 BILLION Golds
+			gold = 2000000000;
+		}
+			
 		goldLbl.setText(String.format("%d", gold) + " Gold");
 		uPnl.updateButtons(gold);
 	}
