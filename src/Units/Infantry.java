@@ -10,6 +10,6 @@ public class Infantry extends Unit {
 		// GPK: 3
 		// constructor structure: int speed, int damage, int maxHealth, int GPK,
 		// boolean forDefense
-		super(2, 2, 9, 3, forDefense, "assets/InfantrySprite1.png");
+		super(2, 2, 9, 3, forDefense, "Infantry");
 	}
 }
