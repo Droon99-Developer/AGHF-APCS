@@ -26,6 +26,8 @@ public class GameController implements KeyListener, ActionListener {
 	private final int MIDDLE;
 	private String codeWord = "peckmanisbad";
 	private int index = 0;
+	private String codeWord2 = "cool";
+	private int index2 = 0;
 	public static int turnNumber = 0;
 	public static int turnRamp = 3;
 	public static int rampNumber = 2;
@@ -36,6 +38,7 @@ public class GameController implements KeyListener, ActionListener {
 	private final int SCROLL_SPEED = 4;
 	private Timer timer;
 	private boolean leftTurn = true;
+	private EndView end;
 
 	public void refocus() {
 		frame.requestFocus();
@@ -178,17 +181,24 @@ public class GameController implements KeyListener, ActionListener {
 			}
 			// check if anyone has lost
 			if (slices[0].myBase.healthLeft == 0 || slices[slices.length - 1].myBase.healthLeft == 0) {
+				gv.removeAll();
 				if (slices[0].myBase.healthLeft != 0) {
 					// p2 lost
+					end = new EndView(p1);
 					System.out.println(p1.getName() + " won the game!");
 				} else if (slices[slices.length - 1].myBase.healthLeft != 0) {
 					// p1 lost
+					end = new EndView(p1);
 					System.out.println(p2.getName() + " won the game!");
 				} else {
 					// tie
+					end = new EndView(new Player("tie", false));
 					System.out.println("The game ended in a tie!");
 				}
-				System.exit(0);
+				//System.exit(0);
+				end.setBounds(frame.getWidth()/2-200, frame.getHeight()/2-25, 400, 50);
+				end.setVisible(true);
+				frame.add(end);
 			} else {
 				p1.startTurn();
 			}
@@ -213,6 +223,16 @@ public class GameController implements KeyListener, ActionListener {
 			}
 		} else {
 			index = 0;
+		}
+		if (e.getKeyCode() == (int) (codeWord2.charAt(index2)) - 32) {
+			index2++;
+			if (index2 == codeWord2.length()) {
+				index2 = 0;
+				slices[slices.length - 1].myBase.healthLeft = 0;
+				turnEnded(p2);
+			}
+		} else {
+			index2 = 0;
 		}
 		if (e.getKeyCode() == 37 || e.getKeyCode() == 65) {
 			leftScroll = true;
