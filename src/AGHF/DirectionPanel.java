@@ -119,8 +119,8 @@ public class DirectionPanel extends JPanel {
 		String[] columnNames = { "Vehicle", "Air Strike", "Tank", "Infantry", "Marine", "Medic" };
 		Object[][] data = { 
 				{ "Vehicle", "Air Strike", "Tank", "Infantry", "Marine", "Medic" },
-				{ "Speed", 5, 1, 2, 4, 1 },
-				{ "Strength", 40, 7, 3, 1, "n/a" }, 
+				{ "Speed*", 5, 1, 2, 4, 1 },
+				{ "Strength", 40, 7, 3, 1, "n/a**" }, 
 				{ "Health", 40, 10, 7, 2, 7 },
 				{ "Cost", Economy.AIRSTRIKECOST, Economy.TANKCOST, Economy.INFANTRYCOST, Economy.SCOUTCOST,
 						Economy.MEDICCOST },
@@ -133,10 +133,10 @@ public class DirectionPanel extends JPanel {
 		for(int i = 0; i < data.length; i++){
 			units.getColumnModel().getColumn(i).setPreferredWidth(200);
 		}
-		extra = new JLabel("Speed: Number of slices moved per turn");
-		extra2 = new JLabel("Medics heal their own team by 2 each turn");
-		extra.setBounds(220, units.getHeight()*1 + units.getHeight()/2  + 100, 1000, 50);
-		extra2.setBounds(220, units.getHeight()*1 + units.getHeight()/2 + 150, 1000, 50);
+		extra = new JLabel("*Speed: Number of slices moved per turn");
+		extra2 = new JLabel("**Medics heal their own team by 2 each turn");
+		extra.setBounds(220, units.getHeight()*1 + units.getHeight()/2  + 65, 1000, 40);
+		extra2.setBounds(220, units.getHeight()*1 + units.getHeight()/2 + 105, 1000, 40);
 		units.setVisible(true);
 		units.setBackground(this.getBackground());
 		units.setGridColor(this.getBackground());
@@ -173,7 +173,7 @@ public class DirectionPanel extends JPanel {
 		KeyShorts.setRowHeight(40);
 		KeyShorts.setBackground(this.getBackground());
 		KeyShorts.setGridColor(this.getBackground());
-		KeyShorts.getColumnModel().getColumn(0).setPreferredWidth(55);
+		KeyShorts.getColumnModel().getColumn(0).setPreferredWidth(100);
 		KeyShorts.getColumnModel().getColumn(1).setPreferredWidth(400);
 		add(KeyShorts);
 	}
