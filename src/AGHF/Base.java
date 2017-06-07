@@ -18,14 +18,21 @@ public class Base extends JPanel {
 	public int level = 1;
 
 	private BufferedImage img;
-
-	private final int HEALTH_BAR_HEIGHT = 5;
+	private int sizeResize = 8;
+	private final int HEALTH_BAR_HEIGHT = 10;
 
 	public Base() {
+		
 		healthLeft = maxHealth;
 		try {
-			img = ImageIO.read(new File("assets/baseholder.png"));
-			setSize(img.getWidth(), img.getHeight() + HEALTH_BAR_HEIGHT);
+			img = ImageIO.read(new File("assets/base.png"));
+			int type = img.getType();
+			BufferedImage resizedImage = new BufferedImage(img.getWidth()*sizeResize, img.getHeight()*sizeResize,type);
+			Graphics2D g = resizedImage.createGraphics();
+			g.drawImage(img, 0, 0, img.getWidth()*sizeResize, img.getHeight()*sizeResize, null);
+			g.dispose();
+			img = resizedImage;
+			setSize(resizedImage.getWidth(), resizedImage.getHeight() + HEALTH_BAR_HEIGHT);
 		} catch (IOException e) {
 			System.out.println("base image didn't load");
 		}

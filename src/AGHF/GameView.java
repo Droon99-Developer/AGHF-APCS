@@ -14,7 +14,7 @@ public class GameView extends JLayeredPane {
 	// button
 	// and also rendering stuff
 
-	private final int SLICES_ON_SCREEN = 9;
+	private final int SLICES_ON_SCREEN = 4;
 	private Player p1;
 	private Player p2;
 	public JPanel sliceContainer;
