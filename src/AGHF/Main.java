@@ -1,5 +1,7 @@
 package AGHF;
+
 import java.awt.EventQueue;
+
 /*
  * Thing that you run
  */
@@ -8,7 +10,8 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StartGameView game = new StartGameView();					
+					@SuppressWarnings("unused")
+					StartGameView game = new StartGameView();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -7,18 +7,13 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.imageio.ImageIO;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import Units.Infantry;
 import Units.Unit;
 
 /*
@@ -27,10 +22,10 @@ import Units.Unit;
 public class SlicePanel extends JPanel {
 	private static final long serialVersionUID = 1521411056254603629L;
 	protected BufferedImage img = null;
-	
-	private final int ANIMATION_SPEED = 7; 
+
+	private final int ANIMATION_SPEED = 7;
 	private final double FRAMES = 20;
-	
+
 	public SlicePanel(int index) {
 		setLayout(null);
 		setOpaque(false);
@@ -45,7 +40,7 @@ public class SlicePanel extends JPanel {
 		b.setLocation(getWidth() / 2 - b.getWidth() / 2, getHeight() * 2 / 3 - b.getHeight() - 14);
 		add(b);
 	}
-	
+
 	public void translateUnit(Unit u, Point dest) {
 		// don't waste time staying in place
 		if (!u.getLocation().equals(dest)) {

@@ -7,16 +7,14 @@ import java.awt.Rectangle;
 
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-/*
- * Nothing yet
- */
+
 public class GameView extends JLayeredPane {
 	private static final long serialVersionUID = -4430897747513766248L;
 	// this class is responsible for drawing the mini map overview and quit
 	// button
 	// and also rendering stuff
 
-	private final int SLICES_ON_SCREEN = 9;
+	private final int SLICES_ON_SCREEN = 4;
 	private Player p1;
 	private Player p2;
 	public JPanel sliceContainer;
@@ -44,16 +42,16 @@ public class GameView extends JLayeredPane {
 	public SliceController[] renderSlices() {
 		sliceContainer = new JPanel();
 		sliceContainer.setLayout(null);
-		double sliceWidth = (double)getWidth() / (double)SLICES_ON_SCREEN;
+		double sliceWidth = (double) getWidth() / (double) SLICES_ON_SCREEN;
 		SliceController[] slices = new SliceController[9];
 		for (int i = 0; i < slices.length; i++) {
-			double x = sliceWidth * (double)i;
-			Rectangle bounds = new Rectangle(Math.round((float)x), 0, Math.round((float)sliceWidth), getHeight());
+			double x = sliceWidth * (double) i;
+			Rectangle bounds = new Rectangle(Math.round((float) x), 0, Math.round((float) sliceWidth), getHeight());
 			slices[i] = new SliceController(bounds, i);
 			// add all of the slice panels to the sliceContainer
 			sliceContainer.add(slices[i].myPanel);
 		}
-		sliceContainer.setBounds(0, 0, Math.round((float)(sliceWidth * (double)slices.length)), getHeight());
+		sliceContainer.setBounds(0, 0, Math.round((float) (sliceWidth * (double) slices.length)), getHeight());
 		return slices;
 	}
 
@@ -67,10 +65,11 @@ public class GameView extends JLayeredPane {
 		}
 		sliceContainer.setLocation(newP);
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
-		Graphics2D g2  = (Graphics2D)g;
+		@SuppressWarnings("unused")
+		Graphics2D g2 = (Graphics2D) g;
 		// TODO paint the mini map
 	}
 
@@ -82,5 +81,5 @@ public class GameView extends JLayeredPane {
 		add(p1.uPnl, 0);
 		add(p2.uPnl, 0);
 	}
-	
+
 }

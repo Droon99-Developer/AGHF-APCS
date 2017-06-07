@@ -1,6 +1,7 @@
 package AGHF;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Units.Unit;
+
 /*
  * Contains all information about players
  * Makes top panel active
@@ -27,17 +29,20 @@ public class Player implements ActionListener, Runnable {
 	private JButton purchaseBtn;
 	private JButton upgradeBtn;
 	private JButton endTurnBtn;
+	private Font font = new Font("Dialog", Font.PLAIN | Font.ROMAN_BASELINE, 20);
 
 	public Player(String name, boolean leftSide) {
 		this.leftSide = leftSide;
 		nameLbl = new JLabel(name, JLabel.CENTER);
-		goldLbl = new JLabel(String.format("%d", gold) , JLabel.CENTER);
+		nameLbl.setFont(font);
+		goldLbl = new JLabel(String.format("%d", gold), JLabel.CENTER);
+		goldLbl.setFont(font);
 	}
 
 	public String getName() {
 		return nameLbl.getText();
 	}
-	
+
 	public void setDelegate(GameController gc) {
 		gcDelegate = gc;
 	}
@@ -45,13 +50,17 @@ public class Player implements ActionListener, Runnable {
 	public void startTurn() {
 		// TODO add the correct amount of gold
 		// economy money stuff
-		changeGold(20);
+		changeGold(Economy.STARTVALUE);
 		playerPnl.setVisible(true);
 	}
 
 	public void changeGold(int offset) {
 		// economy money stuff
 		gold += offset;
+		if(gold > 2000000000 || gold < 0){//2 BILLION Golds
+			gold = 2000000000;
+		}
+			
 		goldLbl.setText(String.format("%d", gold) + " Gold");
 		uPnl.updateButtons(gold);
 	}
@@ -68,14 +77,17 @@ public class Player implements ActionListener, Runnable {
 		goldLbl.setBounds(width / 3, 0, width / 3, 50);
 
 		endTurnBtn = new JButton("End Turn");
+		endTurnBtn.setFont(font);
 		endTurnBtn.addActionListener(this);
 		endTurnBtn.setActionCommand("end");
 
 		purchaseBtn = new JButton("Purchase Units");
+		purchaseBtn.setFont(font);
 		purchaseBtn.addActionListener(this);
 		purchaseBtn.setActionCommand("uPnl");
 
 		upgradeBtn = new JButton("Upgrade Base");
+		upgradeBtn.setFont(font);
 		upgradeBtn.addActionListener(this);
 		upgradeBtn.setActionCommand("upgrade");
 
@@ -109,7 +121,7 @@ public class Player implements ActionListener, Runnable {
 		// economy money stuff
 		changeGold(-cost);
 		newUnit.setSide(leftSide);
-		
+
 		// prevent Player from purchasing unit while animation is playing
 		playerPnl.setVisible(false);
 		uPnl.setVisible(false);
@@ -139,5 +151,9 @@ public class Player implements ActionListener, Runnable {
 	@Override
 	public void run() {
 		gcDelegate.turnEnded(this);
+	}
+
+	public int getGold() {
+		return gold;
 	}
 }

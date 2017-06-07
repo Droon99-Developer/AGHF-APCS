@@ -47,7 +47,7 @@ public abstract class Unit extends JPanel implements MouseListener {
 	private final int HEALTH_BAR_HEIGHT = 5;
 
 	private String filePath;
-	
+
 	public Unit(int speed, int damage, int maxHealth, int GPK, boolean forDefense, String filePath) {
 		setLayout(null);
 		setOpaque(false);
@@ -71,7 +71,7 @@ public abstract class Unit extends JPanel implements MouseListener {
 			System.out.println("unit image didn't load");
 		}
 	}
-	
+
 	@Override
 	public void mousePressed(MouseEvent e) {
 	}
@@ -99,7 +99,7 @@ public abstract class Unit extends JPanel implements MouseListener {
 	public void setTurnChecker(GameController tc) {
 		turnChecker = tc;
 	}
-	
+
 	// used to determine if the medic should visit them
 	// they must be partially wounded but not dead
 	public boolean healMe() {
@@ -120,7 +120,7 @@ public abstract class Unit extends JPanel implements MouseListener {
 		}
 		return 0;
 	}
-	
+
 	public void attack(Base b) {
 		b.healthLeft -= DAMAGE;
 		if (b.healthLeft <= 0) {

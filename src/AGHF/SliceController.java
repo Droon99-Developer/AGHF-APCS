@@ -3,7 +3,9 @@ package AGHF;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import Units.*;
+
+import Units.Medic;
+import Units.Unit;
 
 /*
  * Logic for slices
@@ -20,6 +22,7 @@ public class SliceController {
 
 	private ArrayList<Unit> leftAir = new ArrayList<Unit>();
 	private ArrayList<Unit> rightAir = new ArrayList<Unit>();
+
 
 	private int index;
 
