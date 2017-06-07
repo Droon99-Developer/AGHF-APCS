@@ -1,7 +1,7 @@
 package AGHF;
 
 import java.awt.Color;
-import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,7 +37,6 @@ public class StartGameView implements ActionListener {
 	private DirectionPanel d;
 	private Font font;
 	private Font font2;
-	private Container c;
 	public StartGameView() {
 		frame = new JFrame();
 		frame.setSize((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
@@ -47,17 +48,17 @@ public class StartGameView implements ActionListener {
 		frame.setLocationRelativeTo(null);
 		frame.setName("AGHF");
 
-		c = frame.getContentPane();
-		//need to pick a color if want a diff color background
-		c.setBackground(Color.getHSBColor(new Float(0),new Float(0),new Float(0)));
+		//need to pick a color if we want a diff color background
+		frame.getContentPane().setBackground(Color.getHSBColor(0f, 0f, 0.1f));
 		
 		
 		font = new Font("Dialog", Font.BOLD | Font.HANGING_BASELINE, 180);
 		font2 = new Font("Dialog", Font.PLAIN | Font.ROMAN_BASELINE, 20);
 
-		lblTitle = new JLabel("AGHF");
-		lblTitle.setBounds(frame.getWidth() / 2 - 240, 120, 800, 200);
-		lblTitle.setFont(font);
+		ImageIcon icon = new ImageIcon("assets/GameTitle.png");
+		lblTitle = new JLabel(icon);
+		lblTitle.setSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
+		lblTitle.setLocation(frame.getWidth() / 2 - lblTitle.getWidth() / 2, frame.getHeight() / 4 - lblTitle.getHeight() / 2);
 
 		directionsBtn = new JButton("Directions");
 		directionsBtn.setBounds(frame.getWidth() / 2 + 80, frame.getHeight() * 3 / 4, 160, 70);
