@@ -156,6 +156,15 @@ public class GameController implements KeyListener, ActionListener {
 				p1.changeGold(goldEarned[0]);
 				p2.changeGold(goldEarned[1]);
 			}
+			GameController.turnNumber++;
+			if (GameController.turnNumber >= GameController.turnRamp) {
+				Economy.STARTVALUE = Economy.STARTVALUE * GameController.rampNumber;
+				GameController.turnNumber = 0;
+				GameController.turnRamp++;
+				if (GameController.turnNumber % 2 == 0) {
+					GameController.rampNumber++;
+				}
+			}
 			// check if anyone has lost
 			if (slices[0].myBase.healthLeft == 0 || slices[slices.length - 1].myBase.healthLeft == 0) {
 				if (slices[0].myBase.healthLeft != 0) {
