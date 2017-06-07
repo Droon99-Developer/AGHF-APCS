@@ -135,9 +135,11 @@ public class DirectionPanel extends JPanel {
 		}
 		extra = new JLabel("Speed: Number of slices moved per turn");
 		extra2 = new JLabel("Medics heal their own team by 2 each turn");
-		extra.setBounds(220, units.getHeight()*1 + units.getHeight()/2  + 50, 1000, 50);
-		extra2.setBounds(220, units.getHeight()*1 + units.getHeight()/2 + 100, 1000, 50);
+		extra.setBounds(220, units.getHeight()*1 + units.getHeight()/2  + 100, 1000, 50);
+		extra2.setBounds(220, units.getHeight()*1 + units.getHeight()/2 + 150, 1000, 50);
 		units.setVisible(true);
+		units.setBackground(this.getBackground());
+		units.setGridColor(this.getBackground());
 		extra.setVisible(true);
 		extra2.setVisible(true);
 		extra.setFont(font4);
@@ -169,6 +171,8 @@ public class DirectionPanel extends JPanel {
 		KeyShorts.setBounds(this.getWidth() / 2 - units.getWidth() / 2 + 0 , slideTitle.getHeight() + 50, this.getWidth() - 495, this.getHeight()- 450);
 		KeyShorts.setFont(font3);
 		KeyShorts.setRowHeight(40);
+		KeyShorts.setBackground(this.getBackground());
+		KeyShorts.setGridColor(this.getBackground());
 		KeyShorts.getColumnModel().getColumn(0).setPreferredWidth(55);
 		KeyShorts.getColumnModel().getColumn(1).setPreferredWidth(400);
 		add(KeyShorts);

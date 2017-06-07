@@ -49,7 +49,7 @@ public class StartGameView implements ActionListener {
 
 		c = frame.getContentPane();
 		//need to pick a color if want a diff color background
-		c.setBackground(Color.getHSBColor(new Float(0),new Float(0),new Float(.933334)));
+		c.setBackground(Color.getHSBColor(new Float(0),new Float(0),new Float(0)));
 		
 		
 		font = new Font("Dialog", Font.BOLD | Font.HANGING_BASELINE, 180);
