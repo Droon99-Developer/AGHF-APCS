@@ -10,6 +10,6 @@ public class AirStrike extends Unit {
 		// GPK: 10
 		// constructor structure: int speed, int damage, int maxHealth, int GPK,
 		// boolean forDefense
-		super(5, 40, 1, 10, forDefense, "Heavy");
+		super(5, 40, 1, 10, forDefense, "Jet");
 	}
 }
