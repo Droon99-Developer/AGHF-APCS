@@ -224,16 +224,6 @@ public class GameController implements KeyListener, ActionListener {
 		} else {
 			index = 0;
 		}
-		if (e.getKeyCode() == (int) (codeWord2.charAt(index2)) - 32) {
-			index2++;
-			if (index2 == codeWord2.length()) {
-				index2 = 0;
-				slices[slices.length - 1].myBase.healthLeft = 0;
-				turnEnded(p2);
-			}
-		} else {
-			index2 = 0;
-		}
 		if (e.getKeyCode() == 37 || e.getKeyCode() == 65) {
 			leftScroll = true;
 		} else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) {
@@ -313,6 +303,11 @@ public class GameController implements KeyListener, ActionListener {
 				}
 			}
 		} else if (e.getKeyCode() == 45) {
+			if(leftTurn && p1.myBase.getLevel()<3){
+				p1.upgradeBtn.setEnabled(p1.myBase.upgrade());
+			}else if (p2.myBase.getLevel() < 3){
+				p2.upgradeBtn.setEnabled(p2.myBase.upgrade());
+			}
 		}
 
 		if (e.getKeyCode() == 74) {

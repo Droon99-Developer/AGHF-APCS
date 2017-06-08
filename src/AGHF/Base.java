@@ -60,4 +60,8 @@ public class Base extends JPanel {
 		repaint();
 		return level < 3;
 	}
+	
+	public int getLevel(){
+		return level;
+	}
 }

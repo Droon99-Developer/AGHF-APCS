@@ -27,10 +27,10 @@ public class Player implements ActionListener, Runnable {
 	private JLabel nameLbl;
 	private JLabel goldLbl;
 	private JButton purchaseBtn;
-	private JButton upgradeBtn;
+	public JButton upgradeBtn;
 	private JButton endTurnBtn;
 	private Font font = new Font("Dialog", Font.PLAIN | Font.ROMAN_BASELINE, 20);
-	private Base myBase;
+	public Base myBase;
 	
 	public void setBase(Base b) {
 		myBase = b;

@@ -15,8 +15,8 @@ public class EndView extends JPanel {
 		}
 		winner.setBounds(0, 0, 400, 50);
 		winner.setForeground(Color.GRAY);
-		winner.setBackground(Color.BLACK);
-		this.setBackground(Color.BLACK);
+		winner.setBackground(Color.getHSBColor(0f, 0f, 0.1f));
+		this.setBackground(Color.getHSBColor(0f, 0f, 0.1f));
 		add(winner);
 	}
 }
