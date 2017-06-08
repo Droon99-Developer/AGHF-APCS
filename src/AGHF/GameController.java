@@ -190,13 +190,11 @@ public class GameController implements KeyListener, ActionListener {
 					end = new EndView(p2);
 				} else {
 					// tie
-					end = new EndView(new Player("tie", false));
+					end = new EndView(null);
 					System.out.println("The game ended in a tie!");
 				}
-				//System.exit(0);
-				end.setBounds(frame.getWidth()/2-200, frame.getHeight()/2-25, 400, 50);
-				end.setVisible(true);
-				frame.add(end);
+				gv.add(end);
+				end.setBoundsAndRender(0, 0, frame.getWidth(), frame.getHeight());
 			} else {
 				p1.startTurn();
 			}
