@@ -68,7 +68,6 @@ public class GameView extends JLayeredPane {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		@SuppressWarnings("unused")
 		Graphics2D g2 = (Graphics2D) g;
 		// TODO paint the mini map
 	}
@@ -80,14 +79,6 @@ public class GameView extends JLayeredPane {
 		add(p2.playerPnl, 0);
 		add(p1.uPnl, 0);
 		add(p2.uPnl, 0);
-	}
-	
-	public void removeAll(){
-		p1.playerPnl.setVisible(false);
-		p2.playerPnl.setVisible(false);
-		p1.uPnl.setVisible(false);
-		p2.uPnl.setVisible(false);
-		sliceContainer.setVisible(false);
 	}
 
 }

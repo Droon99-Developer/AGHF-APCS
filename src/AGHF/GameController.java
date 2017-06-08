@@ -181,7 +181,6 @@ public class GameController implements KeyListener, ActionListener {
 			}
 			// check if anyone has lost
 			if (slices[0].myBase.healthLeft == 0 || slices[slices.length - 1].myBase.healthLeft == 0) {
-				gv.removeAll();
 				if (slices[0].myBase.healthLeft != 0) {
 					// p2 lost
 					end = new EndView(p1);
@@ -193,8 +192,9 @@ public class GameController implements KeyListener, ActionListener {
 					end = new EndView(null);
 					System.out.println("The game ended in a tie!");
 				}
-				gv.add(end);
+				timer.stop();
 				end.setBoundsAndRender(0, 0, frame.getWidth(), frame.getHeight());
+				gv.add(end, 1);
 			} else {
 				p1.startTurn();
 			}
