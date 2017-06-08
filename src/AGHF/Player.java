@@ -68,7 +68,6 @@ public class Player implements ActionListener, Runnable {
 			
 		goldLbl.setText(String.format("%d", gold) + " Gold");
 		uPnl.updateButtons(gold);
-		upgradeBtn.setEnabled(gold >= (myBase.getLevel() + 1) * Economy.LEVELUPGRADE && myBase.getLevel() < 3);
 	}
 
 	public void setBounds(int x, int y, int width, int height) {
@@ -143,7 +142,6 @@ public class Player implements ActionListener, Runnable {
 			uPnl.setVisible(!uPnl.isVisible());
 		} else if (e.getActionCommand().equals("upgrade")) {
 			upgradeBtn.setEnabled(myBase.upgrade());
-			changeGold(-1*(myBase.getLevel() + 1) * Economy.LEVELUPGRADE);
 		} else if (e.getActionCommand().equals("end")) {
 			uPnl.setVisible(false);
 			playerPnl.setVisible(false);
