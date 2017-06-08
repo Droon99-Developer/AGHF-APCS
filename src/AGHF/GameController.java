@@ -178,6 +178,7 @@ public class GameController implements KeyListener, ActionListener {
 			}
 			// check if anyone has lost
 			if (slices[0].myBase.healthLeft == 0 || slices[slices.length - 1].myBase.healthLeft == 0) {
+				// TODO create a win screen instead of just exiting
 				if (slices[0].myBase.healthLeft != 0) {
 					// p2 lost
 					System.out.println(p1.getName() + " won the game!");

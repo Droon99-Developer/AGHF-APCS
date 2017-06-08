@@ -91,9 +91,12 @@ public class StartGameView implements ActionListener {
 
 			p1Lbl = new JLabel("Player 1 Name:");
 			p1Lbl.setFont(font2);
+			p1Lbl.setForeground(Color.WHITE);
+			
 			p2Lbl = new JLabel("Player 2 Name:");
 			p2Lbl.setFont(font2);
-
+			p2Lbl.setForeground(Color.WHITE);
+			
 			p1Name = new JTextField("Player 1");
 			p1Name.setForeground(Color.GRAY);
 			p1Name.setFont(font2);
