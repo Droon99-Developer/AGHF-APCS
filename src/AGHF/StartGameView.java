@@ -151,7 +151,7 @@ public class StartGameView implements ActionListener {
 
 			quitBtn.setText("Back");
 			quitBtn.setActionCommand("back");
-			quitBtn.setLocation(frame.getWidth() / 2 - 78, frame.getHeight() / 2 + 250);
+			quitBtn.setLocation(frame.getWidth() / 2 - 78, frame.getHeight() / 2 + 550);
 
 			frame.add(p1Lbl);
 			frame.add(p2Lbl);
