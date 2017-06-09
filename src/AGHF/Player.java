@@ -143,6 +143,7 @@ public class Player implements ActionListener, Runnable {
 			uPnl.setVisible(!uPnl.isVisible());
 		} else if (e.getActionCommand().equals("upgrade")) {
 			changeGold(-1 * (myBase.getLevel() + 1) * Economy.LEVELUPGRADE);
+			boolean i = myBase.upgrade();
 			// upgradeBtn.setEnabled(myBase.upgrade());
 
 		} else if (e.getActionCommand().equals("end")) {
