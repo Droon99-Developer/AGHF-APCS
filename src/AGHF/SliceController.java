@@ -73,9 +73,7 @@ public class SliceController {
 						} else {
 							for (Unit defendU : defending) {
 								if (attacked == false) {
-									if (defendU.dead()) {
-										return;
-									} else {
+									if (!defendU.dead()) {
 										Point orig = attackU.getLocation();
 										Point end = defendU.getLocation();
 										Point middle = defendU.getLocation();
@@ -144,9 +142,7 @@ public class SliceController {
 						} else {
 							for (Unit attackU : attacking) {
 								if (attacked == false) {
-									if (attackU.dead()) {
-										return;
-									} else {
+									if (!attackU.dead()) {
 										Point orig = defendU.getLocation();
 										Point end = attackU.getLocation();
 										Point middle = attackU.getLocation();

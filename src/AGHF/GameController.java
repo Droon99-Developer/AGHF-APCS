@@ -1,16 +1,16 @@
 package AGHF;
-
+ 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-
+ 
 import javax.swing.JFrame;
 import javax.swing.Timer;
-
+ 
 import Units.*;
-
+ 
 /*
  * Controls map view, quit button, and scrolling
  * Tells GameView to render units and slices
@@ -39,11 +39,11 @@ public class GameController implements KeyListener, ActionListener {
 	private Timer timer;
 	private boolean leftTurn = true;
 	private EndView end;
-
+ 
 	public void refocus() {
 		frame.requestFocus();
 	}
-
+ 
 	public void unitPurchased(Unit newUnit, Player p) {
 		frame.requestFocus();
 		newUnit.setTurnChecker(this);
@@ -55,11 +55,11 @@ public class GameController implements KeyListener, ActionListener {
 		newUnits.add(newUnit);
 		slice.addUnits(newUnits, left);
 	}
-
+ 
 	public boolean checkTurn(boolean left) {
 		return left == leftTurn;
 	}
-
+ 
 	// advances the units to or from the given the 2 pointers (MIDDLE + i and
 	// MIDDLE - i)
 	// returns true if any units were advanced forward
@@ -72,7 +72,7 @@ public class GameController implements KeyListener, ActionListener {
 		// we are not done until there are no more units that can advance
 		return leftIncoming.isEmpty() && rightIncoming.isEmpty();
 	}
-
+ 
 	private void advanceUnits() {
 		// THE ALGORITHM:
 		// first: repeat this until no more units can advance:
@@ -105,55 +105,55 @@ public class GameController implements KeyListener, ActionListener {
 			// in case the right side had just scouts that are gone now
 			done = done && advanceMiddle(true);
 		}
-
+ 
 		// reset unit advances
 		for (SliceController sc : slices) {
 			sc.resetUnitAdvances();
 		}
 	}
-
+ 
 	private boolean advanceMiddle(boolean left) {
 		ArrayList<Unit> units = slices[MIDDLE].unitsToAdvance(left);
 		int i = left ? 1 : -1;
 		slices[MIDDLE + i].addUnits(units, left);
 		return units.isEmpty();
 	}
-
+ 
 	public GameController(JFrame frame, Player p1, Player p2) {
 		this.p1 = p1;
 		this.p2 = p2;
 		this.frame = frame;
 		frame.addKeyListener(this);
 		frame.requestFocus();
-
+ 
 		gv = new GameView();
 		gv.setBounds(0, 0, frame.getWidth(), frame.getHeight());
 		frame.add(gv);
-
+ 
 		gv.renderPlayers(p1, p2);
-
+ 
 		gv.renderUnitPanels();
-
+ 
 		slices = gv.renderSlices();
-
+ 
 		Base b1 = new Base();
 		p1.setBase(b1);
 		slices[0].setBase(b1);
-
+ 
 		Base b2 = new Base();
 		p2.setBase(b2);
 		slices[slices.length - 1].setBase(b2);
-
+ 
 		MIDDLE = slices.length / 2;
-
+ 
 		gv.addComponents();
-
+ 
 		timer = new Timer(5, this);
 		timer.setActionCommand("tick");
 		timer.start();
 		p1.startTurn();
 	}
-
+ 
 	public void turnEnded(Player p) {
 		leftTurn = !leftTurn;
 		if (p == p1) {
@@ -183,28 +183,36 @@ public class GameController implements KeyListener, ActionListener {
 			if (slices[0].myBase.healthLeft == 0 || slices[slices.length - 1].myBase.healthLeft == 0) {
 				if (slices[0].myBase.healthLeft != 0) {
 					// p2 lost
-					end = new EndView(p1);
+					slices[slices.length - 1].myBase.explode(p1, this);
 				} else if (slices[slices.length - 1].myBase.healthLeft != 0) {
 					// p1 lost
-					end = new EndView(p2);
+					slices[0].myBase.explode(p2, this);
+					
 				} else {
 					// tie
 					end = new EndView(null);
-					System.out.println("The game ended in a tie!");
+					timer.stop();
+					end.setBoundsAndRender(0, 0, frame.getWidth(), frame.getHeight());
+					gv.add(end, 1);  
 				}
-				timer.stop();
-				end.setBoundsAndRender(0, 0, frame.getWidth(), frame.getHeight());
-				gv.add(end, 1);
+				
 			} else {
 				p1.startTurn();
 			}
 		}
 	}
-
+	
+	public void doneExploding(Player p) {
+		end = new EndView(p);
+		timer.stop();
+		end.setBoundsAndRender(0, 0, frame.getWidth(), frame.getHeight());
+		gv.add(end, 1);
+	}
+ 
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
-
+ 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == (int) (codeWord.charAt(index)) - 32) {
@@ -308,14 +316,14 @@ public class GameController implements KeyListener, ActionListener {
 				p2.changeGold(-1 * (p2.myBase.getLevel()) * Economy.LEVELUPGRADE);
 			}
 		}
-
+ 
 		if (e.getKeyCode() == 74) {
 			p1.changeGold(5000);
 		} else if (e.getKeyCode() == 84) {
 			p2.changeGold(5000);
 		}
 	}
-
+ 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == 37 || e.getKeyCode() == 65) {
@@ -326,7 +334,7 @@ public class GameController implements KeyListener, ActionListener {
 			fastScroll = false;
 		}
 	}
-
+ 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("tick")) {
@@ -348,5 +356,5 @@ public class GameController implements KeyListener, ActionListener {
 			}
 		}
 	}
-
+ 
 }
