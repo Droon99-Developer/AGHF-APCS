@@ -25,6 +25,7 @@ public class StartGameView implements ActionListener {
 	private JButton newGameBtn;
 	private JButton quitBtn;
 	private JButton directionsBtn;
+	private JButton creditsBtn;
 	private JTextField p1Name;
 	private JTextField p2Name;
 	private JLabel p1Lbl;
@@ -34,6 +35,7 @@ public class StartGameView implements ActionListener {
 	private Player p2;
 	private JFrame frame;
 	private DirectionPanel d;
+	private CreditsPnl c;
 	private Font font;
 	private Font font2;
 
@@ -61,13 +63,19 @@ public class StartGameView implements ActionListener {
 				frame.getHeight() / 4 - lblTitle.getHeight() / 2);
 
 		directionsBtn = new JButton("Directions");
-		directionsBtn.setBounds(frame.getWidth() / 2 + 80, frame.getHeight() * 3 / 4, 160, 70);
+		directionsBtn.setBounds(frame.getWidth() / 2 + 140, frame.getHeight() * 3 / 4, 160, 70);
 		directionsBtn.setFont(font2);
 		directionsBtn.addActionListener(this);
 		directionsBtn.setActionCommand("directions");
+		
+		creditsBtn = new JButton("Credits");
+		creditsBtn.setBounds(frame.getWidth() / 2-80, frame.getHeight() * 3 / 4, 160, 70);
+		creditsBtn.setFont(font2);
+		creditsBtn.addActionListener(this);
+		creditsBtn.setActionCommand("credits");
 
 		quitBtn = new JButton("Quit");
-		quitBtn.setBounds(frame.getWidth() / 2 - 240, frame.getHeight() * 3 / 4, 160, 70);
+		quitBtn.setBounds(frame.getWidth() / 2 - 300, frame.getHeight() * 3 / 4, 160, 70);
 		quitBtn.setFont(font2);
 		quitBtn.addActionListener(this);
 		quitBtn.setActionCommand("quit");
@@ -82,6 +90,7 @@ public class StartGameView implements ActionListener {
 		frame.add(newGameBtn);
 		frame.add(quitBtn);
 		frame.add(directionsBtn);
+		frame.add(creditsBtn);
 	}
 
 	@Override
@@ -151,8 +160,8 @@ public class StartGameView implements ActionListener {
 
 			quitBtn.setText("Back");
 			quitBtn.setActionCommand("back");
-			quitBtn.setLocation(frame.getWidth() / 2 - 78, frame.getHeight() / 2 + 550);
-
+			quitBtn.setLocation(frame.getWidth() / 2 - 78, frame.getHeight() / 2 + 200);
+			creditsBtn.setVisible(false);
 			frame.add(p1Lbl);
 			frame.add(p2Lbl);
 			frame.add(p1Name);
@@ -174,13 +183,14 @@ public class StartGameView implements ActionListener {
 			frame.remove(quitBtn);
 			frame.remove(directionsBtn);
 			frame.remove(lblTitle);
+			frame.remove(creditsBtn);
 			frame.repaint();
-
 			GameController gc = new GameController(frame, p1, p2);
 			p1.setDelegate(gc);
 			p2.setDelegate(gc);
 		} else if (e.getActionCommand().equals("directions")) {
 			newGameBtn.setVisible(false);
+			creditsBtn.setVisible(false);
 			quitBtn.setText("Back");
 			quitBtn.setActionCommand("bacc");
 			directionsBtn.setText("Next");
@@ -202,11 +212,12 @@ public class StartGameView implements ActionListener {
 			frame.remove(p1Name);
 			frame.remove(p2Name);
 			frame.add(lblTitle);
+			creditsBtn.setVisible(true);
 			newGameBtn.setActionCommand("setup");
 			newGameBtn.setText("Create New Game");
 			quitBtn.setText("Quit");
 			quitBtn.setActionCommand("quit");
-			quitBtn.setBounds(frame.getWidth() / 2 - 240, frame.getHeight() * 3 / 4, 160, 70);
+			quitBtn.setBounds(frame.getWidth() / 2 - 300, frame.getHeight() * 3 / 4, 160, 70);
 			frame.add(directionsBtn);
 			newGameBtn.setVisible(true);
 			frame.repaint();
@@ -217,12 +228,36 @@ public class StartGameView implements ActionListener {
 			quitBtn.setActionCommand("quit");
 			directionsBtn.setText("Directions");
 			directionsBtn.setActionCommand("directions");
+			creditsBtn.setVisible(true);
 			d.setVisible(false);
 			newGameBtn.setVisible(true);
 			frame.add(lblTitle);
 			frame.repaint();
 		} else if (e.getActionCommand().equals("quit")) {
 			System.exit(0);
+		}else if(e.getActionCommand().equals("credits")){
+			newGameBtn.setVisible(false);
+			directionsBtn.setVisible(false);
+			quitBtn.setVisible(false);
+			creditsBtn.setText("Back");
+			creditsBtn.setActionCommand("baq");
+			c = new CreditsPnl();
+			c.setLayout(null);
+			c.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+			c.setVisible(true);
+			c.show();
+			frame.add(c);
+			frame.remove(lblTitle);
+			frame.repaint();
+		}else if(e.getActionCommand().equals("baq")){
+			newGameBtn.setVisible(true);
+			directionsBtn.setVisible(true);
+			quitBtn.setVisible(true);
+			creditsBtn.setText("Credits");
+			creditsBtn.setActionCommand("credits");
+			frame.remove(c);
+			frame.add(lblTitle);
+			frame.repaint();
 		}
 	}
 }
