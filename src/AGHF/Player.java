@@ -1,6 +1,7 @@
 package AGHF;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,13 +27,21 @@ public class Player implements ActionListener, Runnable {
 	private JLabel nameLbl;
 	private JLabel goldLbl;
 	private JButton purchaseBtn;
-	private JButton upgradeBtn;
+	public JButton upgradeBtn;
 	private JButton endTurnBtn;
+	private Font font = new Font("Dialog", Font.PLAIN | Font.ROMAN_BASELINE, 20);
+	public Base myBase;
+
+	public void setBase(Base b) {
+		myBase = b;
+	}
 
 	public Player(String name, boolean leftSide) {
 		this.leftSide = leftSide;
 		nameLbl = new JLabel(name, JLabel.CENTER);
+		nameLbl.setFont(font);
 		goldLbl = new JLabel(String.format("%d", gold), JLabel.CENTER);
+		goldLbl.setFont(font);
 	}
 
 	public String getName() {
@@ -46,15 +55,6 @@ public class Player implements ActionListener, Runnable {
 	public void startTurn() {
 		// TODO add the correct amount of gold
 		// economy money stuff
-		GameController.turnNumber++;
-		if (GameController.turnNumber >= GameController.turnRamp) {
-			Economy.STARTVALUE = Economy.STARTVALUE * GameController.rampNumber;
-			GameController.turnNumber = 0;
-			GameController.turnRamp++;
-			if (GameController.turnNumber % 2 == 0) {
-				GameController.rampNumber++;
-			}
-		}
 		changeGold(Economy.STARTVALUE);
 		playerPnl.setVisible(true);
 	}
@@ -62,8 +62,13 @@ public class Player implements ActionListener, Runnable {
 	public void changeGold(int offset) {
 		// economy money stuff
 		gold += offset;
+		if ((gold > 2000000000 || gold < 0) && offset > 0) {// 2 BILLION Golds
+			gold = 2000000000;
+		}
+
 		goldLbl.setText(String.format("%d", gold) + " Gold");
 		uPnl.updateButtons(gold);
+		upgradeBtn.setEnabled(gold >= ((myBase.getLevel() + 1) * Economy.LEVELUPGRADE) && myBase.getLevel() < 3);
 	}
 
 	public void setBounds(int x, int y, int width, int height) {
@@ -78,14 +83,17 @@ public class Player implements ActionListener, Runnable {
 		goldLbl.setBounds(width / 3, 0, width / 3, 50);
 
 		endTurnBtn = new JButton("End Turn");
+		endTurnBtn.setFont(font);
 		endTurnBtn.addActionListener(this);
 		endTurnBtn.setActionCommand("end");
 
 		purchaseBtn = new JButton("Purchase Units");
+		purchaseBtn.setFont(font);
 		purchaseBtn.addActionListener(this);
 		purchaseBtn.setActionCommand("uPnl");
 
 		upgradeBtn = new JButton("Upgrade Base");
+		upgradeBtn.setFont(font);
 		upgradeBtn.addActionListener(this);
 		upgradeBtn.setActionCommand("upgrade");
 
@@ -134,7 +142,9 @@ public class Player implements ActionListener, Runnable {
 		if (e.getActionCommand().equals("uPnl")) {
 			uPnl.setVisible(!uPnl.isVisible());
 		} else if (e.getActionCommand().equals("upgrade")) {
-			// TODO perform necessary actions to upgrade the base
+			changeGold(-1 * (myBase.getLevel() + 1) * Economy.LEVELUPGRADE);
+			// upgradeBtn.setEnabled(myBase.upgrade());
+
 		} else if (e.getActionCommand().equals("end")) {
 			uPnl.setVisible(false);
 			playerPnl.setVisible(false);

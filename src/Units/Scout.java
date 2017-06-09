@@ -1,7 +1,5 @@
 package Units;
 
-import java.awt.event.MouseEvent;
-
 public class Scout extends Unit {
 	private static final long serialVersionUID = -3919096808132824140L;
 
@@ -12,6 +10,6 @@ public class Scout extends Unit {
 		// GPK: 1
 		// constructor structure: int speed, int damage, int maxHealth, int GPK,
 		// boolean forDefense
-		super(2, 3, 6, 1, forDefense, "assets/MarineSprite1.png");
+		super(2, 3, 6, 1, forDefense, "Scout");
 	}
 }

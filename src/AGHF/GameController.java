@@ -24,8 +24,10 @@ public class GameController implements KeyListener, ActionListener {
 	private GameView gv;
 	private SliceController[] slices;
 	private final int MIDDLE;
-	private String codeWord = "jarjascat"; // pronounced JAR-ja-scat
+	private String codeWord = "peckmanisbad";
 	private int index = 0;
+	private String codeWord2 = "cool";
+	private int index2 = 0;
 	public static int turnNumber = 0;
 	public static int turnRamp = 3;
 	public static int rampNumber = 2;
@@ -36,6 +38,7 @@ public class GameController implements KeyListener, ActionListener {
 	private final int SCROLL_SPEED = 4;
 	private Timer timer;
 	private boolean leftTurn = true;
+	private EndView end;
 
 	public void refocus() {
 		frame.requestFocus();
@@ -132,8 +135,15 @@ public class GameController implements KeyListener, ActionListener {
 		gv.renderUnitPanels();
 
 		slices = gv.renderSlices();
-		slices[0].setBase(new Base());
-		slices[slices.length - 1].setBase(new Base());
+
+		Base b1 = new Base();
+		p1.setBase(b1);
+		slices[0].setBase(b1);
+
+		Base b2 = new Base();
+		p2.setBase(b2);
+		slices[slices.length - 1].setBase(b2);
+
 		MIDDLE = slices.length / 2;
 
 		gv.addComponents();
@@ -156,19 +166,35 @@ public class GameController implements KeyListener, ActionListener {
 				p1.changeGold(goldEarned[0]);
 				p2.changeGold(goldEarned[1]);
 			}
+			GameController.turnNumber++;
+			if (GameController.turnNumber >= GameController.turnRamp) {
+				Economy.STARTVALUE = Economy.STARTVALUE * GameController.rampNumber;
+				if (Economy.STARTVALUE > Economy.AIRSTRIKECOST * 1000000) {
+					Economy.STARTVALUE = Economy.AIRSTRIKECOST * 1000000;
+					GameController.rampNumber = 1;
+				}
+				GameController.turnNumber = 0;
+				GameController.turnRamp++;
+				if (GameController.turnNumber % 2 == 0) {
+					GameController.rampNumber++;
+				}
+			}
 			// check if anyone has lost
 			if (slices[0].myBase.healthLeft == 0 || slices[slices.length - 1].myBase.healthLeft == 0) {
 				if (slices[0].myBase.healthLeft != 0) {
 					// p2 lost
-					System.out.println(p1.getName() + " won the game!");
+					end = new EndView(p1);
 				} else if (slices[slices.length - 1].myBase.healthLeft != 0) {
 					// p1 lost
-					System.out.println(p2.getName() + " won the game!");
+					end = new EndView(p2);
 				} else {
 					// tie
+					end = new EndView(null);
 					System.out.println("The game ended in a tie!");
 				}
-				System.exit(0);
+				timer.stop();
+				end.setBoundsAndRender(0, 0, frame.getWidth(), frame.getHeight());
+				gv.add(end, 1);
 			} else {
 				p1.startTurn();
 			}
@@ -181,15 +207,14 @@ public class GameController implements KeyListener, ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		codeWord = "peckmanisbad";
 		if (e.getKeyCode() == (int) (codeWord.charAt(index)) - 32) {
 			index++;
 			if (index == codeWord.length()) {
 				index = 0;
 				if (leftTurn) {
-					p1.changeGold(Economy.AIRSTRIKECOST * 100);
+					p1.changeGold(Economy.AIRSTRIKECOST * 10000000);
 				} else {
-					p2.changeGold(Economy.AIRSTRIKECOST * 100);
+					p2.changeGold(Economy.AIRSTRIKECOST * 10000000);
 				}
 			}
 		} else {
@@ -274,6 +299,14 @@ public class GameController implements KeyListener, ActionListener {
 				}
 			}
 		} else if (e.getKeyCode() == 45) {
+			if (leftTurn && p1.myBase.getLevel() < 3
+					&& p1.getGold() > (p1.myBase.getLevel() + 1) * Economy.LEVELUPGRADE) {
+				p1.upgradeBtn.setEnabled(p1.myBase.upgrade());
+				p1.changeGold(-1 * (p1.myBase.getLevel()) * Economy.LEVELUPGRADE);
+			} else if (p2.myBase.getLevel() < 3 && p2.getGold() > (p2.myBase.getLevel() + 1) * Economy.LEVELUPGRADE) {
+				p2.upgradeBtn.setEnabled(p2.myBase.upgrade());
+				p2.changeGold(-1 * (p2.myBase.getLevel()) * Economy.LEVELUPGRADE);
+			}
 		}
 
 		if (e.getKeyCode() == 74) {

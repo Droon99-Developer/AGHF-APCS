@@ -46,9 +46,9 @@ public abstract class Unit extends JPanel implements MouseListener {
 
 	private final int HEALTH_BAR_HEIGHT = 5;
 
-	private String filePath;
+	private String type;
 
-	public Unit(int speed, int damage, int maxHealth, int GPK, boolean forDefense, String filePath) {
+	public Unit(int speed, int damage, int maxHealth, int GPK, boolean forDefense, String type) {
 		setLayout(null);
 		setOpaque(false);
 		this.SPEED = speed;
@@ -59,16 +59,17 @@ public abstract class Unit extends JPanel implements MouseListener {
 		addMouseListener(this);
 		advancesLeft = SPEED;
 		healthLeft = MAX_HEALTH;
-		this.filePath = filePath;
+		this.type = type;
 	}
 
 	public void setSide(boolean left) {
 		leftSide = left;
+		String side = left ? "B" : "R";
 		try {
-			img = ImageIO.read(new File(filePath));
+			img = ImageIO.read(new File("assets/" + side + type + ".png"));
 			setSize(img.getWidth(), img.getHeight() + HEALTH_BAR_HEIGHT);
 		} catch (IOException e) {
-			System.out.println("unit image didn't load");
+			System.out.println(type + " image didn't load");
 		}
 	}
 
@@ -126,6 +127,10 @@ public abstract class Unit extends JPanel implements MouseListener {
 		if (b.healthLeft <= 0) {
 			b.healthLeft = 0;
 		}
+	}
+
+	public void kill() {
+		healthLeft = 0;
 	}
 
 	public void resetAdvances() {
