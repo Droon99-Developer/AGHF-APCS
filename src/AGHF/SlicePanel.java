@@ -30,7 +30,7 @@ public class SlicePanel extends JPanel {
 		setLayout(null);
 		setOpaque(false);
 		try {
-			img = ImageIO.read(new File(String.format("assets/Desert Map/APCSmap0slide%d.png", index)));
+			img = ImageIO.read(new File(String.format("src/assets/Desert Map/APCSmap0slide%d.png", index)));
 		} catch (IOException e) {
 			System.out.println("map image didn't load");
 		}

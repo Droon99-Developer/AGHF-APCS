@@ -36,7 +36,7 @@ public class Base extends JPanel implements ActionListener {
 	public Base() {
 		healthLeft = maxHealth;
 		try {
-			img = ImageIO.read(new File("assets/base.png"));
+			img = ImageIO.read(new File("src/assets/base.png"));
 			int type = img.getType();
 			BufferedImage resizedImage = new BufferedImage(img.getWidth() * sizeResize, img.getHeight() * sizeResize,
 					type);
@@ -53,7 +53,7 @@ public class Base extends JPanel implements ActionListener {
 	public void explode(Player winner, GameController delegate) {
 		gcDelegate = delegate;
 		p = winner;
-		Icon icon = new ImageIcon("assets/explosion.gif");
+		Icon icon = new ImageIcon("src/assets/explosion.gif");
 		JLabel label = new JLabel(icon);
 		label.setVisible(true);
 		label.setBounds(0, 0, getWidth(), ((getWidth() * 1407) / 1000));

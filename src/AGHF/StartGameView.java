@@ -54,7 +54,7 @@ public class StartGameView implements ActionListener {
 		font = new Font("Dialog", Font.BOLD | Font.HANGING_BASELINE, 180);
 		font2 = new Font("Dialog", Font.PLAIN | Font.ROMAN_BASELINE, 20);
 
-		ImageIcon icon = new ImageIcon("assets/GameTitle.png");
+		ImageIcon icon = new ImageIcon("src/assets/GameTitle.png");
 		lblTitle = new JLabel(icon);
 		lblTitle.setSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
 		lblTitle.setLocation(frame.getWidth() / 2 - lblTitle.getWidth() / 2,

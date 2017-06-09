@@ -66,7 +66,7 @@ public abstract class Unit extends JPanel implements MouseListener {
 		leftSide = left;
 		String side = left ? "B" : "R";
 		try {
-			img = ImageIO.read(new File("assets/" + side + type + ".png"));
+			img = ImageIO.read(new File("src/assets/" + side + type + ".png"));
 			setSize(img.getWidth(), img.getHeight() + HEALTH_BAR_HEIGHT);
 		} catch (IOException e) {
 			System.out.println(type + " image didn't load");
