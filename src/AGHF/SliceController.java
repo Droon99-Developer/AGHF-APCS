@@ -43,7 +43,6 @@ public class SliceController {
 			for (Unit attackU : attacking) {
 				String type = attackU.getClass().getName();
 				if (!type.equals("Units.Medic")) {
-					System.out.println(defending.isEmpty());
 					if (!defending.isEmpty()) {
 						boolean attacked = false;
 						boolean tank = false;
@@ -95,7 +94,8 @@ public class SliceController {
 								}
 							}
 						}
-					} else if (index == 0 && (attacking == rightUnits || attacking == rightAir) || myBase != null && index != 0 && (attacking == leftUnits || attacking == leftAir)) {
+					} else if (index == 0 && (attacking == rightUnits || attacking == rightAir)
+							|| myBase != null && index != 0 && (attacking == leftUnits || attacking == leftAir)) {
 						Point orig = attackU.getLocation();
 						myPanel.translateUnit(attackU, myBase.getLocation());
 						attackU.attack(myBase);
@@ -111,6 +111,7 @@ public class SliceController {
 			for (Unit defendU : defending) {
 				String type = defendU.getClass().getName();
 				if (!type.equals("Units.Medic")) {
+					System.out.println(attacking.isEmpty());
 					if (!attacking.isEmpty()) {
 						boolean attacked = false;
 						boolean tank = false;
@@ -164,13 +165,16 @@ public class SliceController {
 								}
 							}
 						}
-					} else if (index == 0 && attacking == leftUnits
-							|| myBase != null && index != 0 && attacking == rightUnits) {
+					} else if (index == 0 && (defending == rightUnits || defending == rightAir)
+							|| myBase != null && index != 0 && (defending == leftUnits || defending == leftAir)) {
 						Point orig = defendU.getLocation();
 						myPanel.translateUnit(defendU, myBase.getLocation());
 						defendU.attack(myBase);
 						myBase.repaint();
 						myPanel.translateUnit(defendU, orig);
+						if (defendU.getClass().getName().equals("Units.AirStrike")) {
+							defendU.kill();
+						}
 					}
 				}
 			}
