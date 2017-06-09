@@ -301,10 +301,10 @@ public class GameController implements KeyListener, ActionListener {
 		} else if (e.getKeyCode() == 45) {
 			if(leftTurn && p1.myBase.getLevel()<3 && p1.getGold() > (p1.myBase.getLevel() + 1) * Economy.LEVELUPGRADE){
 				p1.upgradeBtn.setEnabled(p1.myBase.upgrade());
-				p1.changeGold(-1 * (p1.myBase.getLevel() + 1) * Economy.LEVELUPGRADE);
+				p1.changeGold(-1 * (p1.myBase.getLevel()) * Economy.LEVELUPGRADE);
 			}else if (p2.myBase.getLevel() < 3 && p2.getGold() > (p2.myBase.getLevel() + 1) * Economy.LEVELUPGRADE){
 				p2.upgradeBtn.setEnabled(p2.myBase.upgrade());
-				p2.changeGold(-1 * (p2.myBase.getLevel() + 1) * Economy.LEVELUPGRADE);
+				p2.changeGold(-1 * (p2.myBase.getLevel()) * Economy.LEVELUPGRADE);
 			}
 		}
 
