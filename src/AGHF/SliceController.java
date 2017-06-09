@@ -36,33 +36,8 @@ public class SliceController {
 		myPanel.addBase(myBase);
 	}
 
-	private void attackAnimation(ArrayList<Unit> attacking, ArrayList<Unit> defending) {
-		/*
-		for (Unit attackU : attacking) {
-			String type = attackU.getClass().getName();
-			if (!type.equals("Units.Medic")) {
-				if (!type.equals("Units.AirStrike") && !defending.isEmpty()) {
-					for (Unit defendU : defending) {
-						if (!defendU.getClass().getName().equals("Units.AirStrike") && !defendU.dead()) {
-							Point orig = attackU.getLocation();
-							myPanel.translateUnit(attackU, defendU.getLocation());
-							attackU.attack(defendU);
-							defendU.repaint();
-							myPanel.translateUnit(attackU, orig);
-						}
-					}
-					// ugly if statement to tell if units should attack the base
-				} else if (index == 0 && attacking == rightUnits
-						|| myBase != null && index != 0 && attacking == leftUnits) {
-					Point orig = attackU.getLocation();
-					myPanel.translateUnit(attackU, myBase.getLocation());
-					attackU.attack(myBase);
-					myBase.repaint();
-					myPanel.translateUnit(attackU, orig);
-				}
-			}
-		}
-		*/
+	private void attackAnimation(ArrayList<Unit> attacking, ArrayList<Unit> defending)
+	{
 		if (attacking.size() >= defending.size())
 		{
 			for (Unit attackU : attacking)
@@ -76,16 +51,16 @@ public class SliceController {
 						boolean tank = false;
 						for (Unit defendU : defending)
 						{
-							if(defendU.getClass().getName().equals("Units.Tank"))
+							if (defendU.getClass().getName().equals("Units.Tank"))
 							{
 								tank = true;
 							}
 						}
-						if(tank == true)
+						if (tank == true)
 						{
 							for (Unit defendU : defending)
 							{
-								if(defendU.getClass().getName().equals("Units.Tank"))
+								if (defendU.getClass().getName().equals("Units.Tank"))
 								{
 									Point orig = attackU.getLocation();
 									Point end = defendU.getLocation();
@@ -103,8 +78,7 @@ public class SliceController {
 									attacked = true;
 								}
 							}
-						}
-						else
+						} else
 						{
 							for (Unit defendU : defending)
 							{
@@ -113,8 +87,7 @@ public class SliceController {
 									if (defendU.dead())
 									{
 										return;
-									}
-									else
+									} else
 									{
 										Point orig = attackU.getLocation();
 										Point end = defendU.getLocation();
@@ -134,7 +107,7 @@ public class SliceController {
 								}
 							}
 						}
-						
+
 					} else if (index == 0 && attacking == rightUnits
 							|| myBase != null && index != 0 && attacking == leftUnits)
 					{
@@ -146,8 +119,7 @@ public class SliceController {
 					}
 				}
 			}
-		}
-		else
+		} else
 		{
 			for (Unit defendU : defending)
 			{
@@ -160,7 +132,7 @@ public class SliceController {
 						boolean tank = false;
 						for (Unit attackU : attacking)
 						{
-							if(attackU.getClass().getName().equals("Units.Tank"))
+							if (attackU.getClass().getName().equals("Units.Tank"))
 							{
 								tank = true;
 							}
@@ -189,18 +161,16 @@ public class SliceController {
 									}
 								}
 							}
-						}
-						else
+						} else
 						{
 							for (Unit attackU : attacking)
 							{
-								if(attacked == false)
+								if (attacked == false)
 								{
-									if(attackU.dead())
+									if (attackU.dead())
 									{
 										return;
-									}
-									else
+									} else
 									{
 										Point orig = defendU.getLocation();
 										Point end = attackU.getLocation();
@@ -219,7 +189,7 @@ public class SliceController {
 									}
 								}
 							}
-					}
+						}
 					} else if (index == 0 && attacking == leftUnits
 							|| myBase != null && index != 0 && attacking == rightUnits)
 					{
