@@ -35,7 +35,7 @@ public abstract class Unit extends JPanel implements MouseListener {
 
 	// keeps track of how many advances are left
 	public int advancesLeft;
-	protected int healthLeft;
+	public int healthLeft;
 	public boolean forDefense;
 
 	private boolean leftSide;

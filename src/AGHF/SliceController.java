@@ -38,31 +38,169 @@ public class SliceController {
 		myPanel.addBase(myBase);
 	}
 
-	private void attackAnimation(ArrayList<Unit> attacking, ArrayList<Unit> defending) {
-		for (Unit attackU : attacking) {
-			String type = attackU.getClass().getName();
-			if (!type.equals("Units.Medic")) {
-				if (!defending.isEmpty()) {
-					for (Unit defendU : defending) {
-						if (!defendU.dead()) {
-							Point orig = attackU.getLocation();
-							myPanel.translateUnit(attackU, defendU.getLocation());
-							attackU.attack(defendU);
-							defendU.repaint();
-							myPanel.translateUnit(attackU, orig);
+
+	private void attackAnimation(ArrayList<Unit> attacking, ArrayList<Unit> defending)
+	{
+		if (attacking.size() >= defending.size())
+		{
+			for (Unit attackU : attacking)
+			{
+				String type = attackU.getClass().getName();
+				if (!type.equals("Units.Medic"))
+				{
+					if (!defending.isEmpty())
+					{
+						boolean attacked = false;
+						boolean tank = false;
+						for (Unit defendU : defending)
+						{
+							if (defendU.getClass().getName().equals("Units.Tank"))
+							{
+								tank = true;
+							}
 						}
+						if (tank == true)
+						{
+							for (Unit defendU : defending)
+							{
+								if (defendU.getClass().getName().equals("Units.Tank"))
+								{
+									Point orig = attackU.getLocation();
+									Point end = defendU.getLocation();
+									Point middle = defendU.getLocation();
+									middle.setLocation((((orig.getX()) + (end.getX())) / 2),
+											(((orig.getY()) + (end.getY())) / 2));
+									myPanel.translateUnit(attackU, middle);
+									myPanel.translateUnit(defendU, middle);
+									attackU.attack(defendU);
+									defendU.attack(attackU);
+									myPanel.translateUnit(defendU, end);
+									myPanel.translateUnit(attackU, orig);
+									defendU.repaint();
+									attackU.repaint();
+									attacked = true;
+								}
+							}
+						} else
+						{
+							for (Unit defendU : defending)
+							{
+								if (attacked == false)
+								{
+									if (defendU.dead())
+									{
+										return;
+									} else
+									{
+										Point orig = attackU.getLocation();
+										Point end = defendU.getLocation();
+										Point middle = defendU.getLocation();
+										middle.setLocation((((orig.getX()) + (end.getX())) / 2),
+												(((orig.getY()) + (end.getY())) / 2));
+										myPanel.translateUnit(attackU, middle);
+										myPanel.translateUnit(defendU, middle);
+										attackU.attack(defendU);
+										defendU.attack(attackU);
+										myPanel.translateUnit(defendU, end);
+										myPanel.translateUnit(attackU, orig);
+										defendU.repaint();
+										attackU.repaint();
+										attacked = true;
+									}
+								}
+							}
+						}
+
+					} else if (index == 0 && attacking == rightUnits
+							|| myBase != null && index != 0 && attacking == leftUnits)
+					{
+						Point orig = attackU.getLocation();
+						myPanel.translateUnit(attackU, myBase.getLocation());
+						attackU.attack(myBase);
+						myBase.repaint();
+						myPanel.translateUnit(attackU, orig);
 					}
-					// ugly if statement to tell if units should attack the base
-					// with variable number of slices
-				} else if (index == 0 && (attacking == rightUnits || attacking == rightAir)
-						|| myBase != null && index != 0 && (attacking == leftUnits || attacking == leftAir)) {
-					Point orig = attackU.getLocation();
-					myPanel.translateUnit(attackU, myBase.getLocation());
-					attackU.attack(myBase);
-					myBase.repaint();
-					myPanel.translateUnit(attackU, orig);
-					if (attackU.getClass().getName().equals("Units.AirStrike")) {
-						attackU.kill();
+				}
+			}
+		} else
+		{
+			for (Unit defendU : defending)
+			{
+				String type = defendU.getClass().getName();
+				if (!type.equals("Units.Medic"))
+				{
+					if (!attacking.isEmpty())
+					{
+						boolean attacked = false;
+						boolean tank = false;
+						for (Unit attackU : attacking)
+						{
+							if (attackU.getClass().getName().equals("Units.Tank"))
+							{
+								tank = true;
+							}
+						}
+						if (tank == true)
+						{
+							for (Unit attackU : attacking)
+							{
+								if (attackU.getClass().getName().equals("Units.Tank"))
+								{
+									{
+										Point orig = defendU.getLocation();
+										Point end = attackU.getLocation();
+										Point middle = attackU.getLocation();
+										middle.setLocation((((orig.getX()) + (end.getX())) / 2),
+												(((orig.getY()) + (end.getY())) / 2));
+										myPanel.translateUnit(defendU, middle);
+										myPanel.translateUnit(attackU, middle);
+										defendU.attack(attackU);
+										attackU.attack(defendU);
+										myPanel.translateUnit(attackU, end);
+										myPanel.translateUnit(defendU, orig);
+										attackU.repaint();
+										defendU.repaint();
+										attacked = true;
+									}
+								}
+							}
+						} else
+						{
+							for (Unit attackU : attacking)
+							{
+								if (attacked == false)
+								{
+									if (attackU.dead())
+									{
+										return;
+									} else
+									{
+										Point orig = defendU.getLocation();
+										Point end = attackU.getLocation();
+										Point middle = attackU.getLocation();
+										middle.setLocation((((orig.getX()) + (end.getX())) / 2),
+												(((orig.getY()) + (end.getY())) / 2));
+										myPanel.translateUnit(defendU, middle);
+										myPanel.translateUnit(attackU, middle);
+										defendU.attack(attackU);
+										attackU.attack(defendU);
+										myPanel.translateUnit(attackU, end);
+										myPanel.translateUnit(defendU, orig);
+										attackU.repaint();
+										defendU.repaint();
+										attacked = true;
+									}
+								}
+							}
+						}
+					} else if (index == 0 && attacking == leftUnits
+							|| myBase != null && index != 0 && attacking == rightUnits)
+					{
+						Point orig = defendU.getLocation();
+						myPanel.translateUnit(defendU, myBase.getLocation());
+						defendU.attack(myBase);
+						myBase.repaint();
+						myPanel.translateUnit(defendU, orig);
 					}
 				}
 			}
@@ -109,9 +247,7 @@ public class SliceController {
 
 	public int[] performAttacks() {
 		attackAnimation(leftUnits, rightUnits);
-		attackAnimation(rightUnits, leftUnits);
 		attackAnimation(leftAir, rightAir);
-		attackAnimation(rightAir, leftAir);
 		healAnimation(leftUnits);
 		healAnimation(rightUnits);
 		int[] goldEarned = { 0, 0 };
