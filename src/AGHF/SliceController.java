@@ -63,7 +63,7 @@ public class SliceController {
 			}
 		}
 		*/
-		if (attacking.size() > defending.size())
+		if (attacking.size() >= defending.size())
 		{
 			for (Unit attackU : attacking)
 			{
@@ -72,21 +72,69 @@ public class SliceController {
 				{
 					if (!type.equals("Units.AirStrike") && !defending.isEmpty())
 					{
+						boolean attacked = false;
+						boolean tank = false;
 						for (Unit defendU : defending)
 						{
-							Point orig = attackU.getLocation();
-							Point end = defendU.getLocation();
-							Point middle = defendU.getLocation();
-							middle.setLocation((((orig.getX())+(end.getX()))/2),(((orig.getY())+(end.getY()))/2));
-							myPanel.translateUnit(attackU, middle);
-							myPanel.translateUnit(defendU, middle);
-							attackU.attack(defendU);
-							defendU.attack(attackU);
-							myPanel.translateUnit(defendU, end);
-							myPanel.translateUnit(attackU, orig);
-							defendU.repaint();
-							attackU.repaint();
+							if(defendU.getClass().getName().equals("Units.Tank"))
+							{
+								tank = true;
+							}
 						}
+						if(tank == true)
+						{
+							for (Unit defendU : defending)
+							{
+								if(defendU.getClass().getName().equals("Units.Tank"))
+								{
+									Point orig = attackU.getLocation();
+									Point end = defendU.getLocation();
+									Point middle = defendU.getLocation();
+									middle.setLocation((((orig.getX()) + (end.getX())) / 2),
+											(((orig.getY()) + (end.getY())) / 2));
+									myPanel.translateUnit(attackU, middle);
+									myPanel.translateUnit(defendU, middle);
+									attackU.attack(defendU);
+									defendU.attack(attackU);
+									myPanel.translateUnit(defendU, end);
+									myPanel.translateUnit(attackU, orig);
+									defendU.repaint();
+									attackU.repaint();
+									attacked = true;
+								}
+							}
+						}
+						else
+						{
+							for (Unit defendU : defending)
+							{
+								if (attacked == false)
+								{
+									if (defendU.dead())
+									{
+										return;
+									}
+									else
+									{
+										Point orig = attackU.getLocation();
+										Point end = defendU.getLocation();
+										Point middle = defendU.getLocation();
+										middle.setLocation((((orig.getX()) + (end.getX())) / 2),
+												(((orig.getY()) + (end.getY())) / 2));
+										myPanel.translateUnit(attackU, middle);
+										myPanel.translateUnit(defendU, middle);
+										attackU.attack(defendU);
+										defendU.attack(attackU);
+										myPanel.translateUnit(defendU, end);
+										myPanel.translateUnit(attackU, orig);
+										defendU.repaint();
+										attackU.repaint();
+										attacked = true;
+									}
+								}
+							}
+						}
+						
 					} else if (index == 0 && attacking == rightUnits
 							|| myBase != null && index != 0 && attacking == leftUnits)
 					{
@@ -108,23 +156,72 @@ public class SliceController {
 				{
 					if (!type.equals("Units.AirStrike") && !attacking.isEmpty())
 					{
+						boolean attacked = false;
+						boolean tank = false;
 						for (Unit attackU : attacking)
 						{
-							Point orig = defendU.getLocation();
-							Point end = attackU.getLocation();
-							Point middle = attackU.getLocation();
-							middle.setLocation((((orig.getX())+(end.getX()))/2),(((orig.getY())+(end.getY()))/2));
-							myPanel.translateUnit(defendU, middle);
-							myPanel.translateUnit(attackU, middle);
-							defendU.attack(attackU);
-							attackU.attack(defendU);
-							myPanel.translateUnit(attackU, end);
-							myPanel.translateUnit(defendU, orig);
-							attackU.repaint();
-							defendU.repaint();
+							if(attackU.getClass().getName().equals("Units.Tank"))
+							{
+								tank = true;
+							}
 						}
-					} else if (index == 0 && attacking == rightUnits
-							|| myBase != null && index != 0 && attacking == leftUnits)
+						if (tank == true)
+						{
+							for (Unit attackU : attacking)
+							{
+								if (attackU.getClass().getName().equals("Units.Tank"))
+								{
+									{
+										Point orig = defendU.getLocation();
+										Point end = attackU.getLocation();
+										Point middle = attackU.getLocation();
+										middle.setLocation((((orig.getX()) + (end.getX())) / 2),
+												(((orig.getY()) + (end.getY())) / 2));
+										myPanel.translateUnit(defendU, middle);
+										myPanel.translateUnit(attackU, middle);
+										defendU.attack(attackU);
+										attackU.attack(defendU);
+										myPanel.translateUnit(attackU, end);
+										myPanel.translateUnit(defendU, orig);
+										attackU.repaint();
+										defendU.repaint();
+										attacked = true;
+									}
+								}
+							}
+						}
+						else
+						{
+							for (Unit attackU : attacking)
+							{
+								if(attacked == false)
+								{
+									if(attackU.dead())
+									{
+										return;
+									}
+									else
+									{
+										Point orig = defendU.getLocation();
+										Point end = attackU.getLocation();
+										Point middle = attackU.getLocation();
+										middle.setLocation((((orig.getX()) + (end.getX())) / 2),
+												(((orig.getY()) + (end.getY())) / 2));
+										myPanel.translateUnit(defendU, middle);
+										myPanel.translateUnit(attackU, middle);
+										defendU.attack(attackU);
+										attackU.attack(defendU);
+										myPanel.translateUnit(attackU, end);
+										myPanel.translateUnit(defendU, orig);
+										attackU.repaint();
+										defendU.repaint();
+										attacked = true;
+									}
+								}
+							}
+					}
+					} else if (index == 0 && attacking == leftUnits
+							|| myBase != null && index != 0 && attacking == rightUnits)
 					{
 						Point orig = defendU.getLocation();
 						myPanel.translateUnit(defendU, myBase.getLocation());
