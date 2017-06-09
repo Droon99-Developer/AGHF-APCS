@@ -23,14 +23,15 @@ public class Base extends JPanel {
 	private final int HEALTH_BAR_HEIGHT = 10;
 
 	public Base() {
-		
+
 		healthLeft = maxHealth;
 		try {
 			img = ImageIO.read(new File("assets/base.png"));
 			int type = img.getType();
-			BufferedImage resizedImage = new BufferedImage(img.getWidth()*sizeResize, img.getHeight()*sizeResize,type);
+			BufferedImage resizedImage = new BufferedImage(img.getWidth() * sizeResize, img.getHeight() * sizeResize,
+					type);
 			Graphics2D g = resizedImage.createGraphics();
-			g.drawImage(img, 0, 0, img.getWidth()*sizeResize, img.getHeight()*sizeResize, null);
+			g.drawImage(img, 0, 0, img.getWidth() * sizeResize, img.getHeight() * sizeResize, null);
 			g.dispose();
 			img = resizedImage;
 			setSize(resizedImage.getWidth(), resizedImage.getHeight() + HEALTH_BAR_HEIGHT);
@@ -60,8 +61,8 @@ public class Base extends JPanel {
 		repaint();
 		return level < 3;
 	}
-	
-	public int getLevel(){
+
+	public int getLevel() {
 		return level;
 	}
 }

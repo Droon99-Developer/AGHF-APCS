@@ -55,7 +55,7 @@ public class GameController implements KeyListener, ActionListener {
 		newUnits.add(newUnit);
 		slice.addUnits(newUnits, left);
 	}
-	
+
 	public boolean checkTurn(boolean left) {
 		return left == leftTurn;
 	}
@@ -105,7 +105,7 @@ public class GameController implements KeyListener, ActionListener {
 			// in case the right side had just scouts that are gone now
 			done = done && advanceMiddle(true);
 		}
-		
+
 		// reset unit advances
 		for (SliceController sc : slices) {
 			sc.resetUnitAdvances();
@@ -135,15 +135,15 @@ public class GameController implements KeyListener, ActionListener {
 		gv.renderUnitPanels();
 
 		slices = gv.renderSlices();
-		
+
 		Base b1 = new Base();
 		p1.setBase(b1);
 		slices[0].setBase(b1);
-		
+
 		Base b2 = new Base();
 		p2.setBase(b2);
 		slices[slices.length - 1].setBase(b2);
-		
+
 		MIDDLE = slices.length / 2;
 
 		gv.addComponents();
@@ -169,7 +169,7 @@ public class GameController implements KeyListener, ActionListener {
 			GameController.turnNumber++;
 			if (GameController.turnNumber >= GameController.turnRamp) {
 				Economy.STARTVALUE = Economy.STARTVALUE * GameController.rampNumber;
-				if(Economy.STARTVALUE > Economy.AIRSTRIKECOST * 1000000){
+				if (Economy.STARTVALUE > Economy.AIRSTRIKECOST * 1000000) {
 					Economy.STARTVALUE = Economy.AIRSTRIKECOST * 1000000;
 					GameController.rampNumber = 1;
 				}
@@ -299,10 +299,11 @@ public class GameController implements KeyListener, ActionListener {
 				}
 			}
 		} else if (e.getKeyCode() == 45) {
-			if(leftTurn && p1.myBase.getLevel()<3 && p1.getGold() > (p1.myBase.getLevel() + 1) * Economy.LEVELUPGRADE){
+			if (leftTurn && p1.myBase.getLevel() < 3
+					&& p1.getGold() > (p1.myBase.getLevel() + 1) * Economy.LEVELUPGRADE) {
 				p1.upgradeBtn.setEnabled(p1.myBase.upgrade());
 				p1.changeGold(-1 * (p1.myBase.getLevel()) * Economy.LEVELUPGRADE);
-			}else if (p2.myBase.getLevel() < 3 && p2.getGold() > (p2.myBase.getLevel() + 1) * Economy.LEVELUPGRADE){
+			} else if (p2.myBase.getLevel() < 3 && p2.getGold() > (p2.myBase.getLevel() + 1) * Economy.LEVELUPGRADE) {
 				p2.upgradeBtn.setEnabled(p2.myBase.upgrade());
 				p2.changeGold(-1 * (p2.myBase.getLevel()) * Economy.LEVELUPGRADE);
 			}

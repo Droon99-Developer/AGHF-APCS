@@ -23,7 +23,6 @@ public class SliceController {
 	private ArrayList<Unit> leftAir = new ArrayList<Unit>();
 	private ArrayList<Unit> rightAir = new ArrayList<Unit>();
 
-
 	private int index;
 
 	public Base myBase = null;
@@ -53,7 +52,8 @@ public class SliceController {
 							myPanel.translateUnit(attackU, orig);
 						}
 					}
-				// ugly if statement to tell if units should attack the base with variable number of slices
+					// ugly if statement to tell if units should attack the base
+					// with variable number of slices
 				} else if (index == 0 && (attacking == rightUnits || attacking == rightAir)
 						|| myBase != null && index != 0 && (attacking == leftUnits || attacking == leftAir)) {
 					Point orig = attackU.getLocation();
@@ -114,7 +114,7 @@ public class SliceController {
 		attackAnimation(rightAir, leftAir);
 		healAnimation(leftUnits);
 		healAnimation(rightUnits);
-		int[] goldEarned = {0, 0};
+		int[] goldEarned = { 0, 0 };
 		disposeDead(leftUnits, true, goldEarned);
 		disposeDead(rightUnits, false, goldEarned);
 		disposeDead(leftAir, true, goldEarned);

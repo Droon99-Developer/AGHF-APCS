@@ -31,11 +31,11 @@ public class Player implements ActionListener, Runnable {
 	private JButton endTurnBtn;
 	private Font font = new Font("Dialog", Font.PLAIN | Font.ROMAN_BASELINE, 20);
 	public Base myBase;
-	
+
 	public void setBase(Base b) {
 		myBase = b;
 	}
-	
+
 	public Player(String name, boolean leftSide) {
 		this.leftSide = leftSide;
 		nameLbl = new JLabel(name, JLabel.CENTER);
@@ -62,10 +62,10 @@ public class Player implements ActionListener, Runnable {
 	public void changeGold(int offset) {
 		// economy money stuff
 		gold += offset;
-		if((gold > 2000000000 || gold < 0) && offset > 0){//2 BILLION Golds
+		if ((gold > 2000000000 || gold < 0) && offset > 0) {// 2 BILLION Golds
 			gold = 2000000000;
 		}
-			
+
 		goldLbl.setText(String.format("%d", gold) + " Gold");
 		uPnl.updateButtons(gold);
 		upgradeBtn.setEnabled(gold >= ((myBase.getLevel() + 1) * Economy.LEVELUPGRADE) && myBase.getLevel() < 3);
@@ -142,9 +142,9 @@ public class Player implements ActionListener, Runnable {
 		if (e.getActionCommand().equals("uPnl")) {
 			uPnl.setVisible(!uPnl.isVisible());
 		} else if (e.getActionCommand().equals("upgrade")) {
-			changeGold(-1*(myBase.getLevel() + 1) * Economy.LEVELUPGRADE);
-			//upgradeBtn.setEnabled(myBase.upgrade());
-			
+			changeGold(-1 * (myBase.getLevel() + 1) * Economy.LEVELUPGRADE);
+			// upgradeBtn.setEnabled(myBase.upgrade());
+
 		} else if (e.getActionCommand().equals("end")) {
 			uPnl.setVisible(false);
 			playerPnl.setVisible(false);
